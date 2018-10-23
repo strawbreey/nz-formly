@@ -1,3 +1,3 @@
 # nz-formly
 
-基于antdesign的ng-formly主题
+基于ant design的ng-formly主题
