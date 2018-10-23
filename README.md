@@ -1,2 +1,3 @@
 # nz-formly
- nz-fromly is the ant design theme of ng-fromly.
+
+基于antdesign的ng-formly主题
