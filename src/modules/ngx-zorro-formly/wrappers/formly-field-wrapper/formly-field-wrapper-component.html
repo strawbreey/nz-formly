@@ -1,0 +1,32 @@
+<!-- 
+    nz-form-item: 表单项
+        nzFlex： 是否是Flex布局
+
+    nz-form-label: 表单标签
+        nzRequired： 当前项是否为必填, 仅影响样式
+        nzFor 表单标签的 for 属性
+        ngLableClass: 表单标签的 class 属性
+        ngLabelStyle: 表单标签的 style 属性    
+    
+    nz-form-control: 表单域
+        ngControlClass: 表单域 标签的 class 属性
+        ngControlStyle: 表单域 标签的 style 属性    
+ -->
+<ng-container >
+    <nz-form-item [class]="to['nzLayout']" style="display: inline;">
+        <nz-form-label  *ngIf="to.label"
+                        [nzSpan]="isHorizontal ? labelSpan : null"
+                        [nzRequired]="to['required']"
+                        [nzFor]="id">{{to['labelEdit'] ? model.label : to.label}}</nz-form-label>
+
+        <nz-form-control [nzSpan]="isHorizontal ? (24 - labelSpan) : null">
+            <ng-template #fieldComponent></ng-template>
+        </nz-form-control>
+
+        <!-- <div *ngIf="showError" class="invalid-feedback" [style.display]="'block'" >
+            <formly-validation-message [field]="field"></formly-validation-message>
+        </div>
+
+        <small *ngIf="to.description" class="form-text text-muted">{{ to.description }}</small> -->
+    </nz-form-item>
+</ng-container>

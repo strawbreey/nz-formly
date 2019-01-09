@@ -1,0 +1,8 @@
+<ng-container *ngFor="let field of field.fieldGroup; let i = index;">
+    <formly-group
+      [model]="model"
+      [field]="field"
+      [options]="options"
+      [form]="formControl">
+    </formly-group>
+</ng-container>

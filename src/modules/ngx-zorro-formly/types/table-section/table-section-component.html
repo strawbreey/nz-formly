@@ -1,0 +1,59 @@
+<nz-table
+    #editRowTable
+    [nzData]="dataSet"
+    [nzFrontPagination]="to['nzFrontPagination'] || true"
+    [nzTitle]="nzTitle || null"
+    [nzFooter]="to['nzFooter'] || null"
+    [nzScroll]="to['nzScroll'] || null"
+    [nzShowPagination]="to['nzShowPagination'] || false"
+    [nzWidthConfig]="to['nzWidthConfig'] || null"
+    [nzNoResult]="to['nzNoResult'] || null">
+    <thead class="border"> 
+        <tr>
+            <ng-container *ngFor="let item of field.fieldArray?.fieldGroup">
+                <th><label [class.ant-form-item-required]="item?.templateOptions?.nzRequired">{{item?.templateOptions?.label}}</label></th>
+            </ng-container>
+            <th *ngIf="to.type === 'action'" >{{to.label}}</th>
+        </tr>
+    </thead>
+
+    <tbody class="border">
+        <tr *ngFor="let fields of field.fieldGroup; let i = index;">
+            <td  *ngFor="let item of fields.fieldGroup">
+                <formly-field
+                    [form]="item.formControl"
+                    [options]="options"
+                    [model]="item.model"
+                    [field]="item">
+                </formly-field>
+            </td>
+            <td *ngIf="to['options']">
+                <ng-container *ngFor="let item of to.options; let j = index">
+                    <ng-container *ngIf="item?.type">
+                        <a (click)="updateValue(item, i)">{{item.label}}</a>
+                        <nz-divider *ngIf="j + 1 < to['options'].length" nzType="vertical"></nz-divider>
+                    </ng-container>
+                </ng-container>
+            </td>
+        </tr>
+    </tbody>
+</nz-table>
+
+<ng-template #TitleTemplate>
+    <ng-container *ngIf="to['nzTitle'] === 'nzAddTemplate'">
+        <div style="display: block" class="border bg-light p-2">
+            <span class="d-inline-block pr-3">{{formControl.parent.value.title}}</span>
+            <button nz-button nzSize="small" nzType="default" (click)="add()">添加</button>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="to['nzTitle'] === 'TitleTemplate'">
+        TitleTemplate
+    </ng-container>
+</ng-template>
+
+<ng-template #FooterTemplate>
+    <ng-container *ngIf="to['nzFooter'] === 'FooterTemplate'">
+        Footer
+    </ng-container>
+</ng-template>

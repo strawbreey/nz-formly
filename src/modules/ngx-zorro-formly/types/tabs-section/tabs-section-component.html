@@ -1,0 +1,25 @@
+<nz-tabset
+    [nzSelectedIndex]="nzSelectedIndex || null"
+    [nzAnimated] ="to['nzAnimated'] || true"
+    [nzSize]="to['nzSize'] || 'default'"
+    [nzTabPosition]="to['nzTabPosition'] || 'top'" 
+    [nzType]="to['nzType'] || 'line'"
+    [nzTabBarGutter]="to['nzTabBarGutter'] || null"
+    [nzHideAll]="to['nzHideAll'] || false"
+    [nzShowPagination]="to['nzShowPagination'] || true"
+    (nzSelectedIndexChange)="onChange($event)"
+    [nzTabPosition]="to['nzTabPosition'] || 'top'" 
+    [nzType]="to['nzType'] || 'card'">
+
+    <ng-container *ngFor="let field of field.fieldGroup; let i = index;">
+        <nz-tab [nzTitle]="field['model']?.title"
+                [nzDisabled]="">
+            <formly-group
+                [field]="field"
+                [options]="options"
+                [form]="formControl">
+            </formly-group>
+        </nz-tab>
+    </ng-container>
+</nz-tabset>
+

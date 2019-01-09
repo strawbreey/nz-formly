@@ -1,0 +1,19 @@
+<ng-container [ngSwitch]="to['type']">
+    <!-- 块级元素 -->
+    <h1      *ngSwitchCase="'h1'" >{{model[key]}}</h1>
+    <h2      *ngSwitchCase="'h2'">{{model[key]}}</h2>
+    <h3      *ngSwitchCase="'h3'">{{model[key]}}</h3>
+    <h4      *ngSwitchCase="'h4'">{{model[key]}}</h4>
+    <h5      *ngSwitchCase="'h5'">{{model[key]}}</h5>
+    <h6      *ngSwitchCase="'h6'">{{model[key]}}</h6>
+    <a       *ngSwitchCase="'a'">{{model[key]}}</a>
+    <time    *ngSwitchCase="'time'">{{model[key]}}</time>
+    <address *ngSwitchCase="'address'">{{model[key]}}</address>
+
+    <p       *ngSwitchCase="'p'">{{model[key]}}</p>
+    <label   *ngSwitchCase="'label'">{{model[key]}}</label>
+
+    <div     *ngSwitchCase="'div'">{{model[key]}}</div>
+    <span    *ngSwitchCase="'span'">{{model[key]}}</span>
+    <label   *ngSwitchDefault>{{model[key]}}</label>
+</ng-container>

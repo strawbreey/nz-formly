@@ -1,0 +1,118 @@
+<ng-container [ngSwitch]="to['type']">
+    <!-- nzMonthPicker -->
+    <ng-container  *ngSwitchCase="'nzMonthPicker'">
+        <nz-month-picker    [(ngModel)]="model[key]"
+
+                            [nzAllowClear]="to['nzAllowClear']"
+                            [nzAutoFocus]="to['nzAutoFocus']"
+                            [nzClassName]="to['nzClassName']"
+                            [nzDisabled]="to['nzDisabled']"
+                            [nzDisabledDate]="to['nzDisabledDate']"
+                            [nzLocale]="to['nzLocale']"
+                            [nzOpen]="to['nzOpen']"
+                            [nzPopupStyle]="to['nzPopupStyle']"
+                            [nzDropdownClassName]="to['nzDropdownClassName']"
+                            [nzSize]="to['nzSize']"
+                            [nzStyle]="to['nzStyle']"
+
+                            [nzFormat]="to['nzFormat']"
+                            [nzPlaceHolder]="to['nzPlaceHolder']"
+                            (ngModelChange)="onChange($event)"
+                            
+                            
+                            ></nz-month-picker>
+    </ng-container>
+
+    <!-- nzYearPicker -->
+    <ng-container  *ngSwitchCase="'nzYearPicker'">
+        <nz-year-picker [(ngModel)]="model[key]"
+                        [nzFormat]="to['nzFormat']"
+
+                        [nzAllowClear]="to['nzAllowClear']"
+                        [nzAutoFocus]="to['nzAutoFocus']"
+                        [nzClassName]="to['nzClassName']"
+                        [nzDisabled]="to['nzDisabled']"
+                        [nzDisabledDate]="to['nzDisabledDate']"
+                        [nzLocale]="to['nzLocale']"
+                        [nzOpen]="to['nzOpen']"
+                        [nzPopupStyle]="to['nzPopupStyle']"
+                        [nzDropdownClassName]="to['nzDropdownClassName']"
+                        [nzSize]="to['nzSize']"
+                        [nzStyle]="to['nzStyle']"
+
+                        [nzPlaceHolder]="to['nzPlaceHolder']"
+                        (ngModelChange)="onChange($event)" ></nz-year-picker>
+    </ng-container>
+
+    <!-- nzRangePicker -->
+    <ng-container  *ngSwitchCase="'nzRangePicker'">
+        <nz-range-picker    [(ngModel)]="model[key]"
+
+                            [nzAllowClear]="to['nzAllowClear']"
+                            [nzAutoFocus]="to['nzAutoFocus']"
+                            [nzClassName]="to['nzClassName']"
+                            [nzDisabled]="to['nzDisabled']"
+                            [nzDisabledDate]="to['nzDisabledDate']"
+                            [nzLocale]="to['nzLocale']"
+                            [nzOpen]="to['nzOpen']"
+                            [nzPopupStyle]="to['nzPopupStyle']"
+                            [nzDropdownClassName]="to['nzDropdownClassName']"
+                            [nzSize]="to['nzSize']"
+                            [nzStyle]="to['nzStyle']"
+
+                            [nzFormat]="to['nzFormat']"
+                            [nzRanges]="to['nzRanges']"
+                            [nzRenderExtraFooter]="to['nzRenderExtraFooter']"
+                            [nzShowTime]="to['nzShowTime']"
+                            [nzPlaceHolder]="to['nzPlaceHolder']"
+                            (nzOnOk)="onOk($event)"
+                            (ngModelChange)="modelChange($event)" nzShowTime></nz-range-picker>
+    </ng-container>
+
+    <!-- nzWeekPicker -->
+    <ng-container  *ngSwitchCase="'nzWeekPicker'">
+        <nz-week-picker [(ngModel)]="model[key]"
+
+                        [nzAllowClear]="to['nzAllowClear']"
+                        [nzAutoFocus]="to['nzAutoFocus']"
+                        [nzClassName]="to['nzClassName']"
+                        [nzDisabled]="to['nzDisabled']"
+                        [nzDisabledDate]="to['nzDisabledDate']"
+                        [nzLocale]="to['nzLocale']"
+                        [nzOpen]="to['nzOpen']"
+                        [nzPopupStyle]="to['nzPopupStyle']"
+                        [nzDropdownClassName]="to['nzDropdownClassName']"
+                        [nzSize]="to['nzSize']"
+                        [nzStyle]="to['nzStyle']"
+    
+                        [nzFormat]="to['nzFormat']"
+                        [nzPlaceHolder]="to['nzPlaceHolder']"
+                        (ngModelChange)="modelChange($event)"></nz-week-picker>
+    </ng-container>
+
+    <!-- nzDatePicker -->
+    <ng-container  *ngSwitchDefault>
+        <nz-date-picker [(ngModel)]="model[key]"
+
+                        [nzAllowClear]="to['nzAllowClear']"
+                        [nzAutoFocus]="to['nzAutoFocus']"
+                        [nzClassName]="to['nzClassName']"
+                        [nzDisabled]="to['nzDisabled']"
+                        [nzDisabledDate]="to['nzDisabledDate']"
+                        [nzLocale]="to['nzLocale']"
+                        [nzOpen]="to['nzOpen']"
+                        [nzPopupStyle]="to['nzPopupStyle']"
+                        [nzDropdownClassName]="to['nzDropdownClassName']"
+                        [nzSize]="to['nzSize']"
+                        [nzStyle]="to['nzStyle']"
+
+                        [nzDisabledTime]="to['nzDisabledTime']"
+                        [nzFormat] = "to['nzFormat'] || 'yyyy-MM-dd'"
+                        [nzAllowClear]="to['nzAllowClear'] || true"
+                        [nzShowTime]="to['nzShowTime']"
+                        [nzShowToday]="to['nzShowToday']"
+                        [nzPlaceHolder] = "to['nzPlaceHolder'] || ''"
+                        (nzOnOk) = "onOk($event)"
+                        (ngModelChange) = "modelChange($event)"></nz-date-picker>
+    </ng-container>
+</ng-container>

@@ -1,0 +1,260 @@
+// angular 核心库
+import { NgModule, ModuleWithProviders } from '@angular/core';
+import { FormlyModule } from '@ngx-formly/core';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+
+// @ant-design 核心库
+import { NgZorroAntdModule, NZ_ICONS, NZ_I18N, zh_CN } from 'ng-zorro-antd';
+import { IconDefinition } from '@ant-design/icons-angular';
+import * as AllIcons from '@ant-design/icons-angular/icons';
+
+// 基于 ngx-zorro 的扩展库
+// import { ExtendNgxZorroModule } from '../extend-ngx-zorro/extend-ngx-zorro.module'
+
+// 基于 ngx-zorro 的 formly 库
+// basic
+import { FormlyFieldInputComponent } from './types/input/input-component';
+import { FormlyFieldTextareaComponent } from './types/textarea/textarea-component';
+import { FormlyFieldAutocompleteComponent } from './types/autocomplete/autocomplete-component';
+import { FormlyFieldCascaderComponent } from './types/cascader/cascader-component';
+import { FormlyFieldCheckboxComponent } from './types/checkbox/checkbox-component';
+import { FormlyFieldDatePickerComponent } from './types/date-picker/date-picker-component';
+import { FormlyFieldNumberComponent } from './types/number/number-component';
+import { FormlyFieldRadioComponent } from './types/radio/radio-component';
+import { FormlyFieldRateComponent } from './types/rate/rate-component';
+import { FormlyFieldSelectComponent } from './types/select/select-component';
+import { FormlyFieldSliderComponent } from './types/slider/slider-component';
+import { FormlyFieldSwitchComponent } from './types/switch/switch-component';
+import { FormlyFieldTimePickerComponent } from './types/time-picker/time-picker-component';
+import { FormlyFieldTreeSelectComponent } from './types/tree-select/tree-select-component';
+import { FormlyFieldDateRangePickerComponent } from "./types/date-range-picker/date-range-picker-component";
+import { FormlyFieldSingleFileComponent } from "./types/single-file/single-file";
+import { FormlyFieldTooltipComponent } from "./types/tool-tip/tool-tip-component";
+import { TableSectionComponent } from './types/table-section/table-section-component';
+import { FormlyFieldTitleComponent } from './types/title/title-component';
+import { FormlyFieldRepeatComponent } from './types/repeat/repeat-component'
+import { TabSectionComponent } from './types/tab-section/tab-section-component';
+import { TabsSectionComponent } from './types/tabs-section/tabs-section-component';
+import { FormlyFieldLabelComponent } from './types/label/label-component';
+import { NzButtonComponent } from './types/button/button-component';
+import { FormlyFieldTemplateComponent } from './types/template/template-component';
+import { FormlyFieldGridComponent } from './types/grid/grid-component';
+import { FormlyFieldTableComponent } from './types/table/table-component';
+import { FormlyFieldModelComponent } from './types/model/model-component'
+// repeat
+
+// wrapper
+import { FormlyFieldWrapperComponent } from './wrappers/formly-field-wrapper/formly-field-wrapper-component';
+
+// 服务
+// import { formlyService } from '../../services/formly.service'
+
+import { from } from 'rxjs';
+
+const antDesignIcons = AllIcons as {
+    [key: string]: IconDefinition;
+  };
+  const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesignIcons[key])
+
+// 引入继承的多选框
+
+export const ForRootFormlyModule = FormlyModule.forRoot({
+    types: [
+        {
+            name: 'nz-input',
+            wrappers: ['field-wrapper'],
+            component: FormlyFieldInputComponent,
+        },
+        {
+            name: 'nz-textarea',
+            wrappers: ['field-wrapper'],
+            component: FormlyFieldTextareaComponent
+        },
+        {
+            name: 'nz-autocomplete',
+            wrappers: ['field-wrapper'],
+            component: FormlyFieldAutocompleteComponent
+        },
+        {
+            name: 'nz-cascader',
+            wrappers: ['field-wrapper'],
+            component: FormlyFieldCascaderComponent
+        },
+        {
+            name: 'checkbox',
+            wrappers: ['field-wrapper'],
+            component: FormlyFieldCheckboxComponent
+        },
+        {
+            name: 'date-picker',
+            wrappers: ['field-wrapper'],
+            component: FormlyFieldDatePickerComponent
+        },
+        {
+            name: 'date-range-picker',
+            wrappers: ['field-wrapper'],
+            component: FormlyFieldDateRangePickerComponent
+        },
+        {
+            name: 'nz-number',
+            wrappers: ['field-wrapper'],
+            component: FormlyFieldNumberComponent
+        },
+        {
+            name: 'nz-radio',
+            wrappers: ['field-wrapper'],
+            component: FormlyFieldRadioComponent
+        },
+        {
+            name: 'rate',
+            wrappers: ['field-wrapper'],
+            component: FormlyFieldRateComponent
+        },
+        {
+            name: 'nz-select',
+            wrappers: ['field-wrapper'],
+            component: FormlyFieldSelectComponent
+        },
+        {
+            name: 'slider',
+            wrappers: ['field-wrapper'],
+            component: FormlyFieldSliderComponent
+        },
+        {
+            name: 'nz-switch',
+            wrappers: ['field-wrapper'],
+            component: FormlyFieldSwitchComponent
+        },
+        {
+            name: 'time-picker',
+            wrappers: ['field-wrapper'],
+            component: FormlyFieldTimePickerComponent
+        },
+        {
+            name: 'tree-select',
+            wrappers: ['field-wrapper'],
+            component: FormlyFieldTreeSelectComponent
+        },
+        {
+            name: 'single-file',
+            wrappers: ['field-wrapper'],
+            component: FormlyFieldSingleFileComponent
+        }, 
+        {
+            name: 'tool-tip',
+            wrappers: ['field-wrapper'],
+            component: FormlyFieldTooltipComponent
+        },
+        {
+            name: 'table-section',
+            component: TableSectionComponent
+        },
+        {
+            name: 'nz-title',
+            component: FormlyFieldTitleComponent
+        }, 
+        {
+            name: 'tabs-section',
+            component: TabsSectionComponent
+        },
+        {
+            name: 'nz-grid',
+            component: FormlyFieldGridComponent
+        }, 
+        {
+            name: 'nz-repeat',
+            component: FormlyFieldRepeatComponent
+        }, 
+        {
+            name: 'tab-sections',
+            component: TabSectionComponent
+        }, 
+        {
+            name: 'nz-checkbox',
+            wrappers: ['field-wrapper'],
+            component: FormlyFieldCheckboxComponent
+        },
+        {
+            name: 'nz-label',
+            component: FormlyFieldLabelComponent
+        },
+        {
+            name: 'nz-button',
+            component: NzButtonComponent
+        },
+        {
+            name: 'nz-template',
+            component: FormlyFieldTemplateComponent
+        },
+        {
+            name: 'nz-table',
+            component: FormlyFieldTableComponent
+        },
+        {
+            name: 'nz-model',
+            component: FormlyFieldModelComponent
+        }
+    ],
+    wrappers: [
+        {name: 'field-wrapper', component: FormlyFieldWrapperComponent},
+    ]
+});
+
+@NgModule({
+    providers: [
+        { provide: NZ_I18N, useValue: zh_CN },
+        { provide: NZ_ICONS, useValue: icons }
+    ],
+    imports: [
+        NgZorroAntdModule, 
+        ReactiveFormsModule, 
+        FormsModule, 
+        CommonModule, 
+        ForRootFormlyModule,
+    ],
+    declarations: [
+        FormlyFieldInputComponent,
+        FormlyFieldTextareaComponent,
+        FormlyFieldAutocompleteComponent,
+        FormlyFieldCascaderComponent,
+        FormlyFieldCheckboxComponent,
+        FormlyFieldDatePickerComponent,
+        FormlyFieldDateRangePickerComponent,
+        FormlyFieldNumberComponent,
+        FormlyFieldRadioComponent,
+        FormlyFieldRateComponent,
+        FormlyFieldSelectComponent,
+        FormlyFieldSliderComponent,
+        FormlyFieldSwitchComponent,
+        FormlyFieldTimePickerComponent,
+        FormlyFieldTreeSelectComponent,
+        FormlyFieldSingleFileComponent,
+        FormlyFieldWrapperComponent,
+        FormlyFieldTooltipComponent,
+        TableSectionComponent,
+        FormlyFieldTitleComponent,
+        TabSectionComponent,
+        FormlyFieldGridComponent,
+        FormlyFieldRepeatComponent,
+        FormlyFieldLabelComponent,
+        NzButtonComponent,
+        TabsSectionComponent,
+        FormlyFieldTemplateComponent,
+        FormlyFieldTableComponent,
+        FormlyFieldModelComponent
+    ],
+    exports: [
+        NgZorroAntdModule,
+        ReactiveFormsModule,
+        FormlyModule,
+    ]
+})
+export class FormlyNgxZorroModule {
+    public static forRoot(): ModuleWithProviders {
+        return {
+            ngModule: FormlyNgxZorroModule,
+            providers: []
+        };
+    }
+}

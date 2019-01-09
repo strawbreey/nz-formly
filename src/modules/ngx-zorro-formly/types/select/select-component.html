@@ -1,0 +1,30 @@
+<nz-select  style="min-width: 80px;"
+            [formControl]="formControl"
+            [formlyAttributes]="field"
+            [(ngModel)]="model[key]"
+            [nzAllowClear]="to['[nzAllowClear]'] || false"
+            [nzOpen]="to['nzOpen'] || false"
+            [nzAutoFocus]="to['nzAutoFocus'] || false"
+            [nzDisabled]="to['nzDisabled']"
+            [nzDropdownMatchSelectWidth]="to['nzDropdownMatchSelectWidth'] || true"
+            [nzServerSearch] = "to['nzServerSearch'] || false"
+            [nzMaxMultipleCount]="to['nzMaxMultipleCount'] || 'Infinity'"
+            [nzMode]="to['nzMode'] || 'default'"
+            [nzPlaceHolder] = "to['nzPlaceHolder'] || '输入关键字搜索'"
+            [nzShowSearch] ="to['nzShowSearch'] || false"
+            [nzSize]="to['nzSize'] || 'default'"
+            (nzOnSearch)="OnSearch($event)"
+            (nzOpenChange)="onOpenChange($event)"
+            >
+            
+    <ng-container *ngFor="let option of to['options']">
+        <nz-option *ngIf="!isLoading" 
+                [nzDisabled]="option['nzDisabled '] || false" 
+                [nzValue]="to['nzValue'] ? option[to['nzValue']] : option" 
+                [nzLabel]="option.label"></nz-option>
+    </ng-container>
+
+    <nz-option  *ngIf="isLoading" nzDisabled nzCustomContent>
+        <i nz-icon type="loading" class="loading-icon"></i>加载中...
+    </nz-option>
+</nz-select>

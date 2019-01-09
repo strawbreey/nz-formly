@@ -1,0 +1,39 @@
+
+
+
+
+<ng-container [ngSwitch]="to['type']">
+    <ng-container  *ngSwitchCase="'nzRadioButton'">
+        <nz-radio-group [(ngModel)]="model[key]" 
+                        [nzName]="to['nzName']"
+                        [nzDisabled]="to['nzDisabled']"
+                        [nzSize]="to['nzSize']"
+                        [nzButtonStyle]="to['nzButtonStyle']"
+                        (ngModelChange)="modelChange()">
+            <ng-container *ngFor="let option of to['options']">
+                <label  nz-radio-button 
+                        [nzValue]="option.value"
+                        [nzAutoFocus]="to['nzAutoFocus']"
+                        [nzDisabled]="to['nzDisabled']"
+                        >{{option.label}}</label>
+            </ng-container>
+        </nz-radio-group>
+    </ng-container>
+
+    <ng-container  *ngSwitchDefault>
+        <nz-radio-group [(ngModel)]="model[key]" 
+                    [nzName]="to['nzName']"
+                    [nzDisabled]="to['nzDisabled']"
+                    [nzSize]="to['nzSize']"
+                    [nzButtonStyle]="to['nzButtonStyle']"
+                    (ngModelChange)="modelChange()">
+            <ng-container *ngFor="let option of to['options']">
+                <label  nz-radio 
+                        [nzValue]="option.value"
+                        [nzAutoFocus]="to['nzAutoFocus']"
+                        [nzDisabled]="to['nzDisabled']"
+                        >{{option.label}}</label>
+            </ng-container>
+        </nz-radio-group>
+    </ng-container>
+</ng-container>

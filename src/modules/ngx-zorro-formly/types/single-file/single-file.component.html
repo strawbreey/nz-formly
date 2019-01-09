@@ -1,0 +1,16 @@
+<nz-upload
+        nzAction="web/file/upload"
+        [nzShowUploadList]="false"
+        [nzDisabled]="to['disabled']"
+        (nzChange)="onChange($event)">
+    <button nz-button type="button">
+        <div *ngIf="file">
+            <ng-container *ngIf="['image/gif','image/png','image/jpg','image/jpeg'].indexOf(file.file_type)>-1; else normalFile">
+                <img [src]="'web/file/render?id='+file.id" alt="">
+            </ng-container>
+            <ng-template #normalFile>{{file.file_name}}</ng-template>
+
+        </div>
+        <span *ngIf="!file"> {{to['button_text'] || 'Upload'}}</span>
+    </button>
+</nz-upload>

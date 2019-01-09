@@ -1,0 +1,9 @@
+<div style="padding: 40px;">
+  <form [formGroup]="form">
+    <formly-form [model]="model" [fields]="field" [options]="options" [form]="form"></formly-form>
+  </form>
+
+  <button (click)="onClick()">button</button>
+
+  <pre>{{model | json}}</pre>
+</div>

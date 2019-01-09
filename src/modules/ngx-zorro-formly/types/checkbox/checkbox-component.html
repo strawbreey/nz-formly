@@ -1,0 +1,23 @@
+<!-- 单选 -->
+<ng-container *ngIf="!to['nzCheckboxGroup']">
+    <label nz-checkbox 
+        [(ngModel)]="model[key]" ss
+        [nzDisabled]="to['nzDisabled']"
+        [nzAutoFocus]="to['nzAutoFocus']"
+        [nzIndeterminate]>{{to['nzText']}}</label>
+</ng-container>
+
+<!-- 多选 -->
+<ng-container *ngIf="to['nzCheckboxGroup']">
+    <nz-checkbox-group
+        [(ngModel)]="model[key]"
+        [nzDisabled]="to['nzDisabled']"
+        (ngModelChange)="to['ngModelChage']"></nz-checkbox-group>
+</ng-container>
+
+<!-- 自定义多选 -->
+<nz-checkbox-wrapper style="width: 100%;" (nzOnChange)="to['nzOnChange']">
+    <ng-container *ngFor="let option of to['options']">
+        <label nz-checkbox [nzValue]="option.value" [ngModel]="true">{{option.label}}</label>
+    </ng-container>
+</nz-checkbox-wrapper>
