@@ -1,0 +1,7 @@
+<nz-card style="width: 750px;" class="bg-white p-2 m-3">
+  <form [formGroup]="inputForm" >
+    <formly-form [model]="inputModel" [fields]="inputFields" [options]="inputOptions" [form]="inputForm"></formly-form>
+  </form>
+</nz-card>
+
+<pre>{{inputModel | json}}</pre>

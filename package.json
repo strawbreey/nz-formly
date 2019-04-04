@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "^7.1.4",
     "@angular/router": "^7.1.4",
     "@ngx-formly/core": "^4.8.0",
+    "bootstrap": "^4.3.1",
     "core-js": "^2.5.4",
     "ng-zorro-antd": "^7.0.0-rc.3",
     "rxjs": "~6.3.3",

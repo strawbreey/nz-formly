@@ -1,0 +1,23 @@
+<nz-input-group 
+    nzAddOnBefore="to['nzAddOnBefore']" 
+    nzAddOnAfter="to['nzAddOnAfter']"
+    nzPrefix="to['nzPrefix']"
+    nzSuffix="to['nzSuffix']"
+    nzCompact="to['nzCompact']"
+    nzSearch="to['nzSearch']"
+    nzSize="to['nzSize']"
+    >
+    <input  nz-input
+        [formControl]="formControl" 
+        [formlyAttributes]="field"
+        [id]="key"
+        [name]="key"
+        [type]="type"
+        [autocomplete]="to['autocomplete'] || 'off'"
+        [autofocus]="to['autofocus']"
+        [maxlength]="to['maxLength']"/>
+</nz-input-group>
+
+
+
+

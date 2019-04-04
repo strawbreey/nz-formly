@@ -14,14 +14,19 @@ import * as AllIcons from '@ant-design/icons-angular/icons';
 
 // 基于 ngx-zorro 的 formly 库
 // basic
-import { FormlyFieldInputComponent } from './types/input/input-component';
-import { FormlyFieldTextareaComponent } from './types/textarea/textarea-component';
+import { NzButtonComponent } from './types/button/button-component';
+import { NzButtonGroupComponent } from './types/button-group/button-group-component';
+import { NzInputComponent } from './types/input/input-component';
+import { NzInputGroupComponent } from './types/input-group/input-group-component';
+import { NzTextareaComponent } from './types/textarea/textarea-component';
+import { NzCheckboxComponent } from './types/checkbox/checkbox-component';
+import { NzCheckboxGroupComponent } from './types/checkbox-group/checkbox-group-component'
+
 import { FormlyFieldAutocompleteComponent } from './types/autocomplete/autocomplete-component';
 import { FormlyFieldCascaderComponent } from './types/cascader/cascader-component';
-import { FormlyFieldCheckboxComponent } from './types/checkbox/checkbox-component';
 import { FormlyFieldDatePickerComponent } from './types/date-picker/date-picker-component';
 import { FormlyFieldNumberComponent } from './types/number/number-component';
-import { FormlyFieldRadioComponent } from './types/radio/radio-component';
+import { NzRadioComponent } from './types/radio/radio-component';
 import { FormlyFieldRateComponent } from './types/rate/rate-component';
 import { FormlyFieldSelectComponent } from './types/select/select-component';
 import { FormlyFieldSliderComponent } from './types/slider/slider-component';
@@ -37,11 +42,11 @@ import { FormlyFieldRepeatComponent } from './types/repeat/repeat-component'
 import { TabSectionComponent } from './types/tab-section/tab-section-component';
 import { TabsSectionComponent } from './types/tabs-section/tabs-section-component';
 import { FormlyFieldLabelComponent } from './types/label/label-component';
-import { NzButtonComponent } from './types/button/button-component';
 import { FormlyFieldTemplateComponent } from './types/template/template-component';
 import { FormlyFieldGridComponent } from './types/grid/grid-component';
 import { FormlyFieldTableComponent } from './types/table/table-component';
 import { FormlyFieldModelComponent } from './types/model/model-component'
+
 // repeat
 
 // wrapper
@@ -62,14 +67,37 @@ const antDesignIcons = AllIcons as {
 export const ForRootFormlyModule = FormlyModule.forRoot({
     types: [
         {
+            name: 'nz-button',
+            component: NzButtonComponent
+        },
+        {
+            name: 'nz-button-group',
+            component: NzButtonGroupComponent
+        },
+        {
             name: 'nz-input',
             wrappers: ['field-wrapper'],
-            component: FormlyFieldInputComponent,
+            component: NzInputComponent,
+        },
+        {
+            name: 'nz-input-group',
+            wrappers: ['field-wrapper'],
+            component: NzButtonGroupComponent
         },
         {
             name: 'nz-textarea',
             wrappers: ['field-wrapper'],
-            component: FormlyFieldTextareaComponent
+            component: NzTextareaComponent
+        },
+        {
+            name: 'nz-checkbox',
+            wrappers: ['field-wrapper'],
+            component: NzCheckboxComponent
+        },
+        {
+            name: 'nz-checkbox-group',
+            wrappers: ['field-wrapper'],
+            component: NzCheckboxGroupComponent
         },
         {
             name: 'nz-autocomplete',
@@ -81,11 +109,7 @@ export const ForRootFormlyModule = FormlyModule.forRoot({
             wrappers: ['field-wrapper'],
             component: FormlyFieldCascaderComponent
         },
-        {
-            name: 'checkbox',
-            wrappers: ['field-wrapper'],
-            component: FormlyFieldCheckboxComponent
-        },
+
         {
             name: 'date-picker',
             wrappers: ['field-wrapper'],
@@ -104,7 +128,7 @@ export const ForRootFormlyModule = FormlyModule.forRoot({
         {
             name: 'nz-radio',
             wrappers: ['field-wrapper'],
-            component: FormlyFieldRadioComponent
+            component: NzRadioComponent
         },
         {
             name: 'rate',
@@ -171,18 +195,10 @@ export const ForRootFormlyModule = FormlyModule.forRoot({
             component: TabSectionComponent
         }, 
         {
-            name: 'nz-checkbox',
-            wrappers: ['field-wrapper'],
-            component: FormlyFieldCheckboxComponent
-        },
-        {
             name: 'nz-label',
             component: FormlyFieldLabelComponent
         },
-        {
-            name: 'nz-button',
-            component: NzButtonComponent
-        },
+
         {
             name: 'nz-template',
             component: FormlyFieldTemplateComponent
@@ -214,15 +230,19 @@ export const ForRootFormlyModule = FormlyModule.forRoot({
         ForRootFormlyModule,
     ],
     declarations: [
-        FormlyFieldInputComponent,
-        FormlyFieldTextareaComponent,
+        NzButtonComponent,
+        NzButtonGroupComponent,
+        NzInputComponent,
+        NzInputGroupComponent,
+        NzTextareaComponent,
+        NzCheckboxComponent,
+        NzCheckboxGroupComponent,
+        NzRadioComponent,
         FormlyFieldAutocompleteComponent,
         FormlyFieldCascaderComponent,
-        FormlyFieldCheckboxComponent,
         FormlyFieldDatePickerComponent,
         FormlyFieldDateRangePickerComponent,
         FormlyFieldNumberComponent,
-        FormlyFieldRadioComponent,
         FormlyFieldRateComponent,
         FormlyFieldSelectComponent,
         FormlyFieldSliderComponent,
@@ -238,7 +258,6 @@ export const ForRootFormlyModule = FormlyModule.forRoot({
         FormlyFieldGridComponent,
         FormlyFieldRepeatComponent,
         FormlyFieldLabelComponent,
-        NzButtonComponent,
         TabsSectionComponent,
         FormlyFieldTemplateComponent,
         FormlyFieldTableComponent,

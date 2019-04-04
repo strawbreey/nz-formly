@@ -1,0 +1,22 @@
+<nz-button-group>
+    <ng-container *ngFor="let item of to['options']; let i = index">
+        <button nz-button
+            [nzType]="item['nzType']"
+            [nzShape]="item['nzShape']"
+            [nzSize]="item['nzSize']"
+            [nzGhost]="item['nzGhost']"
+            [disabled]="item['disabled']"
+            [nzLoading]="item['nzLoading']"
+            [nzBlock]="item['nzBlock']"
+            (click)="onClick($event, i)">
+            <ng-container *ngIf="item['nzIcon']">
+                <i nz-icon [type]="item['nzIcon']" ></i>
+            </ng-container>
+
+            <ng-container *ngIf="item['text']">
+                <span>{{item['text']}}</span>
+            </ng-container>
+        </button>
+    </ng-container>
+</nz-button-group>
+

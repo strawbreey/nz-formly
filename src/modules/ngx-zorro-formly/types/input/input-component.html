@@ -1,6 +1,28 @@
-
-<input  nz-input 
-        [(ngModel)]="model[key]"
+<ng-container *ngIf="to['maxLength']">
+    <input  nz-input
         [formControl]="formControl" 
-        [formlyAttributes]="field" 
-        [nzSize]="to['nzSize']"/>
+        [formlyAttributes]="field"
+        [id]="key"
+        [name]="key"
+        [type]="type"
+        [nzSize]="to['nzSize']"
+        [autocomplete]="to['autocomplete'] || 'off'"
+        [autofocus]="to['autofocus']"
+        [maxlength]="to['maxLength']"/>
+</ng-container>
+
+<ng-container *ngIf="!to['maxLength']">
+    <input  nz-input
+        [formControl]="formControl" 
+        [formlyAttributes]="field"
+        [id]="key"
+        [name]="key"
+        [type]="type"
+        [nzSize]="to['nzSize']"
+        [autocomplete]="to['autocomplete'] || 'off'"
+        [autofocus]="to['autofocus']"/>
+</ng-container>
+
+
+
+

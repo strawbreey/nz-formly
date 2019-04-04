@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { FieldType } from '@ngx-formly/core';
 
 @Component({
-    selector: 'nz-input-component',
-    templateUrl: './input-component.html'
+    selector: 'nz-input-group-component',
+    templateUrl: './input-group-component.html'
 
 })
-export class NzInputComponent extends FieldType {
+export class NzInputGroupComponent extends FieldType {
     get type() {
         return this.to.type || 'text';
     }

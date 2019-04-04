@@ -6,6 +6,8 @@
     [nzType]="to['nzType']"
     [nzBlock]="to['nzBlock']"
     (click)="onClick($event)">
-    <i *ngIf="to['nzIcon']" nz-icon [type]="to['nzIcon']"></i>
+    <ng-container *ngIf="to['nzIcon']">
+        <i nz-icon [type]="to['nzIcon']" ></i>
+    </ng-container>
     {{to['text']}}
 </button>
