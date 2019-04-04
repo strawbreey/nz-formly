@@ -25,7 +25,7 @@ export class FormlyComponent implements OnInit {
   field 
 
   constructor(formlyService: FormlyService) {
-    this.field = formlyService.getFields()
+    // this.field = formlyService.getFields()
     console.log(this.field)
   }
   
@@ -138,7 +138,7 @@ export class FormlyComponent implements OnInit {
 
   ngOnInit() {
     // this.formlyService.setFields(this.field)
-    console.log(this.formlyService.getFields())
+    // console.log(this.formlyService.getFields())
   }
 
   onClick () {
