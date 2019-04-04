@@ -90,8 +90,9 @@
   }
 
   .example-box-1 {
-    width: 200px;
-    height: 200px;
+    height: 48px;
+    width: 100%;
+    margin-bottom: 10px;
     border: solid 1px #ccc;
     color: rgba(0, 0, 0, 0.87);
     cursor: move;
@@ -121,27 +122,33 @@
   }
 
   .menu-list{
+    padding: 12px;
     display: block;
     width: 300px;
     float: left;
     height: 800px;
-    border: 1px solid #ccc;
-    background-color: #f1f3f5;
+    /* border: 1px solid #cccccc; */
+    /* box-shadow: rgba(213, 213, 213, 0.5) 0px 2px 30px 0px; */
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.1);
+    background-color: #fff;
   }
 
   .drag-operator{
+    padding: 12px;
     width: 300px;
-    border: 1px solid #ccc;
-    background-color: #f1f3f5;
+    box-shadow: #27364E 1 0 6 0;
+    background-color: #fff;
   }
 
   .drag-list{
+    padding: 12px;
     display: inline-block;
     flex: 1;
     margin: 0 16px;
     height: 800px;
-    border: 1px solid #ccc;
-    background-color: #f1f3f5; 
+    box-shadow: #27364E 1 0 6 0;
+
+    background-color: #fff; 
   }
 
   .box{
