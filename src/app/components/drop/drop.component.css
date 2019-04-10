@@ -141,6 +141,7 @@
   }
 
   .drag-list{
+    min-width: 500px;
     padding: 12px;
     display: inline-block;
     flex: 1;

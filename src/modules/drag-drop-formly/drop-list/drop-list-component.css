@@ -1,0 +1,15 @@
+:host {
+    position: relative;
+    display: block;
+    border: 1px dashed #ccc;
+    padding: 10px;
+    margin: 10px 0;
+    min-height: 100px;
+    overflow: hidden;
+}
+
+.drag-list {
+    display: block;
+    height: 100%;
+    min-height: 48px;
+}

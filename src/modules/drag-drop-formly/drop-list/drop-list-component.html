@@ -1,0 +1,27 @@
+<div cdkDropList [id]="id" class="drag-list" 
+		[cdkDropListData]="field.fieldGroup" 
+		[cdkDropListConnectedTo]="ids"  
+		(cdkDropListDropped)="drop($event, field)"
+		(cdkDropListEntered)="entered($event, field)"
+		(cdkDropListExited)="exited($event, field)"
+
+		[cdkDropListEnterPredicate]="canDropPredicate()">
+
+	<div *ngIf="field.fieldGroup.length < 1">
+		<p>Try to drop items here</p>
+	</div>
+	<formly-field
+		*ngFor="let f of field.fieldGroup" 
+		[field]="f"
+		cdkDrag
+		(contextmenu)="contextmenu($event, f);" 
+		(click)="click($event, f);" 
+		(cdkDragDropped)="dragDrop($event)"
+		(cdkDragEnded)="dragEntered($event)"
+		(cdkDragExited)="dragExited($event)"
+		(cdkDragReleased)="dragReleased($event)"
+		(cdkDragStarted)="dragStarted($event)"
+
+		[class]="f['className'] || 'box'"></formly-field>
+	<ng-content></ng-content>
+</div>

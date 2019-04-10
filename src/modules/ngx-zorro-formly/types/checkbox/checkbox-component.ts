@@ -6,23 +6,20 @@ import { pipe, from } from 'rxjs';
 
 @Component({
     selector: 'nz-checkbox-component',
-    templateUrl: './checkbox-component.html'
+    templateUrl: './checkbox-component.html',
+    // changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class NzCheckboxComponent extends FieldType implements OnChanges {
-
-
-    get type () {
-        return 'boolean'
-    }
+export class NzCheckboxComponent extends FieldType  {
 
     ngOnInit() {
-
+        console.log('NzCheckboxComponent')
     }
 
     onChange (event) {
-        if (this.to.change) {
-            this.to.change(this.field, event)
-        }
+        console.log(this)
+        // if (this.to.change) {
+        //     this.to.change(this.field, event)
+        // }
     }
 }

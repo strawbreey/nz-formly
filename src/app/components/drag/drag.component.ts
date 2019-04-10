@@ -1,8 +1,10 @@
-import { Component, OnInit, HostListener, ChangeDetectionStrategy } from '@angular/core';
-import {CdkDragDrop, moveItemInArray, transferArrayItem, DragDropModule, copyArrayItem} from '@angular/cdk/drag-drop';
+import { Component, OnInit, HostListener, ChangeDetectionStrategy, ComponentFactoryResolver, Injector, Attribute, SimpleChanges } from '@angular/core';
+import { CdkDragDrop, moveItemInArray, transferArrayItem, DragDropModule, copyArrayItem} from '@angular/cdk/drag-drop';
 import { FormGroup } from '@angular/forms';
-import { FormlyFormOptions, FormlyFieldConfig, Field } from '@ngx-formly/core';
-import { FieldType } from '@ngx-formly/core';
+import { FormlyFormOptions, FormlyFieldConfig, Field, FormlyFormBuilder, FieldType ,FormlyConfig } from '@ngx-formly/core';
+import { isNullOrUndefined } from '../../../utils/index'
+// import {  } from '@ngx-formly/core/lib/components/formly.field.config';
+
 
 import { reverseDeepMerge, assignModelValue, clone } from '../../../utils/index';
 
@@ -15,10 +17,9 @@ import { reverseDeepMerge, assignModelValue, clone } from '../../../utils/index'
 
 })
 export class DragComponent  extends FieldType implements OnInit {
-  constructor() { 
-    super()
-  }
+  private immutable = false;
   data = [1,2,3]
+  private initialModel: any
 
   private _model: any;
   menu:FormlyFieldConfig[] = [
@@ -60,7 +61,10 @@ export class DragComponent  extends FieldType implements OnInit {
     }
   ];
 
-  drag:FormlyFieldConfig[] = [
+  dragForm = new FormGroup({});
+  dragModel: any = {};
+  dragOptions: FormlyFormOptions = {};
+  dragFields:FormlyFieldConfig[] = [
     {
       key: 'radio',
       type: 'nz-radio',
@@ -69,8 +73,49 @@ export class DragComponent  extends FieldType implements OnInit {
         text: 'primary',
       },
     }, 
-
   ];
+
+  constructor(
+    private formlyBuilder: FormlyFormBuilder,
+    formlyConfig: FormlyConfig,
+    // tslint:disable-next-line
+    @Attribute('immutable') immutable,
+  ) { 
+    super()
+  }
+
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('ngOnChanges')
+    if (!this.dragFields || this.dragFields.length === 0) {
+      return;
+    }
+
+    if (changes.fields || changes.form || changes.model) {
+      this.model = this.model || {};
+      this.form = this.form || (new FormGroup({}));
+      this.options = this.options || {};
+      // this.clearModelSubscriptions();
+      // this.formlyBuilder.buildForm(this.form, this.dragFields, this.model, this.options);
+      this.formlyBuilder.buildForm(this.dragForm, this.dragFields, this.dragModel, this.dragOptions);
+
+      // this.trackModelChanges(this.fields);
+      // this.options.updateInitialValue();
+    }
+  }
+
+
+  // private checkExpressionChange() {
+  //   if ((<FormlyFormOptionsCache> this.options)._checkField) {
+  //     (<FormlyFormOptionsCache> this.options)._checkField({
+  //       fieldGroup: this.fields,
+  //       model: this.model,
+  //       formControl: this.form,
+  //       options: this.options,
+  //     });
+  //   }
+  // }
+
 
 
   drop(event: CdkDragDrop<string[]>) {
@@ -87,8 +132,16 @@ export class DragComponent  extends FieldType implements OnInit {
       copyArrayItem(clone(event.previousContainer.data), event.container.data, event.previousIndex, event.currentIndex);
 
     }
+    this.dragModel = this.dragModel || {};
+    this.dragForm = this.dragForm || (new FormGroup({}));
+    this.dragOptions = this.dragOptions || {};
+    this.formlyBuilder.buildForm(this.dragForm, this.dragFields, this.dragModel, this.dragOptions);
   }
   ngOnInit() {
+    this.model = this.model || {};
+    this.form = this.form || (new FormGroup({}));
+    this.options = this.options || {};
+    this.formlyBuilder.buildForm(this.dragForm, this.dragFields, this.dragModel, this.dragOptions);
   }
 
   getPlaceholderElement ($event) {
@@ -139,20 +192,7 @@ export class DragComponent  extends FieldType implements OnInit {
     console.log($event)
   }
 
-  click ($event, data) {
-    $event.preventDefault();
-    console.log('click')
-    console.log($event)
-    console.log(data)
 
-    this.operatorModel = data
-  }
-
-  contextmenu ($event) {
-    $event.preventDefault();
-    console.log('contextmenu')
-    console.log($event)
-  }
 
 
   operatorForm = new FormGroup({});
@@ -171,6 +211,7 @@ export class DragComponent  extends FieldType implements OnInit {
           type: 'nz-input',
           templateOptions: {
             label: 'Key',
+            nzLayout: 'inline'
           },
         },
         {
@@ -243,6 +284,13 @@ export class DragComponent  extends FieldType implements OnInit {
                 label: 'nzBlock'
               }
 
+            },
+            {
+              key: 'nzLayout',
+              type: 'nz-input',
+              templateOptions: {
+                label: 'nzLayout'
+              }
             }
           ]
         }

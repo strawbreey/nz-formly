@@ -1,9 +1,14 @@
 <ng-container >
     <nz-form-item [nzFlex]="to['nzFlex'] || true">
-        <nz-form-label [nzRequired]="to['required']">{{to['label']}}</nz-form-label>
+        <nz-form-label [nzRequired]="to['required']" *ngIf="to['label']">{{to['label']}}</nz-form-label>
         <nz-form-control>
             <ng-template #fieldComponent></ng-template>
+            <nz-form-explain *ngIf="to['nzExplain']">{{to['nzExplain']}}</nz-form-explain>
+            <nz-form-extra  *ngIf="to['nzExtra']">{{to['nzExtra']}}</nz-form-extra>
+            <nz-form-split *ngIf="to['nzSplit']">{{to['nzSplit']}}</nz-form-split>
+            <nz-form-text *ngIf="to['nzText']">{{to['nzText']}}</nz-form-text>
         </nz-form-control>
+
 
         <!-- <div *ngIf="showError" class="invalid-feedback" [style.display]="'block'" >
             <formly-validation-message [field]="field"></formly-validation-message>

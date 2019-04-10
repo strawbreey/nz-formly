@@ -1,0 +1,68 @@
+<div class="example-box-1" 
+cdkDrag  
+[cdkDragData]="data"
+[cdkDragDisabled]="false"
+(cdkDragEnded)="ended($event)"
+(cdkDragEntered)="entered($event)"
+(cdkDragExited)="exited($event)"
+(cdkDragMoved)="moved($event)"
+(cdkDragReleased)="released($event)"
+(cdkDragStarted)="started($event)">
+I can only be dragged left/right
+</div>
+
+<div cdkDropList
+ [cdkDropListConnectedTo]="todoList">
+  <div class="example-box-1" 
+  cdkDrag >
+    I can only be dragged left/right
+  </div>
+</div>
+
+<div class="drag-over">
+
+</div>
+<div class="example-container">
+<h2>To do</h2>
+
+<div
+  cdkDropList
+  #todoList="cdkDropList"
+  [cdkDropListData]="todo"
+  [cdkDropListConnectedTo]="[doneList]"
+  class="example-list"
+  (cdkDropListDropped)="drop($event)">
+  <div class="example-box" *ngFor="let item of todo" cdkDrag cdkDragLockAxis="y" style="position: relative" (cdkDragDropped)="drag($event)">
+    {{item}}
+  <div class="example-handle" cdkDragHandle>
+    <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+    </svg>
+</div> 
+
+<!-- cdkDragPreview -->
+<span *cdkDragPreview style="color: red">{{item}}</span>
+
+<span *cdkDragPlaceholder style="color: green">cdkDragPlaceholder: {{item}}</span>
+</div>
+
+
+
+
+</div>
+</div>
+
+<div class="example-container">
+<h2>Done</h2>
+
+<div
+cdkDropList
+#doneList="cdkDropList"
+[cdkDropListData]="done"
+[cdkDropListConnectedTo]="[todoList]"
+class="example-list"
+(cdkDropListDropped)="drop($event)">
+<div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div>
+</div>
+</div>  

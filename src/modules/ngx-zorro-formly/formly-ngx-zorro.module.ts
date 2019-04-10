@@ -9,6 +9,9 @@ import { NgZorroAntdModule, NZ_ICONS, NZ_I18N, zh_CN } from 'ng-zorro-antd';
 import { IconDefinition } from '@ant-design/icons-angular';
 import * as AllIcons from '@ant-design/icons-angular/icons';
 
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
+
 // 基于 ngx-zorro 的扩展库
 // import { ExtendNgxZorroModule } from '../extend-ngx-zorro/extend-ngx-zorro.module'
 
@@ -51,6 +54,9 @@ import { FormlyFieldModelComponent } from './types/model/model-component'
 
 // wrapper
 import { FormlyFieldWrapperComponent } from './wrappers/formly-field-wrapper/formly-field-wrapper-component';
+
+// drag-drop
+import { DropListComponent } from '../drag-drop-formly/drop-list/drop-list-component'
 
 // 服务
 // import { formlyService } from '../../services/formly.service'
@@ -210,6 +216,10 @@ export const ForRootFormlyModule = FormlyModule.forRoot({
         {
             name: 'nz-model',
             component: FormlyFieldModelComponent
+        },
+        {
+            name: 'mt-drop-list',
+            component: DropListComponent
         }
     ],
     wrappers: [
@@ -224,6 +234,7 @@ export const ForRootFormlyModule = FormlyModule.forRoot({
     ],
     imports: [
         NgZorroAntdModule, 
+        DragDropModule,
         ReactiveFormsModule, 
         FormsModule, 
         CommonModule, 
@@ -261,7 +272,8 @@ export const ForRootFormlyModule = FormlyModule.forRoot({
         TabsSectionComponent,
         FormlyFieldTemplateComponent,
         FormlyFieldTableComponent,
-        FormlyFieldModelComponent
+        FormlyFieldModelComponent,
+        DropListComponent
     ],
     exports: [
         NgZorroAntdModule,

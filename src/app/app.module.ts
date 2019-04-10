@@ -23,6 +23,7 @@ import { InputComponent } from './components/input/input.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { RadioComponent } from './components/radio/radio.component';
 import { DragComponent } from './components/drag/drag.component';
+import { DropComponent } from './components/drop/drop.component';
 
 registerLocaleData(en);
 
@@ -38,6 +39,7 @@ registerLocaleData(en);
     CheckboxComponent,
     RadioComponent,
     DragComponent,
+    DropComponent,
   ],
   imports: [
     BrowserModule,

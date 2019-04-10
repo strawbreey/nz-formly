@@ -4,7 +4,7 @@ import { FieldType } from '@ngx-formly/core';
 @Component({
     selector: 'nz-button-component',
     templateUrl: './button-component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    // changeDetection: ChangeDetectionStrategy.OnPush
 
 })
 export class NzButtonComponent extends FieldType {

@@ -8,6 +8,7 @@ import { FieldType } from '@ngx-formly/core';
 export class NzRadioComponent extends FieldType {
     ngOnInit () {
         // console.log('ngOnInit')
+        console.log(this)
     }
 
     blur () {
