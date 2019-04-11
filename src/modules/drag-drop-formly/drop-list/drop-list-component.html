@@ -4,24 +4,27 @@
 		(cdkDropListDropped)="drop($event, field)"
 		(cdkDropListEntered)="entered($event, field)"
 		(cdkDropListExited)="exited($event, field)"
-
 		[cdkDropListEnterPredicate]="canDropPredicate()">
 
 	<div *ngIf="field.fieldGroup.length < 1">
 		<p>Try to drop items here</p>
 	</div>
-	<formly-field
-		*ngFor="let f of field.fieldGroup" 
-		[field]="f"
-		cdkDrag
-		(contextmenu)="contextmenu($event, f);" 
-		(click)="click($event, f);" 
-		(cdkDragDropped)="dragDrop($event)"
-		(cdkDragEnded)="dragEntered($event)"
-		(cdkDragExited)="dragExited($event)"
-		(cdkDragReleased)="dragReleased($event)"
-		(cdkDragStarted)="dragStarted($event)"
-
-		[class]="f['className'] || 'box'"></formly-field>
+	<ng-container *ngFor="let f of field.fieldGroup" >
+		<formly-field
+			cdkDrag
+			[field]="f"
+			[class]="getCurrentClass(f)"
+			(click)="click($event, f);" 
+			(contextmenu)="contextmenu($event, f);" 
+			(cdkDragDropped)="dragDrop($event)"
+			(cdkDragEnded)="dragEntered($event)"
+			(cdkDragExited)="dragExited($event)"
+			(cdkDragReleased)="dragReleased($event)"
+			(cdkDragStarted)="dragStarted($event)"
+			>
+		</formly-field>
+	</ng-container>
+	
+	<!-- [class]="f['className'] ? f['className'] + ' formly-field-box' : 'formly-field-box'"  -->
 	<ng-content></ng-content>
 </div>

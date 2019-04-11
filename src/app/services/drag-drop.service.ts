@@ -32,6 +32,12 @@ export class DragDropService {
         }
       ]
     }, 
+    {
+      type: 'nz-input',
+      templateOptions: {
+        label: '标签'
+      }
+    }
   ]
 
   fields$ = new Subject<FormlyFieldConfig[]>()

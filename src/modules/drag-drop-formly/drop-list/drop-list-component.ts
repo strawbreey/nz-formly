@@ -178,4 +178,17 @@ export class DropListComponent extends FieldType {
     console.log($event)
   }
 
+  // 获取当前的class
+  getCurrentClass (field ) {
+    if (field.className) {
+      let className = field.className.split(' ').some(item => item === 'formly-field-box')
+      if (!className) {
+        field.className = field.className ? field.className + ' formly-field-box' : 'formly-field-box'
+      }
+    } else {
+      field.className = 'formly-field-box'
+    }
+    return field.className
+  }
+
 }

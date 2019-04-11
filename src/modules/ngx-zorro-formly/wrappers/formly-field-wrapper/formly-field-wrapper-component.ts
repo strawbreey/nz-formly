@@ -9,7 +9,12 @@ import { FieldWrapper } from '@ngx-formly/core';
         '[class.ant-form-horizontal]': "to['nzLayout'] === 'horizontal'",
         '[class.ant-form-inline]': "to['nzLayout'] === 'inline'",
       }
-    `]
+    :host {
+    display: block;
+    }
+      `
+    
+]
 })
 
 export class FormlyFieldWrapperComponent extends FieldWrapper {

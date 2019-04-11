@@ -43,6 +43,7 @@ export class DropComponent  extends FieldType implements OnInit {
       },
     }, 
     {
+      key: 'nz-input',
       type: 'nz-input',
       wrappers: ['field-wrapper'],
       className: 'px-2',
@@ -56,11 +57,6 @@ export class DropComponent  extends FieldType implements OnInit {
       templateOptions: {
         text: '6666'
       }
-    },
-    {
-      id: 'fieldGroup',
-      fieldGroup: [],
-      fieldGroupClassName: ''
     },
     {
       type: 'mt-drop-list',
@@ -197,7 +193,6 @@ export class DropComponent  extends FieldType implements OnInit {
     console.log('click')
     console.log($event)
     console.log(data)
-
     this.operatorModel = data
   }
 
@@ -208,7 +203,6 @@ export class DropComponent  extends FieldType implements OnInit {
   }
 
   change ($event) {
-    // console.log('change')
     // this.attributeService.setModel($event)
   }
 }
