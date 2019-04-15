@@ -10,7 +10,7 @@ import { FieldWrapper } from '@ngx-formly/core';
         '[class.ant-form-inline]': "to['nzLayout'] === 'inline'",
       }
     :host {
-    display: block;
+        display: block;
     }
       `
     
@@ -29,6 +29,4 @@ export class FormlyFieldWrapperComponent extends FieldWrapper {
         // console.log('nzLayout')
         // console.log(this.nzLayout)
     }
-
-
 }

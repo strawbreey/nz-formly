@@ -1,5 +1,5 @@
 <div cdkDropList [id]="id" class="drag-list" 
-		[cdkDropListData]="field.fieldGroup" 
+		[cdkDropListData]="clones(field.fieldGroup)" 
 		[cdkDropListConnectedTo]="ids"  
 		(cdkDropListDropped)="drop($event, field)"
 		(cdkDropListEntered)="entered($event, field)"

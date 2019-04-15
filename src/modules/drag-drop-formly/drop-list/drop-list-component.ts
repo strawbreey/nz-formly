@@ -4,6 +4,7 @@ import { FieldType } from '@ngx-formly/core';
 import { reverseDeepMerge, assignModelValue, clone } from '../../../utils/index';
 import { DragDropService } from '../../../app/services/drag-drop.service'
 import { DragAttributeService } from '../../../app/services/drag-attribute.service'
+import { cloneSVG } from '@ant-design/icons-angular';
 
 
 @Component({
@@ -30,65 +31,18 @@ export class DropListComponent extends FieldType {
   
   // 
   canDropPredicate(): Function {
-    const me = this;
-    return (drag: CdkDrag<Element>, drop: CdkDropList<Element>): boolean => {
-      // console.log(drag)
-      // console.log(drop)
-      const fromBounds = drag.dropContainer.element.nativeElement.getBoundingClientRect();
-      const toBounds = drop.element.nativeElement.getBoundingClientRect();
-
-      if (!me.intersect(fromBounds, toBounds)) {
-        return true;
-      }
-
-      // This gross but allows us to access a private field for now.
-      const pointerPosition: any = drag['_dragRef']['_pointerPositionAtLastDirectionChange'];
-      // They Intersect with each other so we need to do some calculations here.
-      if (me.insideOf(fromBounds, toBounds)) {
-        return !me.pointInsideOf(pointerPosition, fromBounds);
-      }
-
-      if (me.insideOf(toBounds, fromBounds) && me.pointInsideOf(pointerPosition, toBounds)) {
-        return true;
-      }
-      return false;
-    };
+    return this.dragDropService.canDropPredicate()
 	}
   
-  // 
-	intersect(r1: DOMRect | ClientRect, r2: DOMRect | ClientRect): boolean {
-    return !(r2.left > r1.right ||
-      r2.right < r1.left ||
-      r2.top > r1.bottom ||
-      r2.bottom < r1.top);
-	}
-  
-  // 
-	insideOf(innerRect: DOMRect | ClientRect, outerRect: DOMRect | ClientRect): boolean {
-    return innerRect.left >= outerRect.left &&
-      innerRect.right <= outerRect.right &&
-      innerRect.top >= outerRect.top &&
-      innerRect.bottom <= outerRect.bottom &&
-      !(
-        innerRect.left === outerRect.left &&
-        innerRect.right === outerRect.right &&
-        innerRect.top === outerRect.top &&
-        innerRect.bottom === outerRect.bottom
-      );
-	}
-	
-	// 
-  pointInsideOf(position: any, rect: DOMRect | ClientRect) {
-    return position.x >= rect.left &&
-      position.x <= rect.right &&
-      position.y >= rect.top &&
-      position.y <= rect.bottom;
-  }
+
 
   // 点击
 	click ($event, field) {
-    $event.stopPropagation();    
-    $event.preventDefault();
+    console.log($event)
+    console.log(field)
+
+    // $event.stopPropagation();    
+    // $event.preventDefault();
     this.attributeService.setModel(field)
 	}
   
@@ -189,6 +143,10 @@ export class DropListComponent extends FieldType {
       field.className = 'formly-field-box'
     }
     return field.className
+  }
+
+  clones (field) {
+    return clone(field)
   }
 
 }

@@ -17,32 +17,32 @@ export class NzCheckboxGroupComponent extends FieldType {
         this.getCheckboxOptions()
     }
 
-    // onChange ($event) {
-    //     if (this.to.options) {
-    //        let value = $event.filter(item => item.checked).map(item => item.value)
-    //        this.field.formControl.patchValue(value)
-    //     } else {
-    //         this.field.formControl.patchValue($event)
-    //     }
+    onChange ($event) {
+        if (this.to.options) {
+           let value = $event.filter(item => item.checked).map(item => item.value)
+           this.field.formControl.patchValue(value)
+        } else {
+            this.field.formControl.patchValue($event)
+        }
 
-    //     if (this.to.change) {
-    //         this.to.change(this.field, event)
-    //     }
-    // }
+        if (this.to.change) {
+            this.to.change(this.field, event)
+        }
+    }
 
     getCheckboxOptions () {
-        // if (this.to.options && !(this.to.options instanceof Observable)) {
-        //     let value = this.field.formControl.value
-        //     if (value) {
-        //        this.checkOptions = this.to.options.map(option => {
-        //             return {
-        //                 ...option,
-        //                 checked: value.some(item => item === option.value)
-        //             } 
-        //        })
-        //     }
-        // } else {
-        //     this.checkOptions = this.field.formControl.value
-        // }
+        if (this.to.options && !(this.to.options instanceof Observable)) {
+            let value = this.field.formControl.value
+            if (value) {
+               this.checkOptions = this.to.options.map(option => {
+                    return {
+                        ...option,
+                        checked: value.some(item => item === option.value)
+                    } 
+               })
+            }
+        } else {
+            this.checkOptions = this.field.formControl.value
+        }
     }
 }

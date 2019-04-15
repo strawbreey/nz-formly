@@ -1,0 +1,7 @@
+<h3>Default editor with height of 200px</h3>
+<quill-editor 
+    [(ngModel)]="model[key]"
+    [style]="{height: '200px'}" 
+    [theme]="to['theme'] || 'bubble' "
+    (onEditorCreated)="setFocus($event)"
+    (onContentChanged)="onContentChanged($event)"></quill-editor>

@@ -11,6 +11,9 @@ import * as AllIcons from '@ant-design/icons-angular/icons';
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
+// 富文本编辑器 ngx-quill
+import { QuillModule } from 'ngx-quill'  
+
 
 // 基于 ngx-zorro 的扩展库
 // import { ExtendNgxZorroModule } from '../extend-ngx-zorro/extend-ngx-zorro.module'
@@ -49,6 +52,8 @@ import { FormlyFieldTemplateComponent } from './types/template/template-componen
 import { FormlyFieldGridComponent } from './types/grid/grid-component';
 import { FormlyFieldTableComponent } from './types/table/table-component';
 import { FormlyFieldModelComponent } from './types/model/model-component'
+
+import { NgxQuillComponent } from '../ngx-quill/ngx-quill-component'
 
 // repeat
 
@@ -220,6 +225,10 @@ export const ForRootFormlyModule = FormlyModule.forRoot({
         {
             name: 'mt-drop-list',
             component: DropListComponent
+        },
+        {
+            name: 'ngx-quill',
+            component: NgxQuillComponent
         }
     ],
     wrappers: [
@@ -238,6 +247,7 @@ export const ForRootFormlyModule = FormlyModule.forRoot({
         ReactiveFormsModule, 
         FormsModule, 
         CommonModule, 
+        QuillModule,
         ForRootFormlyModule,
     ],
     declarations: [
@@ -273,12 +283,14 @@ export const ForRootFormlyModule = FormlyModule.forRoot({
         FormlyFieldTemplateComponent,
         FormlyFieldTableComponent,
         FormlyFieldModelComponent,
-        DropListComponent
+        DropListComponent,
+        NgxQuillComponent
     ],
     exports: [
         NgZorroAntdModule,
         ReactiveFormsModule,
         FormlyModule,
+        QuillModule
     ]
 })
 export class FormlyNgxZorroModule {
