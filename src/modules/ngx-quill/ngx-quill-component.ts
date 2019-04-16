@@ -19,5 +19,5 @@ export class NgxQuillComponent extends FieldType {
 
     onContentChanged ($event) {
         console.log($event)
-    } 
+    }
 }
