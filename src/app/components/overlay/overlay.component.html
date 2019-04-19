@@ -1,0 +1,28 @@
+<p>
+  overlay works!
+</p>
+  <p>
+    <!-- overlay works! -->
+  </p>
+  <button (click)="openDialog()">Open a draggable dialog</button>
+
+
+
+
+
+<div class="example-box" cdkDrag>
+  Drag me around
+</div>
+
+<ng-template>
+  <div class="example-dialog-content" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+    Drag the dialog around
+  </div>
+</ng-template>
+
+<ng-template>
+  <div class="example-dialog-content" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+    Drag the dialog around!
+  </div>
+</ng-template>
+
