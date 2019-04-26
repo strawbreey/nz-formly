@@ -25,6 +25,7 @@ export class DropListComponent extends FieldType {
 
 
 	ngOnInit(): void {
+    console.log('drop-list: oninit')
     this.dragDropService.addIds(this.id)
     this.ids = this.dragDropService.getIds()
 	}
@@ -40,20 +41,16 @@ export class DropListComponent extends FieldType {
 	click ($event, field) {
     console.log($event)
     console.log(field)
-
-    // $event.stopPropagation();    
-    // $event.preventDefault();
-    this.attributeService.setModel(field)
 	}
   
   // 右击
 	contextmenu ($event) {
     $event.stopPropagation();
     $event.preventDefault();
-    console.log('contextmenu')
 	}
 
 	drop(event: CdkDragDrop<string[]>, field) {
+    console.log('drop-list')
 		if (event.previousContainer === event.container) {
 			moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else if (Array.isArray(event.container.connectedTo) && 
@@ -62,22 +59,16 @@ export class DropListComponent extends FieldType {
     } else {
       copyArrayItem(clone(event.previousContainer.data), event.container.data, event.previousIndex, event.currentIndex)
     }
-    console.log('drop')
-    console.log(this)
-    this.dragDropService.setFields()
   }
 
   started($event) {
     console.log('started')
     console.log($event)
-    // let drag = $event.source
-    // console.log(drag.getPlaceholderElement())
-    // console.log(drag.getRootElement())
   }
 
-  entered ($event) {
+  entered ($event, field) {
     console.log('entered')
-    // console.log($event)
+    console.log($event)
   }
 
   ended ($event) {
@@ -85,7 +76,7 @@ export class DropListComponent extends FieldType {
     console.log($event)
   }
 
-  exited ($event) {
+  exited ($event, field) {
     console.log('exited')
     console.log($event)
   }
@@ -101,13 +92,12 @@ export class DropListComponent extends FieldType {
   }
   
   ngOnDestroy () {
-    console.log(this.key+': ngOnDestroy')
+    console.log('drop-list: OnDestroy')
   }
 
   dragDrop ($event) {
     console.log('dragDrop')
     console.log($event)
-    console.log(this)
   }
 
   dragEntered ($event) {
@@ -148,5 +138,4 @@ export class DropListComponent extends FieldType {
   clones (field) {
     return clone(field)
   }
-
 }

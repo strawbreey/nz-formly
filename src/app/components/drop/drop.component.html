@@ -1,16 +1,13 @@
-<p>
-  drop works!
-</p>
 <nz-card style="width: 100%; background-color: #f5f5f5; padding: 12px;">
   <div class="drag-over">
     <div cdkDropListGroup style="display: inline;">
       <div class="menu-list" 
         cdkDropList
+        #menuList="cdkDropList"
         id="menuid"
         [cdkDropListData]="menu"
-        #menuList="cdkDropList"
         (cdkDragMoved)="moved($event)"
-        (cdkDropListDropped)="drop($event)">
+        (cdkDropListDropped)="menuDrop($event, field)">
 
         <nz-input-group class="mb-2" [nzSuffix]="suffixIconSearch">
           <input type="text" nz-input placeholder="搜索组件" />
@@ -22,20 +19,45 @@
         <hr class="m-2">
         <div class="example-box-1" *ngFor="let item of menu" cdkDrag>{{item.key ? item.key : item?.templateOptions?.label}}</div>
       </div>
-      <!-- #dragList="cdkDropList"  [cdkDropListData]="dropFields"  " -->
       
-      <div class="drag-list" id="dragroot">
-          <formly-form [model]="dropModel" [fields]="dropFields" [options]="dropOptions" [form]="dropForm"></formly-form>
-      </div>
+      <div  class="drag-list"
+            id="dragroot"
+            cdkDropList
+            [cdkDropListData]="fields" 
+            [cdkDropListConnectedTo]="ids"  
+
+            (cdkDropListDropped)="dragListDrop($event, field)"
+            (cdkDropListEntered)="dragListEntered($event, field)"
+            (cdkDropListExited)="dragListExited($event, field)"
+
+            [cdkDropListEnterPredicate]="canDropPredicate()">
+            <!-- <div class="example-box-1" *ngFor="let item of fields" cdkDrag>{{item.key ? item.key : item?.templateOptions?.label}}</div> -->
+            <!-- <formly-form [model]="dropModel" [fields]="dropField" [options]="dropOptions" [form]="dropForm"></formly-form> -->
+            <formly-field 
+              cdkDrag
+              *ngFor="let field of fields"
+              hide-deprecation
+              [form]="field.form"
+              [options]="field.options"
+              [model]="field.model"
+              [field]="field">
+            </formly-field>
+      
+        </div>
     </div>
 
 
     <div class="drag-operator">
+        <i nz-icon nzType="copy" nzTheme="outline"></i>
       <formly-form [model]="operatorModel" [fields]="operatorFields" [options]="operatorOptions" [form]="operatorForm" (modelChange)="change($event)" ></formly-form>
     </div>
   </div>
 </nz-card>
-<pre>{{dropModel | json}}</pre>
+
+
+<button nz-button [nzType]="'primary'" (click)="showModal()"><span>Show Modal</span></button>
+<nz-modal [(nzVisible)]="isModelVisible" nzTitle="显示modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+</nz-modal>
 
 
 

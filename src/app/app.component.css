@@ -3,3 +3,16 @@
     height: 100%;
     background-color: #ccc;
 }
+
+::ng-deep .ant-modal-wrap {
+    left: 50%;
+    top: 50%;
+    transform:translate(-50%,-50%);
+    z-index:1000;  
+    width:  537px;
+    height: 357px;
+}
+
+::ng-deep .ant-modal { 
+    top: unset;
+ }

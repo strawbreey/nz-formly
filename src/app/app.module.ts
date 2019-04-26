@@ -10,6 +10,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 
+import { QuillModule } from 'ngx-quill'  
+
 import { FormlyNgxZorroModule } from "../modules/ngx-zorro-formly/formly-ngx-zorro.module";
 import { AppRoutingModule } from './app-routing.module';
 
@@ -24,6 +26,9 @@ import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { RadioComponent } from './components/radio/radio.component';
 import { DragComponent } from './components/drag/drag.component';
 import { DropComponent } from './components/drop/drop.component';
+import { QuillComponent } from './components/quill/quill.component';
+import { OverlayComponent } from './components/overlay/overlay.component';
+import { DragModalComponent } from './modal/drag-modal/drag-modal.component';
 
 registerLocaleData(en);
 
@@ -40,6 +45,9 @@ registerLocaleData(en);
     RadioComponent,
     DragComponent,
     DropComponent,
+    QuillComponent,
+    OverlayComponent,
+    DragModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,7 +58,8 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     FormlyNgxZorroModule,
     AppRoutingModule,
-    DragDropModule
+    DragDropModule,
+    QuillModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
