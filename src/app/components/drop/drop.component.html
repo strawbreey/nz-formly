@@ -5,9 +5,9 @@
         cdkDropList
         #menuList="cdkDropList"
         id="menuid"
-        [cdkDropListData]="menu"
-        (cdkDragMoved)="moved($event)"
-        (cdkDropListDropped)="menuDrop($event, field)">
+        [cdkDropListData]="menuData"
+        (cdkDragMoved)="menuMoved($event)"
+        (cdkDropListDropped)="menuDrop($event)">
 
         <nz-input-group class="mb-2" [nzSuffix]="suffixIconSearch">
           <input type="text" nz-input placeholder="搜索组件" />
@@ -17,7 +17,7 @@
         </ng-template>
 
         <hr class="m-2">
-        <div class="example-box-1" *ngFor="let item of menu" cdkDrag>{{item.key ? item.key : item?.templateOptions?.label}}</div>
+        <div class="example-box-1" *ngFor="let item of menuData" cdkDrag>{{item.key ? item.key : item?.templateOptions?.label}}</div>
       </div>
       
       <div  class="drag-list"
@@ -26,23 +26,29 @@
             [cdkDropListData]="fields" 
             [cdkDropListConnectedTo]="ids"  
 
-            (cdkDropListDropped)="dragListDrop($event, field)"
-            (cdkDropListEntered)="dragListEntered($event, field)"
-            (cdkDropListExited)="dragListExited($event, field)"
+            (cdkDropListDropped)="dragListDrop($event)"
+            (cdkDropListEntered)="dragListEntered($event)"
+            (cdkDropListExited)="dragListExited($event)"
 
             [cdkDropListEnterPredicate]="canDropPredicate()">
-            <!-- <div class="example-box-1" *ngFor="let item of fields" cdkDrag>{{item.key ? item.key : item?.templateOptions?.label}}</div> -->
-            <!-- <formly-form [model]="dropModel" [fields]="dropField" [options]="dropOptions" [form]="dropForm"></formly-form> -->
+
             <formly-field 
               cdkDrag
               *ngFor="let field of fields"
+
+              (click)="fieldClick($event, field);" 
+              (contextmenu)="fieldContextMenu($event, field);" 
+              (cdkDragDropped)="fieldDrop($event)"
+              (cdkDragEnded)="fieldEntered($event)"
+              (cdkDragExited)="fieldExited($event)"
+              (cdkDragReleased)="fieldReleased($event)"
+              (cdkDragStarted)="fieldStarted($event)"
               hide-deprecation
               [form]="field.form"
               [options]="field.options"
               [model]="field.model"
               [field]="field">
-            </formly-field>
-      
+            </formly-field>      
         </div>
     </div>
 
@@ -57,8 +63,5 @@
 
 <button nz-button [nzType]="'primary'" (click)="showModal()"><span>Show Modal</span></button>
 <nz-modal [(nzVisible)]="isModelVisible" nzTitle="显示modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+<pre>{{resultField | json}}</pre>
 </nz-modal>
-
-
-
-

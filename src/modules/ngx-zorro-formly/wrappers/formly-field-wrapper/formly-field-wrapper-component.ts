@@ -11,6 +11,7 @@ import { FieldWrapper } from '@ngx-formly/core';
       }
     :host {
         display: block;
+        border: 1px solid #ccc;
     }
       `
     

@@ -13,6 +13,7 @@ import { FormGroup, FormArray, FormGroupDirective } from '@angular/forms';
 
 import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { getFieldId } from '@ngx-formly/core/lib/utils';
 
 
 
@@ -27,7 +28,7 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy {
   data = [1,2,3]
 
   // 菜单栏
-  menu:FormlyFieldConfig[] = [
+  menuData:FormlyFieldConfig[] = [
     {
       key: 'radio',
       type: 'nz-radio',
@@ -103,6 +104,8 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy {
   };
   operatorFields: FormlyFieldConfig[] = []
 
+  resultField 
+
   // 
   ids = []
 
@@ -143,15 +146,10 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy {
       // copyArrayItem(event.container.data, event.container.data, event.previousIndex, event.currentIndex);
     } else {
       // transferArrayItem(event.previousContainer.data, <string[]>this.dropFields, event.previousIndex, event.currentIndex);
-      copyArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+      copyArrayItem(clone(event.previousContainer.data), event.container.data, event.previousIndex, event.currentIndex);
 
       // copyArrayItem(clone(event.previousContainer.data), event.container.data, event.previousIndex, event.currentIndex);
     }
-
-    // this.dropOptions.s
-    console.log(event.container.data)
-    // this.checkExpressionChange()
-    // this.dropField = clone(event.container.data)
   }
 
   dragListEntered ($event) {
@@ -188,76 +186,13 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy {
   ngOnInit() {
     console.log('ngOnInit')
     this.init = true
-    // this.operatorForm = this.attributeService.form
-    // this.operatorOptions = this.attributeService.options
-    // this.operatorFields = this.attributeService.fields
-    // this.attributeService.getModel().subscribe(res => {
-    //   this.operatorModel = this.attributeService.model
-    // })
 
-    // this.dragDropService.getFields().subscribe(field => {
-    //   // this.dropModel = this.dragDropService.model
-    //   // this.dropFields = field
-    // })
+    this.operatorFields = this.attributeService.fields
+    // this.formlyBuilder.buildForm(this.form,[field], this.model,this.options);
   }
 
 
   CdkDragStart($event) {
-    console.log($event)
-  }
-
-  
-  started($event) {
-    console.log('started')
-    console.log($event)
-  }
-
-  entered ($event, field) {
-    console.log('entered')
-    console.log($event)
-  }
-
-  draged ($event) {
-    console.log('drag')    
-    console.log($event)
-  }
-
-
-  ended ($event) {
-    console.log('ended')
-    console.log($event)
-  }
-
-  exited ($event, field) {
-    console.log('exited')
-    console.log($event)
-  }
-
-  moved ($event) {
-    console.log('moved')
-    console.log($event)
-  }
-
-  released ($event) {
-    console.log('released')
-    console.log($event)
-  }
-
-  click ($event, data) {
-    $event.preventDefault();
-    console.log('click')
-    console.log($event)
-    console.log(data)
-    this.operatorModel = data
-  }
-
-  onclick ($event) {
-    console.log($event)
-  }
-
-  contextmenu ($event) {
-    $event.preventDefault();
-    console.log('contextmenu')
     console.log($event)
   }
 
@@ -266,6 +201,24 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy {
 
   showModal () {
     this.isModelVisible = true
+    console.log(this.fields)
+    let field = this.getField(this.fields)
+    console.log(field)
+    this.resultField = field
+  }
+
+  getField (field) {
+    if (Array.isArray(field)) {
+      return field.map(item => {
+        return {
+          key: item.key,
+          templateOptions: item.templateOptions,
+          type: item.type,
+          wrappers: item.wrappers,
+          className: item.className
+        }
+      })
+    }
   }
 
   handleCancel () {
@@ -295,6 +248,12 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy {
   private enableCheckExprDebounce = false;
 
   checkExpressionChange() {
+    console.log('666')
+    console.log(this.fields)
+    console.log(this.model)
+    console.log(this.form)
+    console.log(this.options)
+
     if ((<FormlyFormOptionsCache> this.options)._checkField) {
       (<FormlyFormOptionsCache> this.options)._checkField({
         fieldGroup: this.fields,
@@ -307,7 +266,8 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy {
 
   ngDoCheck() {
     console.log('ngDoCheck')
-    this.checkExpressionChange();
+    // this.checkExpressionChange();
+    this.fieldChanges()
   }
 
   clearModelSubscriptions() {
@@ -331,6 +291,17 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy {
       this.trackModelChanges(this.fields);
       this.options.updateInitialValue();
     }
+  }
+
+  fieldChanges () {
+    this.fields = this.fields || [];
+    this.model = this.model || {};
+    this.form = this.form || (new FormGroup({}));
+    this.setOptions();
+    this.clearModelSubscriptions();
+    this.formlyBuilder.buildForm(this.form, this.fields, this.model, this.options);
+    this.trackModelChanges(this.fields);
+    this.options.updateInitialValue();
   }
 
   setOptions() {
@@ -413,6 +384,45 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy {
   }
 
 
+  getCurrentClass () {
 
+  }
+
+
+  // 
+
+  // TODO: field
+  fieldDrop ($event) {
+    console.log('fieldDrop')
+  }
+
+  fieldEntered ($event) {
+    console.log('fieldEntered')
+  }
+
+  fieldExited ($event) {
+    console.log('fieldExited')
+  }
+
+  fieldReleased ($event) {
+    console.log('fieldReleased')
+  }
+
+  fieldStarted ($event) {
+    console.log('fieldStarted')
+  }
+
+  // 右键点击
+  fieldContextMenu ($event, field) {
+    $event.preventDefault();
+  }
+
+  // 左键点击
+  fieldClick ($event, field) {
+    console.log('fieldClick')
+    console.log($event)
+    console.log(field)
+    this.operatorModel = field
+  }
 
 }
