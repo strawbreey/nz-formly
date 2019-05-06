@@ -1,7 +1,8 @@
-<nz-card style="width: 100%; background-color: #f5f5f5; padding: 12px;">
-  <div class="drag-over">
-    <div cdkDropListGroup style="display: inline;">
-      <div class="menu-list" 
+<nz-card style="width: 100%; background-color: #f5f5f5;">
+
+    <div class="header d-block bg-white shadow mb-1" style="height: 64px;"></div>
+    <div cdkDropListGroup class="drop-list-group">
+      <div class="menu-list shadow" 
         cdkDropList
         #menuList="cdkDropList"
         id="menuid"
@@ -20,7 +21,7 @@
         <div class="example-box-1" *ngFor="let item of menuData" cdkDrag>{{item.key ? item.key : item?.templateOptions?.label}}</div>
       </div>
       
-      <div  class="drag-list"
+      <div  class="drag-list shadow"
             id="dragroot"
             cdkDropList
             [cdkDropListData]="fields" 
@@ -49,15 +50,13 @@
               [model]="field.model"
               [field]="field">
             </formly-field>      
-        </div>
-    </div>
+      </div>
 
-
-    <div class="drag-operator">
+      <div class="drag-operator shadow">
         <i nz-icon nzType="copy" nzTheme="outline"></i>
-      <formly-form [model]="operatorModel" [fields]="operatorFields" [options]="operatorOptions" [form]="operatorForm" (modelChange)="change($event)" ></formly-form>
+        <formly-form [model]="operatorModel" [fields]="operatorFields" [options]="operatorOptions" [form]="operatorForm" (modelChange)="change($event)" ></formly-form>
+      </div>
     </div>
-  </div>
 </nz-card>
 
 
@@ -65,3 +64,17 @@
 <nz-modal [(nzVisible)]="isModelVisible" nzTitle="显示modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
 <pre>{{resultField | json}}</pre>
 </nz-modal>
+
+<ng-template #contentmenu>
+  <div class="contentmenu-dialog-content">
+    <ul>
+      <li>剪切<i>Ctrl + X</i></li>
+      <li>复制<i>Ctrl + C</i></li>
+      <li>黏贴<i>Ctrl + V</i></li>
+      <hr>
+      <li>删除<i>Delete/Backspace</i></li>
+      <li>向上<i>Ctrl + Up</i></li>
+      <li>向下<i>Ctrl + Down</i></li>
+    </ul>
+  </div>
+</ng-template>

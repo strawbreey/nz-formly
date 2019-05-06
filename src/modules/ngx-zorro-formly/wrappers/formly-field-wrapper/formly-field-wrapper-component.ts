@@ -8,11 +8,8 @@ import { FieldWrapper } from '@ngx-formly/core';
     host: {
         '[class.ant-form-horizontal]': "to['nzLayout'] === 'horizontal'",
         '[class.ant-form-inline]': "to['nzLayout'] === 'inline'",
+        '[class.ant-form-vertical]': "to['nzLayout'] === 'vertical'",
       }
-    :host {
-        display: block;
-        border: 1px solid #ccc;
-    }
       `
     
 ]
@@ -23,7 +20,11 @@ export class FormlyFieldWrapperComponent extends FieldWrapper {
     fieldComponent: ViewContainerRef;
 
     get nzLayout () {
-        return this.to['nzLayout']
+        return this.to['nzLayout'] || 'horizontal'
+    }
+
+    get isHorizontal(): boolean {
+        return ((this.to['nzLayout'] || 'horizontal' ) === 'horizontal') && !!this.to['label']
     }
 
     ngOnInit() {

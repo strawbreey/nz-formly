@@ -39,6 +39,8 @@ export class DropListComponent extends FieldType {
 
   // 点击
 	click ($event, field) {
+    $event.stopPropagation();
+    // $event.preventDefault();
     console.log($event)
     console.log(field)
 	}
@@ -46,7 +48,7 @@ export class DropListComponent extends FieldType {
   // 右击
 	contextmenu ($event) {
     $event.stopPropagation();
-    $event.preventDefault();
+    // $event.preventDefault();
 	}
 
 	drop(event: CdkDragDrop<string[]>, field) {

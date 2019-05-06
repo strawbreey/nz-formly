@@ -1,21 +1,26 @@
-// import { Component Attribute, SimpleChanges } from '@angular/core';
-import {CdkDragDrop, moveItemInArray, transferArrayItem, DragDropModule, copyArrayItem} from '@angular/cdk/drag-drop';
-// import { FormGroup } from '@angular/forms';
-import { FormlyFormOptions, FormlyFieldConfig, Field,  FieldType, FormlyFormBuilder, FormlyConfig  } from '@ngx-formly/core';
-import {  assignModelValue, isNullOrUndefined, wrapProperty, clone, defineHiddenProp, reverseDeepMerge } from '../../../utils/index'
-// import { FormlyFormBuilder } from '@ngx-formly/core/lib/services/formly.form.builder';
-// import { FormlyConfig } from '@ngx-formly/core/lib/services/formly.config';
-import { FormlyFormOptionsCache }from '@ngx-formly/core/lib/components/formly.field.config';
-import { DragAttributeService } from '../../../app/services/drag-attribute.service'
-import { DragDropService } from '../../../app/services/drag-drop.service'
-import { Component, DoCheck, OnChanges, Input, SimpleChanges, Optional, EventEmitter, Output, OnDestroy, Attribute, OnInit, HostListener, ChangeDetectionStrategy, ComponentFactoryResolver, Injector, } from '@angular/core';
+import { 
+  Component, DoCheck, OnChanges, Input, 
+  SimpleChanges, Optional, EventEmitter, 
+  Output, OnDestroy, Attribute, OnInit, 
+  HostListener, ChangeDetectionStrategy, ComponentFactoryResolver, 
+  Injector, ViewChild, TemplateRef, AfterViewInit, ViewContainerRef
+} from '@angular/core';
+
 import { FormGroup, FormArray, FormGroupDirective } from '@angular/forms';
+import {Overlay, OverlayRef} from '@angular/cdk/overlay';
+import {TemplatePortal, PortalModule} from '@angular/cdk/portal';
+import {CdkDragDrop, moveItemInArray, transferArrayItem, DragDropModule, copyArrayItem} from '@angular/cdk/drag-drop';
+
+import { FormlyFormOptions, FormlyFieldConfig, Field,  FieldType, FormlyFormBuilder, FormlyConfig  } from '@ngx-formly/core';
+import { FormlyFormOptionsCache }from '@ngx-formly/core/lib/components/formly.field.config';
+import { getFieldId } from '@ngx-formly/core/lib/utils';
 
 import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { getFieldId } from '@ngx-formly/core/lib/utils';
 
-
+import { assignModelValue, isNullOrUndefined, wrapProperty, clone, defineHiddenProp, reverseDeepMerge } from '../../../utils/index'
+import { DragAttributeService } from '../../../app/services/drag-attribute.service'
+import { DragDropService } from '../../../app/services/drag-drop.service'
 
 @Component({
   selector: 'app-drop',
@@ -24,11 +29,28 @@ import { getFieldId } from '@ngx-formly/core/lib/utils';
   changeDetection: ChangeDetectionStrategy.OnPush
 
 })
-export class DropComponent implements DoCheck, OnChanges, OnDestroy {
+export class DropComponent implements DoCheck, OnChanges, OnDestroy, AfterViewInit {
+
+  @ViewChild('contentmenu') _dialogTemplate: TemplateRef<any>;
+  private _overlayRef: OverlayRef;
+  private _portal: TemplatePortal;
   data = [1,2,3]
+  ids = []
+
+  constructor(
+    private attributeService: DragAttributeService,
+    private dragDropService:DragDropService,
+    private _overlay: Overlay, 
+    private _viewContainerRef: ViewContainerRef,
+    private formlyBuilder: FormlyFormBuilder,
+    @Optional() private parentFormGroup: FormGroupDirective,
+  ) { 
+    this.dragDropService.addIds('dragroot')
+    this.ids = this.dragDropService.getIds()
+  }
 
   // 菜单栏
-  menuData:FormlyFieldConfig[] = [
+  menuData:FormlyFieldConfig[] = [    
     {
       key: 'radio',
       type: 'nz-radio',
@@ -36,7 +58,19 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy {
       templateOptions: {
         text: 'primary',
       },
-    }, 
+    },
+    {
+      key: 'radio-group',
+      type: 'nz-radio-group',
+      className: 'px-2',
+      templateOptions: {
+        options: [
+          { label: 'Apple', value: 'Apple' },
+          { label: 'Pear', value: 'Pear' },
+          { label: 'Orange', value: 'Orange' }
+        ]
+      }
+    },
     {
       key: 'checkbox',
       type: 'nz-checkbox',
@@ -63,6 +97,7 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy {
     },
     {
       type: 'mt-drop-list',
+      className: 'd-block',
       fieldGroup: [],
       templateOptions: {
         label: 'drop-list'
@@ -81,8 +116,6 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy {
 
   init = false
  
-  // :FormlyFieldConfig[] = [];
-  // fields
   fields: FormlyFieldConfig[] = [
     {
       key: 'radio',
@@ -106,32 +139,9 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy {
 
   resultField 
 
-  // 
-  ids = []
-
-  constructor(
-    private attributeService: DragAttributeService,
-    private dragDropService:DragDropService,
-
-    private formlyBuilder: FormlyFormBuilder,
-    @Optional() private parentFormGroup: FormGroupDirective,
-  ) { 
-    // super()
-    this.dragDropService.addIds('dragroot')
-
-    this.ids = this.dragDropService.getIds()
-  }
-
 
   // 将菜单栏控件拖到视图层
-  dragListDrop(event: CdkDragDrop<string[]>, field) {
-    console.log('dragListDrop')
-    console.log('视图层')
-
-    console.log(event.previousContainer.data)
-    console.log(event.container.data)
-    console.log(event)
-    
+  dragListDrop(event: CdkDragDrop<string[]>, field) {    
     // 如果将视图层的拖到试图外，则是删除
     if (!event.isPointerOverContainer) {
       event.previousContainer.data.splice(event.previousIndex, 1)
@@ -183,12 +193,51 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy {
     }
   }
 
+  menuMoved ($event) {
+    console.log('$event')
+  } 
+
   ngOnInit() {
     console.log('ngOnInit')
     this.init = true
 
     this.operatorFields = this.attributeService.fields
     // this.formlyBuilder.buildForm(this.form,[field], this.model,this.options);
+  }
+
+  ngAfterViewInit() {
+    // 弹窗内容
+    this._portal = new TemplatePortal(this._dialogTemplate, this._viewContainerRef);
+    this._overlayRef = this._overlay.create({
+      hasBackdrop: true,
+    });
+
+    // 点击遮罩层关闭弹窗
+    this._overlayRef.backdropClick().subscribe(($event) => {
+      console.log($event)
+      this._overlayRef.detach()
+    });
+
+    this._overlayRef.keydownEvents().subscribe(($event) => {
+      console.log($event)
+      $event.stopPropagation()
+    })
+  }
+
+
+  openDialog($event) {
+    let strategy = null
+    strategy = this._overlay.position().flexibleConnectedTo({
+        x: $event.x,
+        y: $event.y
+    }).withPositions([{
+      originX: 'start',
+      originY: 'top',
+      overlayX: 'start',
+      overlayY: 'top',
+    }])
+    this._overlayRef.updatePositionStrategy(strategy)
+    this._overlayRef.attach(this._portal);
   }
 
 
@@ -248,12 +297,6 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy {
   private enableCheckExprDebounce = false;
 
   checkExpressionChange() {
-    console.log('666')
-    console.log(this.fields)
-    console.log(this.model)
-    console.log(this.form)
-    console.log(this.options)
-
     if ((<FormlyFormOptionsCache> this.options)._checkField) {
       (<FormlyFormOptionsCache> this.options)._checkField({
         fieldGroup: this.fields,
@@ -277,6 +320,7 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy {
   
   ngOnDestroy() {
     this.clearModelSubscriptions();
+    this._overlayRef.dispose();
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -383,13 +427,10 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy {
     assignModelValue(this.model, event.key.split('.'), event.value);
   }
 
-
   getCurrentClass () {
 
   }
 
-
-  // 
 
   // TODO: field
   fieldDrop ($event) {
@@ -415,14 +456,18 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy {
   // 右键点击
   fieldContextMenu ($event, field) {
     $event.preventDefault();
+    $event.stopPropagation();
+    this.openDialog($event)
+    console.log(field)
+
   }
 
   // 左键点击
   fieldClick ($event, field) {
-    console.log('fieldClick')
-    console.log($event)
-    console.log(field)
+    $event.preventDefault();
+    $event.stopPropagation();
     this.operatorModel = field
+    console.log(field)
   }
 
 }

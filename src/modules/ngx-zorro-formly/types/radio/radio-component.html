@@ -3,4 +3,6 @@
         [formlyAttributes]="field"
         [nzAutoFocus]="to['nzAutoFocus']"
         [nzDisabled]="to['nzDisabled']"
-        (ngModelChange)="onChange()">Radio</label>
+        (click)="onClick($event)"
+        (ngModelChange)="onChange()"
+        (contextmenu)="contextmenu($event, field);" >Radio</label>

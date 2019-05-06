@@ -26,13 +26,15 @@ import { NzInputComponent } from './types/input/input-component';
 import { NzInputGroupComponent } from './types/input-group/input-group-component';
 import { NzTextareaComponent } from './types/textarea/textarea-component';
 import { NzCheckboxComponent } from './types/checkbox/checkbox-component';
-import { NzCheckboxGroupComponent } from './types/checkbox-group/checkbox-group-component'
+import { NzCheckboxGroupComponent } from './types/checkbox-group/checkbox-group-component';
+import { NzRadioComponent } from './types/radio/radio-component';
+import { NzRadioGroupComponent } from './types/radio-group/radio-group-component'
 
 import { FormlyFieldAutocompleteComponent } from './types/autocomplete/autocomplete-component';
 import { FormlyFieldCascaderComponent } from './types/cascader/cascader-component';
 import { FormlyFieldDatePickerComponent } from './types/date-picker/date-picker-component';
 import { FormlyFieldNumberComponent } from './types/number/number-component';
-import { NzRadioComponent } from './types/radio/radio-component';
+
 import { FormlyFieldRateComponent } from './types/rate/rate-component';
 import { FormlyFieldSelectComponent } from './types/select/select-component';
 import { FormlyFieldSliderComponent } from './types/slider/slider-component';
@@ -140,6 +142,11 @@ export const ForRootFormlyModule = FormlyModule.forRoot({
             name: 'nz-radio',
             wrappers: ['field-wrapper'],
             component: NzRadioComponent
+        },
+        {
+            name: 'nz-radio-group',
+            wrappers: ['field-wrapper'],
+            component: NzRadioGroupComponent
         },
         {
             name: 'rate',
@@ -259,6 +266,7 @@ export const ForRootFormlyModule = FormlyModule.forRoot({
         NzCheckboxComponent,
         NzCheckboxGroupComponent,
         NzRadioComponent,
+        NzRadioGroupComponent,
         FormlyFieldAutocompleteComponent,
         FormlyFieldCascaderComponent,
         FormlyFieldDatePickerComponent,

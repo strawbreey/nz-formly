@@ -27,4 +27,18 @@ export class NzRadioComponent extends FieldType {
     onChange () {
         console.log('onChange')
     }
+
+    // 
+    onClick ($event) {
+        if ($event.defaultPrevented) {
+            console.log('55555')
+            /* 事件的默认动作已被取消*/
+          }
+        $event.preventDefault();
+        console.log($event)
+    }
+
+    contextmenu ($event) {
+        console.log($event)
+    }
 }

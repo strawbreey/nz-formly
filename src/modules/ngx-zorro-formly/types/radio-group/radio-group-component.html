@@ -1,0 +1,7 @@
+<nz-radio-group [(ngModel)]="model[key]" 
+                [nzName]="to['nzMame']"
+                [nzDisabled]="to['nzDisabled']"
+                [nzSize]="to['nzSize']"
+                [nzButtonStyle]="to['nzButtonStyle']">
+    <label nz-radio [nzValue]="o.value" *ngFor="let o of to['options']">{{ o.label }}</label>
+</nz-radio-group>

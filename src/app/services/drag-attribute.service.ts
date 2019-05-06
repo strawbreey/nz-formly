@@ -12,21 +12,20 @@ export class DragAttributeService {
   model: any = {};
   fields: FormlyFieldConfig[] = [
     {
-      fieldGroupClassName: '',
+      fieldGroupClassName: 'border border border-info m-2 p-2 d-block',
       fieldGroup: [
         {
           key: 'key',
           type: 'nz-input',
           templateOptions: {
             label: 'Key',
-            nzLayout: 'inline'
           },
         },
         {
           key: 'id',
           type: 'nz-input',
           templateOptions: {
-            label: 'Id'
+            label: 'Id',
           },
           hideExpression: '!model.id'
         },
@@ -34,7 +33,9 @@ export class DragAttributeService {
           key: 'name',
           type: 'nz-input',
           templateOptions: {
-            label: 'Name'
+            label: 'Name',
+            nzLayout: 'inline'
+
           },
           hideExpression: '!model.name'
         },
@@ -52,17 +53,23 @@ export class DragAttributeService {
           type: 'nz-input',
           templateOptions: {
             label: 'ClassName',
-          }
+          },
+          hideExpression: '!model.className'
         },
         {
           key: 'templateOptions',
+          className: 'd-block pr-2 py-2 bg-light',
+          templateOptions: {
+            label: 'templateOptions',
+            nzLayout: 'vertical'
+          },
           fieldGroup: [
             {
               key: 'nzType',
               type: 'nz-input',
               templateOptions: {
                 label: 'nzType'
-              }
+              },
             },
             {
               key: 'text',
@@ -100,7 +107,13 @@ export class DragAttributeService {
                 label: 'nzLayout'
               }
             },
-
+            {
+              key: 'options',
+              type: 'nz-input',
+              templateOptions: {
+                label: 'options'
+              }
+            },
           ]
         }
       ]
