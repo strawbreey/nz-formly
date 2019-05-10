@@ -7,8 +7,6 @@ import {
 } from '@angular/core';
 
 import { FormGroup, FormArray, FormGroupDirective } from '@angular/forms';
-import {Overlay, OverlayRef} from '@angular/cdk/overlay';
-import {TemplatePortal, PortalModule} from '@angular/cdk/portal';
 import {CdkDragDrop, moveItemInArray, transferArrayItem, DragDropModule, copyArrayItem} from '@angular/cdk/drag-drop';
 
 import { FormlyFormOptions, FormlyFieldConfig, Field,  FieldType, FormlyFormBuilder, FormlyConfig  } from '@ngx-formly/core';
@@ -30,7 +28,7 @@ import { ModalService } from '../../services/modal.service'
   changeDetection: ChangeDetectionStrategy.OnPush
 
 })
-export class DropComponent implements DoCheck, OnChanges, OnDestroy, AfterViewInit {
+export class DropComponent implements DoCheck, OnChanges, OnDestroy {
 
   data = [1,2,3]
   ids = []
@@ -38,8 +36,6 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy, AfterViewIn
   constructor(
     private attributeService: DragAttributeService,
     private dragDropService:DragDropService,
-    private _overlay: Overlay, 
-    private _viewContainerRef: ViewContainerRef,
     private formlyBuilder: FormlyFormBuilder,
     private _modalService: ModalService,
     @Optional() private parentFormGroup: FormGroupDirective,
@@ -200,7 +196,7 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy, AfterViewIn
     // console.log($event)
   }
 
-  menuDrop (event: CdkDragDrop<string[]>, field) {
+  menuDrop (event: CdkDragDrop<string[]>) {
     // console.log('菜单栏')
     if (event.previousContainer === event.container) {
       // moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);

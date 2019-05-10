@@ -53,9 +53,9 @@
             [cdkDropListData]="fields" 
             [cdkDropListConnectedTo]="ids"  
 
-            (cdkDropListDropped)="dragListDrop($event)"
+            (cdkDropListDropped)="dragListDrop($event, fields)"
             (cdkDropListEntered)="dragListEntered($event)"
-            (cdkDropListExited)="dragListExited($event)"
+            (cdkDropListExited)="dragListExited($event, fields)"
 
             [cdkDropListEnterPredicate]="canDropPredicate()">
 
