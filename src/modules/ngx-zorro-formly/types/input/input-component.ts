@@ -12,6 +12,6 @@ export class NzInputComponent extends FieldType {
     }
 
     ngOnInit() {
-        // console.log(this)
+        console.log(this)
     }
 }

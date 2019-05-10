@@ -32,7 +32,7 @@
         cdkDropList
         #menuList="cdkDropList"
         id="menuid"
-        [cdkDropListData]="menuData"
+        [cdkDropListData]="leftPaneFieldConfig"
         (cdkDragMoved)="menuMoved($event)"
         (cdkDropListDropped)="menuDrop($event)">
 
@@ -44,7 +44,7 @@
         </ng-template>
 
         <hr class="m-2">
-        <div class="example-box-1" *ngFor="let item of menuData" cdkDrag>{{item.key ? item.key : item?.templateOptions?.label}}</div>
+        <div class="example-box-1" *ngFor="let item of leftPaneFieldConfig" cdkDrag>{{item.type}}</div>
       </div>
       
       <div  class="drag-list shadow"
@@ -84,8 +84,4 @@
     </div>
 </nz-card>
 
-
-<nz-modal [(nzVisible)]="isModelVisible" nzTitle="显示modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
-  <pre>{{model | json}}</pre>
-</nz-modal>
 

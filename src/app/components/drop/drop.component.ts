@@ -21,6 +21,8 @@ import { DragAttributeService } from '../../services/drag-attribute.service'
 import { DragDropService } from '../../services/drag-drop.service'
 import { ModalService } from '../../services/modal.service' 
 
+import { LeftPaneService } from '../../services/left-pane.service'
+
 @Component({
   selector: 'app-drop',
   templateUrl: './drop.component.html',
@@ -28,98 +30,29 @@ import { ModalService } from '../../services/modal.service'
   changeDetection: ChangeDetectionStrategy.OnPush
 
 })
-export class DropComponent implements DoCheck, OnChanges, OnDestroy {
+export class DropComponent implements DoCheck, OnDestroy {
 
   data = [1,2,3]
   ids = []
+
+  // 菜单栏
+  leftPaneFieldConfig: FormlyFieldConfig[] = []
 
   constructor(
     private attributeService: DragAttributeService,
     private dragDropService:DragDropService,
     private formlyBuilder: FormlyFormBuilder,
     private _modalService: ModalService,
+    private _leftPaneService: LeftPaneService,
     @Optional() private parentFormGroup: FormGroupDirective,
   ) { 
     this.dragDropService.addIds('dragroot')
     this.ids = this.dragDropService.getIds()
+
+    this.leftPaneFieldConfig = this._leftPaneService.FieldConfig
   }
 
-  // 菜单栏
-  menuData:FormlyFieldConfig[] = [    
-    {
-      key: 'radio',
-      type: 'nz-radio',
-      className: 'px-2',
-      templateOptions: {
-        text: 'primary',
-      },
-    },
-    {
-      key: 'radio-group',
-      type: 'nz-radio-group',
-      className: 'px-2',
-      templateOptions: {
-        nzButtonStyle: 'solid',
-        options: [
-          { label: 'Apple', value: 'Apple' },
-          { label: 'Pear', value: 'Pear' },
-          { label: 'Orange', value: 'Orange' }
-        ]
-      }
-    },
-    {
-      key: 'checkbox',
-      type: 'nz-checkbox',
-      className: 'px-2',
-      templateOptions: {
-        text: 'primary',
-      },
-    }, 
-    {
-      key: 'nz-input',
-      type: 'nz-input',
-      wrappers: ['field-wrapper'],
-      className: 'px-2',
-      templateOptions: {
-        label: 'input',
-      },
-    },
-    {
-      key: 'button',
-      type: 'nz-button',
-      templateOptions: {
-        text: '按钮'
-      }
-    },
-    {
-      type: 'mt-drop-list',
-      className: 'd-block',
-      fieldGroupClassName: 'ant-row',
-      fieldGroup: [],
-      templateOptions: {
-        label: 'drop-list'
-      }
-    },
-    {
-      key: 'label',
-      type: 'nz-title',
-      className: 'd-block',
-      defaultValue: '请输入',
-      templateOptions: {
-        content: '2333',
-        value: '单击编辑文本',
-        fontWeight: 'bold'
-      }
-    },
-    {
-      key: 'avatar',
-      type: 'nz-avatar',
-      className: 'd-block',
-      templateOptions: {
 
-      }
-    }
-  ];
 
   // 视图栏
   form = new FormGroup({});
@@ -129,19 +62,8 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy {
       awesomeIsForced: false,
     },
   };
-
-  init = false
  
-  fields: FormlyFieldConfig[] = [
-    {
-      key: 'radio',
-      type: 'nz-radio',
-      className: 'px-2',
-      templateOptions: {
-        text: 'primary',
-      },
-    }, 
-  ];
+  fields: FormlyFieldConfig[] = [];
 
   // 操作栏
   operatorForm = new FormGroup({});
@@ -155,6 +77,8 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy {
 
   resultField 
 
+  initialModel: any;
+  modelChangeSubs: Subscription[] = [];
 
   // 将菜单栏控件拖到视图层
   dragListDrop(event: CdkDragDrop<string[]>, field) { 
@@ -165,17 +89,6 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy {
       event.container.data.splice(event.currentIndex, 1)
       return
     }
-
-    // // 如果
-    // if (event.previousContainer === event.container) {
-    //   moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    //   // copyArrayItem(event.container.data, event.container.data, event.previousIndex, event.currentIndex);
-    // } else {
-    //   // transferArrayItem(event.previousContainer.data, <string[]>this.dropFields, event.previousIndex, event.currentIndex);
-    //   copyArrayItem(clone(event.previousContainer.data), event.container.data, event.previousIndex, event.currentIndex);
-
-    //   // copyArrayItem(clone(event.previousContainer.data), event.container.data, event.previousIndex, event.currentIndex);
-    // }
 
     if (event.previousContainer.id ===  'menuid') {
       copyArrayItem(clone(event.previousContainer.data), event.container.data, event.previousIndex, event.currentIndex);      
@@ -222,14 +135,8 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy {
   } 
 
   ngOnInit() {
-    console.log('ngOnInit')
-    this.init = true
-
     this.operatorFields = this.attributeService.fields
-    // this.operatorModel = this.attributeService.model
     this.getAttributeModel()
-    
-    // this.formlyBuilder.buildForm(this.form,[field], this.model,this.options);
   }
 
   getAttributeModel () {
@@ -245,12 +152,12 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy {
 
   isModelVisible = false
 
-  showModal () {
-    this.isModelVisible = true
+  showModal ($event) {
+    // this.isModelVisible = true
     let field = this.getField(this.fields)
     this.resultField = field
+    this._modalService.open('editor', $event)
 
-    // this
   }
 
   getField (field) {
@@ -279,19 +186,12 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy {
     return this.dragDropService.canDropPredicate()
   }
 
-  clones (field) {
-    return clone(field)
-  }
 
   change ($event) {
     console.log('change')
   }
 
 
-  private initialModel: any;
-  private modelChangeSubs: Subscription[] = [];
-
-  private enableCheckExprDebounce = false;
 
   checkExpressionChange() {
     if ((<FormlyFormOptionsCache> this.options)._checkField) {
@@ -318,24 +218,26 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy {
     this.clearModelSubscriptions();
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    console.log('ngOnChanges')
-    if (changes.fields || changes.form || changes.model) {
-      this.fields = this.fields || [];
-      this.model = this.model || {};
-      this.form = this.form || (new FormGroup({}));
-      this.setOptions();
-      this.clearModelSubscriptions();
-      this.formlyBuilder.buildForm(this.form, this.fields, this.model, this.options);
-      this.trackModelChanges(this.fields);
-      this.options.updateInitialValue();
-    }
-  }
+  // ngOnChanges(changes: SimpleChanges) {
+  //   console.log('ngOnChanges')
+  //   if (changes.fields || changes.form || changes.model) {
+  //     this.fields = this.fields || [];
+  //     this.model = this.model || {};
+  //     this.form = this.form || (new FormGroup({}));
+  //     this.setOptions();
+  //     this.clearModelSubscriptions();
+  //     this.formlyBuilder.buildForm(this.form, this.fields, this.model, this.options);
+  //     this.trackModelChanges(this.fields);
+  //     this.options.updateInitialValue();
+  //   }
+  // }
 
   fieldChanges () {
+    console.log('6666666666666666666666')
     this.fields = this.fields || [];
     this.model = this.model || {};
     this.form = this.form || (new FormGroup({}));
+    console.log(this.fields)
     this.setOptions();
     this.clearModelSubscriptions();
     this.formlyBuilder.buildForm(this.form, this.fields, this.model, this.options);
@@ -421,11 +323,6 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy {
   changeModel(event: { key: string, value: any }) {
     assignModelValue(this.model, event.key.split('.'), event.value);
   }
-
-  getCurrentClass () {
-
-  }
-
 
   // TODO: field
   fieldDrop ($event) {

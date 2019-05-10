@@ -13,6 +13,7 @@ export class ModalService {
   // key: model 
   // key: field
   // key: click  点击弹窗
+  // editor： 编辑器弹窗
   open(key: string, $event = null) {
     this.zIndex = this.zIndex + 5
     this.modal$.next({

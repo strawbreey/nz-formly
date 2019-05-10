@@ -1,20 +1,10 @@
 
 import { 
-  Component, DoCheck, OnChanges, Input, 
-  SimpleChanges, Optional, EventEmitter, 
-  Output, OnDestroy, Attribute, OnInit, 
-  HostListener, ChangeDetectionStrategy, ComponentFactoryResolver, 
-  Injector, ViewChild, TemplateRef, AfterViewInit, ViewContainerRef
+  Component, OnInit,  ViewChild, TemplateRef, ViewContainerRef
 } from '@angular/core';
 
-import { FormGroup, FormArray, FormGroupDirective } from '@angular/forms';
 import {Overlay, OverlayRef} from '@angular/cdk/overlay';
-import {TemplatePortal, PortalModule} from '@angular/cdk/portal';
-import {CdkDragDrop, moveItemInArray, transferArrayItem, DragDropModule, copyArrayItem} from '@angular/cdk/drag-drop';
-
-import { FormlyFormOptions, FormlyFieldConfig, Field,  FieldType, FormlyFormBuilder, FormlyConfig  } from '@ngx-formly/core';
-import { FormlyFormOptionsCache }from '@ngx-formly/core/lib/components/formly.field.config';
-import { getFieldId } from '@ngx-formly/core/lib/utils';
+import {TemplatePortal } from '@angular/cdk/portal';
 
 import { Subscription } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
@@ -49,18 +39,15 @@ export class ContentMenuModalComponent implements OnInit {
     this._modalService.modal$.pipe(filter(item => {
       return item['key'] === 'contentmenu'
     })).subscribe(item => {
-      console.log(item)
       this.openDialog(item['$event'])
     })
 
     // 点击遮罩层关闭弹窗
     this._overlayRef.backdropClick().subscribe(($event) => {
-      console.log($event)
       this._overlayRef.detach()
     });
 
     this._overlayRef.keydownEvents().subscribe(($event) => {
-      console.log($event)
       $event.stopPropagation()
     })
   }
@@ -82,6 +69,7 @@ export class ContentMenuModalComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('ngOnInit')
   }
 
 }

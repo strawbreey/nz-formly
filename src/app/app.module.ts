@@ -32,6 +32,7 @@ import { QuillComponent } from './components/quill/quill.component';
 import { OverlayComponent } from './components/overlay/overlay.component';
 import { DragModalComponent } from './modal/drag-modal/drag-modal.component';
 import { ContentMenuModalComponent } from './modal/content-menu-modal/content-menu-modal.component';
+import { EditorModalComponent } from './modal/editor-modal/editor-modal.component';
 
 
 
@@ -54,6 +55,7 @@ registerLocaleData(en);
     OverlayComponent,
     DragModalComponent,
     ContentMenuModalComponent,
+    EditorModalComponent,
   ],
   imports: [
     BrowserModule,
