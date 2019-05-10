@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FieldType } from '@ngx-formly/core';
 
 @Component({
-  selector: 'formly-field-title',
+  selector: 'label-component',
   templateUrl: './label-component.html'
 })
 export class FormlyFieldLabelComponent extends FieldType{

@@ -14,6 +14,9 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 // 富文本编辑器 ngx-quill
 import { QuillModule } from 'ngx-quill'  
 
+// 代码编辑器 monaco-editor
+import { MonacoEditorModule } from 'ngx-monaco-editor';
+
 
 // 基于 ngx-zorro 的扩展库
 // import { ExtendNgxZorroModule } from '../extend-ngx-zorro/extend-ngx-zorro.module'
@@ -53,9 +56,12 @@ import { FormlyFieldLabelComponent } from './types/label/label-component';
 import { FormlyFieldTemplateComponent } from './types/template/template-component';
 import { FormlyFieldGridComponent } from './types/grid/grid-component';
 import { FormlyFieldTableComponent } from './types/table/table-component';
-import { FormlyFieldModelComponent } from './types/model/model-component'
+import { FormlyFieldModelComponent } from './types/model/model-component';
+import { NzAvatarComponent } from './types/nz-avatar/nz-avatar-component'
 
 import { NgxQuillComponent } from '../ngx-quill/ngx-quill-component'
+
+import { MonacoEditorComponent } from '../monaco-editor/monaco-editor-component'
 
 // repeat
 
@@ -236,6 +242,14 @@ export const ForRootFormlyModule = FormlyModule.forRoot({
         {
             name: 'ngx-quill',
             component: NgxQuillComponent
+        },
+        {
+            name: 'monaco-editor',
+            component: MonacoEditorComponent
+        },
+        {
+            name: 'nz-avatar',
+            component: NzAvatarComponent
         }
     ],
     wrappers: [
@@ -255,6 +269,7 @@ export const ForRootFormlyModule = FormlyModule.forRoot({
         FormsModule, 
         CommonModule, 
         QuillModule,
+        MonacoEditorModule.forRoot(),
         ForRootFormlyModule,
     ],
     declarations: [
@@ -292,7 +307,9 @@ export const ForRootFormlyModule = FormlyModule.forRoot({
         FormlyFieldTableComponent,
         FormlyFieldModelComponent,
         DropListComponent,
-        NgxQuillComponent
+        NgxQuillComponent,
+        MonacoEditorComponent,
+        NzAvatarComponent
     ],
     exports: [
         NgZorroAntdModule,

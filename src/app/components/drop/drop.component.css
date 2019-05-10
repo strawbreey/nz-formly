@@ -61,60 +61,6 @@
   display: flex;
 }
 
-.contentmenu-dialog-content {
-  width: 200px;
-  height: 200px;
-  /* border: solid 1px #ccc; */
-  color: rgba(0, 0, 0, 0.87);
-  cursor: pointer;
-
-  background: #fff;
-  border-radius: 4px;
-  /* transition: box-shadow 200ms cubic-bezier(0, 0, 0.2, 1);
-  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
-              0 2px 2px 0 rgba(0, 0, 0, 0.14),
-              0 1px 5px 0 rgba(0, 0, 0, 0.12); */
-}
-
-.contentmenu-dialog-content {
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
-}
-
-
-
-.contentmenu-dialog-content ul hr {
-  margin: 5px 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.contentmenu-dialog-content ul,
-.contentmenu-dialog-content ul li {
-  padding: 0;
-  margin: 0;
-  list-style-type: none;
-}
-
-.contentmenu-dialog-content ul  {
-  padding: 12px 0;
-}
-
-.contentmenu-dialog-content ul li {
-  padding: 0 12px;
-  line-height: 28px;
-  height: 28px;
-}
-
-.contentmenu-dialog-content ul li:hover {
-  /* background-color: #eee; */
-  background: rgba(0, 0, 0, 0.04);
-}
-.contentmenu-dialog-content ul li i{
-  font-size: 12px;
-  float: right;
-  color: #ccc;
-}
-
-
 
 ::ng-deep .cdk-global-overlay-wrapper{
   z-index: 10000;
@@ -132,4 +78,24 @@ formly-field:active
   /* border: 1px solid #ccc; */
   /* box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1); */
   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
+}
+
+.toolbar-center {
+  margin-left: 316px; 
+  margin-right: 316px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+}
+
+.toolbar-center i {
+  font-size: 20px;
+  margin-right: 20px;
+  color: rgb(125, 134, 148);
+}
+
+.toolbar-center i:hover {
+  /* color: rgb(125, 134, 148); */
+  color: rgb(65, 80, 88);
 }

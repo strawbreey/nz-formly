@@ -1,6 +1,32 @@
 <nz-card style="width: 100%; background-color: #f5f5f5;">
 
-    <div class="header d-block bg-white shadow mb-1" style="height: 64px;"></div>
+    <div class="toolbar header d-block bg-white shadow mb-1 d-flex" style="height: 56px;">
+      <div class="toolbar-left d-flex justify-content-start align-items-center ml-3">
+          <i nz-icon nzType="left" nzTheme="outline"></i>
+      </div>
+      <div class="toolbar-center d-flex justify-content-between pointer-event" style="width: 1000px">
+        <section class="d-flex justify-content-center">
+            <i nz-icon nzType="copy" nzTheme="outline"></i>
+            <i nz-icon nzType="delete" nzTheme="outline"></i>
+            <i nz-icon nzType="scissor" nzTheme="outline"></i>
+            <i nz-icon nzType="snippets" nzTheme="outline"></i>
+        </section>
+
+        <section class="d-flex justify-content-center">
+            <i nz-icon nzType="code" nzTheme="outline"></i>
+            <i nz-icon nzType="setting" nzTheme="outline"></i>
+            <i nz-icon nzType="cloud-upload" nzTheme="outline"></i>
+        </section>
+
+        <section class="d-flex justify-content-center">
+            <i nz-icon nzType="download" nzTheme="outline"></i>
+            <i nz-icon nzType="share-alt" nzTheme="outline"></i>
+            <i nz-icon nzType="link" nzTheme="outline"></i>
+            <i nz-icon nzType="eye" nzTheme="outline" (click)="showModal()"></i>
+        </section>
+      </div>
+    </div>
+    
     <div cdkDropListGroup class="drop-list-group">
       <div class="menu-list shadow" 
         cdkDropList
@@ -53,28 +79,13 @@
       </div>
 
       <div class="drag-operator shadow">
-        <i nz-icon nzType="copy" nzTheme="outline"></i>
         <formly-form [model]="operatorModel" [fields]="operatorFields" [options]="operatorOptions" [form]="operatorForm" (modelChange)="change($event)" ></formly-form>
       </div>
     </div>
 </nz-card>
 
 
-<button nz-button [nzType]="'primary'" (click)="showModal()"><span>Show Modal</span></button>
 <nz-modal [(nzVisible)]="isModelVisible" nzTitle="显示modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
-<pre>{{resultField | json}}</pre>
+  <pre>{{model | json}}</pre>
 </nz-modal>
 
-<ng-template #contentmenu>
-  <div class="contentmenu-dialog-content">
-    <ul>
-      <li>剪切<i>Ctrl + X</i></li>
-      <li>复制<i>Ctrl + C</i></li>
-      <li>黏贴<i>Ctrl + V</i></li>
-      <hr>
-      <li>删除<i>Delete/Backspace</i></li>
-      <li>向上<i>Ctrl + Up</i></li>
-      <li>向下<i>Ctrl + Down</i></li>
-    </ul>
-  </div>
-</ng-template>

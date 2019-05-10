@@ -57,6 +57,14 @@ export class DragAttributeService {
           hideExpression: '!model.className'
         },
         {
+          key: 'fieldGroupClassName',
+          type: 'nz-input',
+          templateOptions: {
+            label: 'fieldGroupClassName',
+          },
+          hideExpression: '!model.fieldGroupClassName'
+        },
+        {
           key: 'templateOptions',
           className: 'd-block pr-2 py-2 bg-light',
           templateOptions: {
@@ -114,6 +122,13 @@ export class DragAttributeService {
                 label: 'options'
               }
             },
+            {
+              key: 'value',
+              type: 'nz-input',
+              templateOptions: {
+                label: 'value'
+              }
+            }
           ]
         }
       ]
@@ -145,7 +160,8 @@ export class DragAttributeService {
     this.model$.next(field)
   }
 
-  getModel(): Observable<any> {
-    return this.model$
+  // 返回引用对象/返回可观察的
+  getModel () {
+    return this.model
   }
 }

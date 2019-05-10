@@ -5,10 +5,10 @@ import { reverseDeepMerge, assignModelValue, clone } from '../../../utils/index'
 import { DragDropService } from '../../../app/services/drag-drop.service'
 import { DragAttributeService } from '../../../app/services/drag-attribute.service'
 import { cloneSVG } from '@ant-design/icons-angular';
-
+import { ModalService } from '../../../app/services/modal.service'
 
 @Component({
-    selector: 'mt-drop-list-group',
+    selector: 'field-group',
 		templateUrl: './drop-list-component.html',
 		styleUrls:['./drop-list-component.css']
     // changeDetection: ChangeDetectionStrategy.OnPush
@@ -19,62 +19,44 @@ export class DropListComponent extends FieldType {
   ids = []
   connectedLists: string[];
 
-  constructor(private  dragDropService: DragDropService, private attributeService: DragAttributeService) {
+  constructor(
+    private  dragDropService: DragDropService, 
+    private attributeService: DragAttributeService,
+    private _modalService: ModalService
+  ) {
     super()
-   }
+  }
 
 
 	ngOnInit(): void {
     console.log('drop-list: oninit')
+    console.log(this)
     this.dragDropService.addIds(this.id)
     this.ids = this.dragDropService.getIds()
 	}
   
-  // 
   canDropPredicate(): Function {
     return this.dragDropService.canDropPredicate()
 	}
   
 
-
-  // 点击
-	click ($event, field) {
-    $event.stopPropagation();
-    // $event.preventDefault();
-    console.log($event)
-    console.log(field)
-	}
-  
-  // 右击
-	contextmenu ($event) {
-    $event.stopPropagation();
-    // $event.preventDefault();
-	}
-
-	drop(event: CdkDragDrop<string[]>, field) {
-    console.log('drop-list')
-		if (event.previousContainer === event.container) {
-			moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else if (Array.isArray(event.container.connectedTo) && 
-                  event.container.connectedTo.some(id => id === event.previousContainer.id)) {
-			transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);      
+  // ------------------------------------------ cdkDropList ----------------------------------------
+  // 将菜单栏控件拖到视图层
+  drop(event: CdkDragDrop<string[]>, field) {    
+    // 如果将视图层的拖到试图外，则是删除
+    console.log(event)
+    if (event.previousContainer.id === 'menuid') {
+      console.log('1')
+      copyArrayItem(clone(event.previousContainer.data), event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      copyArrayItem(clone(event.previousContainer.data), event.container.data, event.previousIndex, event.currentIndex)
+      console.log('2')
+      transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex)
     }
   }
 
-  started($event) {
-    console.log('started')
-    console.log($event)
-  }
 
   entered ($event, field) {
     console.log('entered')
-    console.log($event)
-  }
-
-  ended ($event) {
-    console.log('ended')
     console.log($event)
   }
 
@@ -83,46 +65,35 @@ export class DropListComponent extends FieldType {
     console.log($event)
   }
 
-  moved ($event) {
-    console.log('moved')
-    console.log($event)
-  }
-
-  released ($event) {
-    console.log('released')
-    console.log($event)
-  }
-  
-  ngOnDestroy () {
-    console.log('drop-list: OnDestroy')
-  }
-
+  // -------------------------------------------- cdkDrag -----------------------------------------
   dragDrop ($event) {
-    console.log('dragDrop')
-    console.log($event)
+    // console.log('dragDrop')
+    // console.log($event)
   }
 
   dragEntered ($event) {
-    console.log('dragEntered')
-    console.log($event)
+    // console.log('dragEntered')
+    // console.log($event)
   }
 
   dragExited ($event) {
 
-    console.log('dragExited')
-    console.log($event)
+    // console.log('dragExited')
+    // console.log($event)
   }
 
   dragStarted ($event) {
-    console.log('dragStarted')
-    console.log($event)
-
+    // console.log('dragStarted')
+    // console.log($event)
   }
 
   dragReleased ($event) {
-    console.log('dragReleased')
-    console.log($event)
+    // console.log('dragReleased')
+    // console.log($event)
   }
+
+  
+  // -------------------------------------------- cdkDrag -----------------------------------------
 
   // 获取当前的class
   getCurrentClass (field ) {
@@ -137,7 +108,24 @@ export class DropListComponent extends FieldType {
     return field.className
   }
 
-  clones (field) {
-    return clone(field)
+
+  // 右键点击
+  fieldContextMenu ($event, field) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    this._modalService.open('contentmenu', $event)
+
+  }
+
+
+  // 左键点击
+  fieldClick ($event, field) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    this.attributeService.model = field
+  }
+
+  ngOnDestroy () {
+    // console.log('drop-list: OnDestroy')
   }
 }

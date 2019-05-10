@@ -19,8 +19,9 @@ import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
 import { assignModelValue, isNullOrUndefined, wrapProperty, clone, defineHiddenProp, reverseDeepMerge } from '../../../utils/index'
-import { DragAttributeService } from '../../../app/services/drag-attribute.service'
-import { DragDropService } from '../../../app/services/drag-drop.service'
+import { DragAttributeService } from '../../services/drag-attribute.service'
+import { DragDropService } from '../../services/drag-drop.service'
+import { ModalService } from '../../services/modal.service' 
 
 @Component({
   selector: 'app-drop',
@@ -31,9 +32,6 @@ import { DragDropService } from '../../../app/services/drag-drop.service'
 })
 export class DropComponent implements DoCheck, OnChanges, OnDestroy, AfterViewInit {
 
-  @ViewChild('contentmenu') _dialogTemplate: TemplateRef<any>;
-  private _overlayRef: OverlayRef;
-  private _portal: TemplatePortal;
   data = [1,2,3]
   ids = []
 
@@ -43,6 +41,7 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy, AfterViewIn
     private _overlay: Overlay, 
     private _viewContainerRef: ViewContainerRef,
     private formlyBuilder: FormlyFormBuilder,
+    private _modalService: ModalService,
     @Optional() private parentFormGroup: FormGroupDirective,
   ) { 
     this.dragDropService.addIds('dragroot')
@@ -64,6 +63,7 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy, AfterViewIn
       type: 'nz-radio-group',
       className: 'px-2',
       templateOptions: {
+        nzButtonStyle: 'solid',
         options: [
           { label: 'Apple', value: 'Apple' },
           { label: 'Pear', value: 'Pear' },
@@ -92,17 +92,37 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy, AfterViewIn
       key: 'button',
       type: 'nz-button',
       templateOptions: {
-        text: '6666'
+        text: '按钮'
       }
     },
     {
       type: 'mt-drop-list',
       className: 'd-block',
+      fieldGroupClassName: 'ant-row',
       fieldGroup: [],
       templateOptions: {
         label: 'drop-list'
       }
-    }, 
+    },
+    {
+      key: 'label',
+      type: 'nz-title',
+      className: 'd-block',
+      defaultValue: '请输入',
+      templateOptions: {
+        content: '2333',
+        value: '单击编辑文本',
+        fontWeight: 'bold'
+      }
+    },
+    {
+      key: 'avatar',
+      type: 'nz-avatar',
+      className: 'd-block',
+      templateOptions: {
+
+      }
+    }
   ];
 
   // 视图栏
@@ -141,54 +161,62 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy, AfterViewIn
 
 
   // 将菜单栏控件拖到视图层
-  dragListDrop(event: CdkDragDrop<string[]>, field) {    
-    // 如果将视图层的拖到试图外，则是删除
+  dragListDrop(event: CdkDragDrop<string[]>, field) { 
+    console.log(event)   
+    // // 如果将视图层的拖到试图外，则是删除
     if (!event.isPointerOverContainer) {
       event.previousContainer.data.splice(event.previousIndex, 1)
       event.container.data.splice(event.currentIndex, 1)
-      // this.dropField = clone(event.container.data)
       return
     }
 
-    // 如果
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      // copyArrayItem(event.container.data, event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      // transferArrayItem(event.previousContainer.data, <string[]>this.dropFields, event.previousIndex, event.currentIndex);
-      copyArrayItem(clone(event.previousContainer.data), event.container.data, event.previousIndex, event.currentIndex);
+    // // 如果
+    // if (event.previousContainer === event.container) {
+    //   moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    //   // copyArrayItem(event.container.data, event.container.data, event.previousIndex, event.currentIndex);
+    // } else {
+    //   // transferArrayItem(event.previousContainer.data, <string[]>this.dropFields, event.previousIndex, event.currentIndex);
+    //   copyArrayItem(clone(event.previousContainer.data), event.container.data, event.previousIndex, event.currentIndex);
 
-      // copyArrayItem(clone(event.previousContainer.data), event.container.data, event.previousIndex, event.currentIndex);
+    //   // copyArrayItem(clone(event.previousContainer.data), event.container.data, event.previousIndex, event.currentIndex);
+    // }
+
+    if (event.previousContainer.id ===  'menuid') {
+      copyArrayItem(clone(event.previousContainer.data), event.container.data, event.previousIndex, event.currentIndex);      
+    } else if (event.previousContainer === event.container ){
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);      
+    } else {
+      transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
     }
   }
 
   dragListEntered ($event) {
-    console.log('dragListEntered')
-    console.log($event)
+    // console.log('dragListEntered')
+    // console.log($event)
   }
 
   dragListExited ($event, field) {
-    console.log('dragListExited')
-    console.log($event)
+    // console.log('dragListExited')
+    // console.log($event)
   }
 
   menuDrop (event: CdkDragDrop<string[]>, field) {
-    console.log('菜单栏')
+    // console.log('菜单栏')
     if (event.previousContainer === event.container) {
       // moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
       // copyArrayItem(event.container.data, event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      console.log('233')
-      // 这是上一个
-      console.log(event.previousContainer.data)
-      console.log(event.container.data)
+      // console.log('233')
+      // // 这是上一个
+      // console.log(event.previousContainer.data)
+      // console.log(event.container.data)
 
       // transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
       // copyArrayItem(event.previousContainer.data, <string[]>this.dropFields, event.previousIndex, event.currentIndex);
       // copyArrayItem(event.previousContainer.data, <string[]>this.dropFields, event.previousIndex, event.currentIndex);
       // moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      console.log(event.previousContainer.data)
-      console.log(event.container.data)
+      // console.log(event.previousContainer.data)
+      // console.log(event.container.data)
       // copyArrayItem(clone(event.previousContainer.data), event.container.data, event.previousIndex, event.currentIndex);
     }
   }
@@ -202,43 +230,16 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy, AfterViewIn
     this.init = true
 
     this.operatorFields = this.attributeService.fields
+    // this.operatorModel = this.attributeService.model
+    this.getAttributeModel()
+    
     // this.formlyBuilder.buildForm(this.form,[field], this.model,this.options);
   }
 
-  ngAfterViewInit() {
-    // 弹窗内容
-    this._portal = new TemplatePortal(this._dialogTemplate, this._viewContainerRef);
-    this._overlayRef = this._overlay.create({
-      hasBackdrop: true,
-    });
-
-    // 点击遮罩层关闭弹窗
-    this._overlayRef.backdropClick().subscribe(($event) => {
-      console.log($event)
-      this._overlayRef.detach()
-    });
-
-    this._overlayRef.keydownEvents().subscribe(($event) => {
-      console.log($event)
-      $event.stopPropagation()
-    })
+  getAttributeModel () {
+    this.operatorModel = this.attributeService.getModel()
   }
 
-
-  openDialog($event) {
-    let strategy = null
-    strategy = this._overlay.position().flexibleConnectedTo({
-        x: $event.x,
-        y: $event.y
-    }).withPositions([{
-      originX: 'start',
-      originY: 'top',
-      overlayX: 'start',
-      overlayY: 'top',
-    }])
-    this._overlayRef.updatePositionStrategy(strategy)
-    this._overlayRef.attach(this._portal);
-  }
 
 
   CdkDragStart($event) {
@@ -250,10 +251,10 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy, AfterViewIn
 
   showModal () {
     this.isModelVisible = true
-    console.log(this.fields)
     let field = this.getField(this.fields)
-    console.log(field)
     this.resultField = field
+
+    // this
   }
 
   getField (field) {
@@ -308,9 +309,8 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy, AfterViewIn
   }
 
   ngDoCheck() {
-    console.log('ngDoCheck')
-    // this.checkExpressionChange();
     this.fieldChanges()
+    this.getAttributeModel()
   }
 
   clearModelSubscriptions() {
@@ -320,7 +320,6 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy, AfterViewIn
   
   ngOnDestroy() {
     this.clearModelSubscriptions();
-    this._overlayRef.dispose();
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -434,7 +433,8 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy, AfterViewIn
 
   // TODO: field
   fieldDrop ($event) {
-    console.log('fieldDrop')
+    // console.log('fieldDrop')
+    console.log($event)
   }
 
   fieldEntered ($event) {
@@ -457,17 +457,14 @@ export class DropComponent implements DoCheck, OnChanges, OnDestroy, AfterViewIn
   fieldContextMenu ($event, field) {
     $event.preventDefault();
     $event.stopPropagation();
-    this.openDialog($event)
-    console.log(field)
-
+    // this.openDialog($event)
+    this._modalService.open('contentmenu', $event)
   }
 
   // 左键点击
   fieldClick ($event, field) {
     $event.preventDefault();
     $event.stopPropagation();
-    this.operatorModel = field
-    console.log(field)
+    this.attributeService.model = field
   }
-
 }

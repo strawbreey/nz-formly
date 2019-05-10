@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { FormlyFormOptions, FormlyFieldConfig, Field } from '@ngx-formly/core';
 import { of } from 'rxjs';
 
+
 @Component({
   selector: 'app-quill',
   templateUrl: './quill.component.html',
@@ -19,17 +20,30 @@ export class QuillComponent implements OnInit {
       awesomeIsForced: false,
     },
   };
-  quillFields: FormlyFieldConfig[] = [{
-    key: 'text',
-    type: 'ngx-quill',
-    templateOptions: {
-      label: '文本框',
+  quillFields: FormlyFieldConfig[] = [
+    {
+      key: 'text',
+      type: 'ngx-quill',
+      templateOptions: {
+        label: '文本框',
+      }
+    },
+    {
+      key: 'text',
+      type: 'monaco-editor',
+      templateOptions: {
+        label: '文本框',
+      }
     }
-  }]
+  ]
+
+
 
   ngOnInit() {
     console.log('quill')
   }
+
+  
 
 }
 

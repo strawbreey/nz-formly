@@ -31,6 +31,9 @@ import { DropComponent } from './components/drop/drop.component';
 import { QuillComponent } from './components/quill/quill.component';
 import { OverlayComponent } from './components/overlay/overlay.component';
 import { DragModalComponent } from './modal/drag-modal/drag-modal.component';
+import { ContentMenuModalComponent } from './modal/content-menu-modal/content-menu-modal.component';
+
+
 
 registerLocaleData(en);
 
@@ -50,6 +53,7 @@ registerLocaleData(en);
     QuillComponent,
     OverlayComponent,
     DragModalComponent,
+    ContentMenuModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,7 +65,7 @@ registerLocaleData(en);
     FormlyNgxZorroModule,
     AppRoutingModule,
     DragDropModule,
-    QuillModule
+    QuillModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
