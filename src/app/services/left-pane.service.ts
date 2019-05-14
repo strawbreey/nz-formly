@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { FormlyFieldConfig } from '@ngx-formly/core';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,16 @@ export class LeftPaneService {
 
   constructor() { }
 
-  FieldConfig: FormlyFieldConfig[] = [    
+  FieldConfig: FormlyFieldConfig[] = [
+    {
+      key: 'tag',
+      type: 'nz-tag',
+      className: 'px-2',
+      templateOptions: {
+        nzColor: 'magenta',
+        nzContent: 'magenta'
+      },
+    },
     {
       key: 'radio',
       type: 'nz-radio',
@@ -77,6 +87,38 @@ export class LeftPaneService {
       className: 'd-block',
       templateOptions: {
 
+      }
+    },
+    {
+      key: 'menu',
+      type: 'nz-menu',
+      templateOptions: {
+        
+      }
+    },
+    {
+      key: 'tree-select',
+      type: 'nz-tree-select',
+      className: 'd-block',
+      templateOptions: {
+        label: '分类',
+        nzDisplayWith: (node) => node.title,
+        nzNodes: [
+          {
+            title: 'parent 1',
+            key: '100',
+            children: [
+              {
+                title: 'parent 1-0',
+                key: '1001',
+                children: [
+                  { title: 'leaf 1-0-0', key: '10010', isLeaf: true },
+                  { title: 'leaf 1-0-1', key: '10011', isLeaf: true }
+                ]
+              }
+            ]
+          }
+        ]
       }
     }
   ];

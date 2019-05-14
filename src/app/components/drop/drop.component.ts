@@ -150,14 +150,11 @@ export class DropComponent implements DoCheck, OnDestroy {
   }
 
 
-  isModelVisible = false
 
   showModal ($event) {
-    // this.isModelVisible = true
     let field = this.getField(this.fields)
     this.resultField = field
     this._modalService.open('editor', $event)
-
   }
 
   getField (field) {
@@ -174,13 +171,6 @@ export class DropComponent implements DoCheck, OnDestroy {
     }
   }
 
-  handleCancel () {
-    this.isModelVisible = false
-  }
-
-  handleOk () {
-    this.isModelVisible = false
-  }
 
   canDropPredicate(): Function {
     return this.dragDropService.canDropPredicate()
@@ -233,11 +223,9 @@ export class DropComponent implements DoCheck, OnDestroy {
   // }
 
   fieldChanges () {
-    console.log('6666666666666666666666')
     this.fields = this.fields || [];
     this.model = this.model || {};
     this.form = this.form || (new FormGroup({}));
-    console.log(this.fields)
     this.setOptions();
     this.clearModelSubscriptions();
     this.formlyBuilder.buildForm(this.form, this.fields, this.model, this.options);

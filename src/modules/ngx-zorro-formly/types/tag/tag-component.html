@@ -1,0 +1,19 @@
+<ng-container *ngIf="to['nzMode'] === 'closeable'">
+    <nz-tag             
+        nzMode="closeable" 
+        [nzColor]="to['nzColor']"
+        (nzAfterClose)="afterClose($event)"
+        (nzOnClose)="onClose($event)">{{to['nzContent']}}</nz-tag>
+</ng-container>
+    
+<ng-container *ngIf="to['nzMode'] === 'checkable'">
+    <nz-tag 
+        nzMode="checkable" 
+        [nzColor]="to['nzColor']"
+        (nzCheckedChange)="checkedChange($event)">{{to['nzContent']}}</nz-tag>
+</ng-container>
+
+<ng-container *ngIf="!to['nzMode'] || to['nzMode'] === 'default'">
+    <nz-tag nzMode="default" [nzColor]="to['nzColor']">{{to['nzContent']}}</nz-tag>   
+</ng-container>
+

@@ -32,6 +32,10 @@ import { NzCheckboxComponent } from './types/checkbox/checkbox-component';
 import { NzCheckboxGroupComponent } from './types/checkbox-group/checkbox-group-component';
 import { NzRadioComponent } from './types/radio/radio-component';
 import { NzRadioGroupComponent } from './types/radio-group/radio-group-component'
+import { NzTagComponent } from './types/tag/tag-component';
+import { NzTagGroupComponent} from './types/tag-group/tag-group-compoent';
+
+import { NzMenuComponent } from './types/menu/menu-component'
 
 import { FormlyFieldAutocompleteComponent } from './types/autocomplete/autocomplete-component';
 import { FormlyFieldCascaderComponent } from './types/cascader/cascader-component';
@@ -43,7 +47,7 @@ import { FormlyFieldSelectComponent } from './types/select/select-component';
 import { FormlyFieldSliderComponent } from './types/slider/slider-component';
 import { FormlyFieldSwitchComponent } from './types/switch/switch-component';
 import { FormlyFieldTimePickerComponent } from './types/time-picker/time-picker-component';
-import { FormlyFieldTreeSelectComponent } from './types/tree-select/tree-select-component';
+import { NzTreeSelectComponent } from './types/tree-select/tree-select-component';
 import { FormlyFieldDateRangePickerComponent } from "./types/date-range-picker/date-range-picker-component";
 import { FormlyFieldSingleFileComponent } from "./types/single-file/single-file";
 import { FormlyFieldTooltipComponent } from "./types/tool-tip/tool-tip-component";
@@ -155,6 +159,14 @@ export const ForRootFormlyModule = FormlyModule.forRoot({
             component: NzRadioGroupComponent
         },
         {
+            name: 'nz-tag',
+            component: NzTagComponent,
+        },
+        {
+            name: 'nz-tag-group',
+            component: NzTagGroupComponent
+        },
+        {
             name: 'rate',
             wrappers: ['field-wrapper'],
             component: FormlyFieldRateComponent
@@ -180,9 +192,9 @@ export const ForRootFormlyModule = FormlyModule.forRoot({
             component: FormlyFieldTimePickerComponent
         },
         {
-            name: 'tree-select',
+            name: 'nz-tree-select',
             wrappers: ['field-wrapper'],
-            component: FormlyFieldTreeSelectComponent
+            component: NzTreeSelectComponent
         },
         {
             name: 'single-file',
@@ -250,6 +262,10 @@ export const ForRootFormlyModule = FormlyModule.forRoot({
         {
             name: 'nz-avatar',
             component: NzAvatarComponent
+        },
+        {
+            name:'nz-menu',
+            component: NzMenuComponent
         }
     ],
     wrappers: [
@@ -282,6 +298,8 @@ export const ForRootFormlyModule = FormlyModule.forRoot({
         NzCheckboxGroupComponent,
         NzRadioComponent,
         NzRadioGroupComponent,
+        NzTagComponent,
+        NzTagGroupComponent,
         FormlyFieldAutocompleteComponent,
         FormlyFieldCascaderComponent,
         FormlyFieldDatePickerComponent,
@@ -292,7 +310,7 @@ export const ForRootFormlyModule = FormlyModule.forRoot({
         FormlyFieldSliderComponent,
         FormlyFieldSwitchComponent,
         FormlyFieldTimePickerComponent,
-        FormlyFieldTreeSelectComponent,
+        NzTreeSelectComponent,
         FormlyFieldSingleFileComponent,
         FormlyFieldWrapperComponent,
         FormlyFieldTooltipComponent,
@@ -309,7 +327,8 @@ export const ForRootFormlyModule = FormlyModule.forRoot({
         DropListComponent,
         NgxQuillComponent,
         MonacoEditorComponent,
-        NzAvatarComponent
+        NzAvatarComponent,
+        NzMenuComponent
     ],
     exports: [
         NgZorroAntdModule,

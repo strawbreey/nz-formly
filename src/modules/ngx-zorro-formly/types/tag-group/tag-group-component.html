@@ -1,0 +1,20 @@
+<ng-container *ngFor="let item of to['options']">
+    <ng-container *ngIf="item['nzMode'] === 'closeable'">
+        <nz-tag             
+            nzMode="closeable" 
+            [nzColor]="item['nzColor']"
+            (nzAfterClose)="afterClose($event)"
+            (nzOnClose)="onClose($event)"></nz-tag>
+    </ng-container>
+    
+    <ng-container *ngIf="item['nzMode'] === 'checkable'">
+        <nz-tag 
+            nzMode="checkable" 
+            [nzColor]="item['nzColor']"
+            (nzCheckedChange)="checkedChange($event)"></nz-tag>
+    </ng-container>
+    
+    <ng-container *ngIf="!item['nzMode'] && item['nzMode'] === 'default'">
+        <nz-tag nzMode="default" [nzColor]="item['nzColor']"></nz-tag>   
+    </ng-container>
+</ng-container>
