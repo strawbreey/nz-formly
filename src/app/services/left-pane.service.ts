@@ -93,7 +93,15 @@ export class LeftPaneService {
       key: 'menu',
       type: 'nz-menu',
       templateOptions: {
-        
+
+      }
+    },
+    {
+      key: 'breadcrumb',
+      type: 'nz-breadcrumb',
+      className: 'd-block',
+      templateOptions: {
+        options: []
       }
     },
     {

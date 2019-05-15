@@ -66,6 +66,7 @@ import { NzAvatarComponent } from './types/nz-avatar/nz-avatar-component'
 import { NgxQuillComponent } from '../ngx-quill/ngx-quill-component'
 
 import { MonacoEditorComponent } from '../monaco-editor/monaco-editor-component'
+import { NzBreadcrumbComponent } from './types/breadcrumb/breadcrumb-component'
 
 // repeat
 
@@ -266,6 +267,10 @@ export const ForRootFormlyModule = FormlyModule.forRoot({
         {
             name:'nz-menu',
             component: NzMenuComponent
+        },
+        {
+            name: 'nz-breadcrumb',
+            component: NzBreadcrumbComponent
         }
     ],
     wrappers: [
@@ -300,6 +305,7 @@ export const ForRootFormlyModule = FormlyModule.forRoot({
         NzRadioGroupComponent,
         NzTagComponent,
         NzTagGroupComponent,
+        NzBreadcrumbComponent,
         FormlyFieldAutocompleteComponent,
         FormlyFieldCascaderComponent,
         FormlyFieldDatePickerComponent,

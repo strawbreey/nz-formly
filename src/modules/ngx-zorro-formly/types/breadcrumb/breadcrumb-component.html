@@ -1,0 +1,31 @@
+<!-- <nz-breadcrumb>
+    <nz-breadcrumb-item>
+        Home
+    </nz-breadcrumb-item>
+    <nz-breadcrumb-item>
+        <a>Application List</a>
+    </nz-breadcrumb-item>
+    <nz-breadcrumb-item>
+        An Application
+    </nz-breadcrumb-item>
+</nz-breadcrumb> -->
+
+
+<ng-container *ngIf="to['nzAutoGenerate']">
+    <nz-breadcrumb [nzAutoGenerate]="to['nzAutoGenerate'] || false"></nz-breadcrumb>
+</ng-container>
+
+<ng-container *ngIf="!to['nzAutoGenerate']">
+    <nz-breadcrumb>
+        <ng-container *ngFor="let item of list">
+            <nz-breadcrumb-item>
+                <ng-container *ngIf="item.link">
+                    <a [href]="item.link" [target]="item.target || '_blank'">{{item.label}}</a>
+                </ng-container>
+                <ng-container *ngIf="!item.link">{{item.label}}</ng-container>
+            </nz-breadcrumb-item>
+        </ng-container>
+    </nz-breadcrumb>
+</ng-container>
+
+
