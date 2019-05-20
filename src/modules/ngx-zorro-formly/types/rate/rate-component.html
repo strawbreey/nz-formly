@@ -1,5 +1,7 @@
-<nz-rate [formControl]="formControl"
+<nz-rate
+         [formControl]="formControl"
          [formlyAttributes]="field"
+         [(ngModel)]="model[key]"
          [nzAllowClear]="to['nzAllowClear']"
          [nzAllowHalf]="to['nzAllowHalf']"
          [nzAutoFocus]="to['nzAutoFocus']"

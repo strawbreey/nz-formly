@@ -1,0 +1,11 @@
+<nz-carousel    [nzEffect]="to['nzEffect'] || 'scrollx'" 
+                [nzAutoPlay]="to['nzAutoPlay'] || false" 
+                [nzAutoPlaySpeed]="to['nzAutoPlaySpeed'] ||3000"
+                [nzDots]="to['nzDots'] || true" 
+                [nzVertical]="to['nzVertical']"
+                (nzAfterChange)="afterChange($event)"
+                (nzBeforeChange)="beforeChange($event)" >
+    <div nz-carousel-content *ngFor="let item of to['options']">
+        <h3>{{ item.label }}</h3>
+    </div>
+</nz-carousel>

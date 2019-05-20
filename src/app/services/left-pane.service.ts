@@ -10,6 +10,26 @@ export class LeftPaneService {
 
   FieldConfig: FormlyFieldConfig[] = [
     {
+      key: 'app-line',
+      type: 'app-line',
+      className: 'px-2',
+    },
+    {
+      key: 'app-text',
+      type: 'app-text',
+      className: 'px-2',
+    },
+    {
+      key: 'app-panel',
+      type: 'app-panel',
+      className: 'px-2',
+    },
+    {
+      key: 'app-picture',
+      type: 'app-picture',
+      className: 'px-2',
+    },
+    {
       key: 'tag',
       type: 'nz-tag',
       className: 'px-2',
@@ -53,6 +73,14 @@ export class LeftPaneService {
       className: 'px-2',
       templateOptions: {
         label: 'input',
+      },
+    },
+    {
+      type: 'nz-input-number',
+      wrappers: ['field-wrapper'],
+      className: 'px-2',
+      templateOptions: {
+        label: 'input-number',
       },
     },
     {

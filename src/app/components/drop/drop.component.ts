@@ -82,11 +82,14 @@ export class DropComponent implements DoCheck, OnDestroy {
 
   // 将菜单栏控件拖到视图层
   dragListDrop(event: CdkDragDrop<string[]>, field) { 
-    console.log(event)   
-    // // 如果将视图层的拖到试图外，则是删除
+    // 如果将视图层的拖到试图外，则是删除
     if (!event.isPointerOverContainer) {
-      event.previousContainer.data.splice(event.previousIndex, 1)
-      event.container.data.splice(event.currentIndex, 1)
+      if (event.previousContainer === event.container) {
+        event.container.data.splice(event.currentIndex, 1)        
+      } else {
+        event.container.data.splice(event.currentIndex, 1)
+        event.previousContainer.data.splice(event.previousIndex, 1)
+      }
       return
     }
 

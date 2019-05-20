@@ -1,10 +1,9 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { CdkDragDrop, moveItemInArray, transferArrayItem, DragDropModule, copyArrayItem, CdkDrag, CdkDropList} from '@angular/cdk/drag-drop';
+import { Component } from '@angular/core';
+import { CdkDragDrop, transferArrayItem, copyArrayItem,} from '@angular/cdk/drag-drop';
 import { FieldType } from '@ngx-formly/core';
-import { reverseDeepMerge, assignModelValue, clone } from '../../../utils/index';
+import { clone } from '../../../utils/index';
 import { DragDropService } from '../../../app/services/drag-drop.service'
 import { DragAttributeService } from '../../../app/services/drag-attribute.service'
-import { cloneSVG } from '@ant-design/icons-angular';
 import { ModalService } from '../../../app/services/modal.service'
 
 @Component({
@@ -29,8 +28,6 @@ export class DropListComponent extends FieldType {
 
 
 	ngOnInit(): void {
-    console.log('drop-list: oninit')
-    console.log(this)
     this.dragDropService.addIds(this.id)
     this.ids = this.dragDropService.getIds()
 	}
@@ -44,12 +41,9 @@ export class DropListComponent extends FieldType {
   // 将菜单栏控件拖到视图层
   drop(event: CdkDragDrop<string[]>, field) {    
     // 如果将视图层的拖到试图外，则是删除
-    console.log(event)
     if (event.previousContainer.id === 'menuid') {
-      console.log('1')
       copyArrayItem(clone(event.previousContainer.data), event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      console.log('2')
       transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex)
     }
   }

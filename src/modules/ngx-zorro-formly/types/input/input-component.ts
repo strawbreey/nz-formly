@@ -7,11 +7,23 @@ import { FieldType } from '@ngx-formly/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NzInputComponent extends FieldType {
-    get type() {
-        return this.to.type || 'text';
-    }
+    value: string = ''
 
     ngOnInit() {
         console.log(this)
     }
+
+    change ($event) {
+        let value = $event.target.value
+        console.log(value)
+        console.log(this)
+    }
+
+    blur ($event) {
+        console.log('blur')
+    }
+
+    focus ($event) {
+        console.log('focus')
+    } 
 }

@@ -1,0 +1,23 @@
+<!-- <nz-input-number    [(ngModel)]="value"         
+                    [nzAutoFocus]="to['nzAutoFocus'] || false"
+                    [nzDisabled]="to['nzDisabled'] || false"
+                    [nzMax]="to['nzMax'] || Infinity"
+                    [nzMin]="to['nzMin'] || -Infinity" 
+                    [nzFormatter]="to['nzFormatter']"
+                    [nzPrecision]="to['nzPrecision']"
+                    [nzParser]="to['nzParser']"
+                    [nzSize]="to['nzSize']"
+                    [nzStep]="to['nzStep'] || 1"
+                    [nzPlaceHolder]="to['nzPlaceHolder']"
+                    (ngModelChange)="onModelChange($event)"
+                   ></nz-input-number> -->
+
+    <input  nz-input
+        [(ngModel)]="value"
+        [type]="to['type']"
+        [nzSize]="to['nzSize']"
+        [autocomplete]="to['autocomplete'] || 'off'"
+        [autofocus]="to['autofocus']"
+        (keyup)="change($event)"
+        (focus)="focus($event)"
+        (blur)="blur($event)"/> 

@@ -17,6 +17,7 @@ export class EditorModalComponent implements OnInit {
     this._modalService.modal$.pipe(filter(item => {
       return item['key'] === 'editor'
     })).subscribe(item => {
+      console.log(item)
       this.isModelVisible = true
     })
   }

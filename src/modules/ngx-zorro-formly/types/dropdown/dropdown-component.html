@@ -1,0 +1,24 @@
+<nz-dropdown 
+    [nzPlacement]="to['nzPlacement']"
+    [nzDisabled]="to['nzDisabled']"
+    [nzTrigger]="to['nzTrigger']"
+    [nzClickHide]="to['nzClickHide']"
+    [nzVisible]="to['nzVisible']"
+    [nzOverlayClassName]="to['nzOverlayClassName']"
+    [nzOverlayStyle]="to['nzOverlayStyle']"
+    (nzVisibleChange)="onVisibleChange($event)"> 
+    <ng-container *ngIf="to['type'] == 'button'">
+        <button nz-button nz-dropdown>{{to['content']}}</button>
+    </ng-container>
+    <ng-container *ngIf="to['type'] != 'button'">
+        <a nz-dropdown>{{to['content'] || 'Hover me' }}<i nz-icon type="down"></i> </a>
+    </ng-container>
+    
+    <ul nz-menu nzSelectable>
+        <ng-container *ngFor="let item of to['options']">
+            <li nz-menu-item>
+                <a>{{item.label}}</a>
+            </li>
+        </ng-container>
+    </ul>
+</nz-dropdown>

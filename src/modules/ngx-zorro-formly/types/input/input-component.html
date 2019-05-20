@@ -13,9 +13,19 @@
     <input  nz-input
         [formControl]="formControl" 
         [formlyAttributes]="field"
-        [type]="type"
+        [type]="to['type']"
         [nzSize]="to['nzSize']"
         [autocomplete]="to['autocomplete'] || 'off'"
         [autofocus]="to['autofocus']"/>
 </ng-container>
+
+<!-- <input  nz-input
+        [(ngModel)]="value"
+        [type]="to['type']"
+        [nzSize]="to['nzSize']"
+        [autocomplete]="to['autocomplete'] || 'off'"
+        [autofocus]="to['autofocus']"
+        (keyup)="change($event)"
+        (focus)="focus($event)"
+        (blur)="blur($event)"/> -->
 

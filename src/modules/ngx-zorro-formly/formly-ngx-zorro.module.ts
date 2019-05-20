@@ -35,14 +35,19 @@ import { NzRadioGroupComponent } from './types/radio-group/radio-group-component
 import { NzTagComponent } from './types/tag/tag-component';
 import { NzTagGroupComponent} from './types/tag-group/tag-group-compoent';
 
-import { NzMenuComponent } from './types/menu/menu-component'
+import { NzMenuComponent } from './types/menu/menu-component';
+import { NzDropdownComponent } from './types/dropdown/dropdown-component';
+import { NzPaginationComponent } from './types/pagination/pagination-component';
+import { NzInputNumberComponent } from './types/input-number/input-number-component';
+
 
 import { FormlyFieldAutocompleteComponent } from './types/autocomplete/autocomplete-component';
 import { FormlyFieldCascaderComponent } from './types/cascader/cascader-component';
 import { FormlyFieldDatePickerComponent } from './types/date-picker/date-picker-component';
 import { FormlyFieldNumberComponent } from './types/number/number-component';
 
-import { FormlyFieldRateComponent } from './types/rate/rate-component';
+import { NzRateComponent } from './types/rate/rate-component';
+
 import { FormlyFieldSelectComponent } from './types/select/select-component';
 import { FormlyFieldSliderComponent } from './types/slider/slider-component';
 import { FormlyFieldSwitchComponent } from './types/switch/switch-component';
@@ -63,10 +68,11 @@ import { FormlyFieldTableComponent } from './types/table/table-component';
 import { FormlyFieldModelComponent } from './types/model/model-component';
 import { NzAvatarComponent } from './types/nz-avatar/nz-avatar-component'
 
-import { NgxQuillComponent } from '../ngx-quill/ngx-quill-component'
+import { NgxQuillComponent } from '../ngx-quill/ngx-quill-component';
 
-import { MonacoEditorComponent } from '../monaco-editor/monaco-editor-component'
-import { NzBreadcrumbComponent } from './types/breadcrumb/breadcrumb-component'
+
+import { MonacoEditorComponent } from '../monaco-editor/monaco-editor-component';
+import { NzBreadcrumbComponent } from './types/breadcrumb/breadcrumb-component';
 
 // repeat
 
@@ -74,7 +80,13 @@ import { NzBreadcrumbComponent } from './types/breadcrumb/breadcrumb-component'
 import { FormlyFieldWrapperComponent } from './wrappers/formly-field-wrapper/formly-field-wrapper-component';
 
 // drag-drop
-import { DropListComponent } from '../drag-drop-formly/drop-list/drop-list-component'
+import { DropListComponent } from '../drag-drop-formly/drop-list/drop-list-component';
+
+// app basic Label
+import { AppLineComponent } from '../basic-component/line/line-component'
+import { AppTextComponent } from '../basic-component/text/text-component'
+import { AppPanelComponent } from '../basic-component/panel/panel-component'
+import { AppPictureComponent } from '../basic-component/picture/picture-component'
 
 // 服务
 // import { formlyService } from '../../services/formly.service'
@@ -170,7 +182,7 @@ export const ForRootFormlyModule = FormlyModule.forRoot({
         {
             name: 'rate',
             wrappers: ['field-wrapper'],
-            component: FormlyFieldRateComponent
+            component: NzRateComponent
         },
         {
             name: 'nz-select',
@@ -271,6 +283,34 @@ export const ForRootFormlyModule = FormlyModule.forRoot({
         {
             name: 'nz-breadcrumb',
             component: NzBreadcrumbComponent
+        },
+        {
+            name: 'nz-dropdown',
+            component: NzDropdownComponent
+        },
+        {
+            name: 'pagination',
+            component: NzPaginationComponent
+        },
+        {
+            name: 'nz-input-number',
+            component: NzInputNumberComponent
+        },
+        {
+            name: 'app-line',
+            component: AppLineComponent
+        },
+        {
+            name: 'app-text',
+            component: AppTextComponent,
+        },
+        {
+            name: 'app-picture',
+            component: AppPictureComponent
+        },
+        {
+            name: 'app-panel',
+            component: AppPanelComponent
         }
     ],
     wrappers: [
@@ -298,6 +338,7 @@ export const ForRootFormlyModule = FormlyModule.forRoot({
         NzButtonGroupComponent,
         NzInputComponent,
         NzInputGroupComponent,
+        NzInputNumberComponent,
         NzTextareaComponent,
         NzCheckboxComponent,
         NzCheckboxGroupComponent,
@@ -306,12 +347,12 @@ export const ForRootFormlyModule = FormlyModule.forRoot({
         NzTagComponent,
         NzTagGroupComponent,
         NzBreadcrumbComponent,
+        NzRateComponent,
         FormlyFieldAutocompleteComponent,
         FormlyFieldCascaderComponent,
         FormlyFieldDatePickerComponent,
         FormlyFieldDateRangePickerComponent,
         FormlyFieldNumberComponent,
-        FormlyFieldRateComponent,
         FormlyFieldSelectComponent,
         FormlyFieldSliderComponent,
         FormlyFieldSwitchComponent,
@@ -334,7 +375,13 @@ export const ForRootFormlyModule = FormlyModule.forRoot({
         NgxQuillComponent,
         MonacoEditorComponent,
         NzAvatarComponent,
-        NzMenuComponent
+        NzMenuComponent,
+        NzDropdownComponent,
+        NzPaginationComponent,
+        AppLineComponent,
+        AppTextComponent,
+        AppPanelComponent,
+        AppPictureComponent
     ],
     exports: [
         NgZorroAntdModule,

@@ -1,0 +1,14 @@
+<nz-pagination 
+    [nzPageIndex]="to['nzPageIndex']" 
+    [nzTotal]="to['nzTotal']" 
+    [nzShowSizeChanger]="to['nzShowSizeChanger'] || false"
+    [nzPageSize]="to['nzPageSize']"
+    [nzShowQuickJumper]="to['nzShowQuickJumper'] || false"
+    [nzSimple]="to['nzSimple'] || false"
+    [nzSize]="to['nzSize'] || 'default'"
+    [nzPageSizeOptions]="to['nzPageSizeOptions'] || [10, 20, 30, 40]"
+    [nzHideOnSinglePage]="to['nzHideOnSinglePage'] || false"
+    (nzPageIndexChange)="pageIndexChange($event)"
+    (nzPageSizeChange)="pageSizeChange($event)"
+    >
+</nz-pagination>
