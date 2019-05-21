@@ -80,6 +80,13 @@ export class DragAttributeService {
               },
             },
             {
+              key: 'Styles',
+              type: 'nz-input',
+              templateOptions: {
+                label: 'styles'
+              }
+            },
+            {
               key: 'text',
               type: 'nz-input',
               templateOptions: {

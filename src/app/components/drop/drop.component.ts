@@ -347,6 +347,7 @@ export class DropComponent implements DoCheck, OnDestroy {
 
   // 左键点击
   fieldClick ($event, field) {
+    console.log($event)
     $event.preventDefault();
     $event.stopPropagation();
     this.attributeService.model = field

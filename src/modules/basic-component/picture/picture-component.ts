@@ -5,16 +5,11 @@ import { FieldType } from '@ngx-formly/core';
     selector: 'app-picture-component',
     templateUrl: 'picture-component.html'
     // changeDetection: ChangeDetectionStrategy.OnPush
-
 })
 export class AppPictureComponent extends FieldType {
 
     get Styles () {
-			return {
-				'font-style':  this.to['style']['font-style']      ? 'italic' : 'normal',
-				'font-weight': this.to['style']['font-weight']     ? 'bold'   : 'normal',
-				'font-size':   this.to['style']['font-size']       ? '24px'   : '12px'
-			}
+        return  Object.assign({}, this.to['styles'])    
     }
 
     onClick ($event) {
