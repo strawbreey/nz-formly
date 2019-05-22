@@ -1,4 +1,3 @@
-
 import { 
   Component, OnInit,  ViewChild, TemplateRef, ViewContainerRef
 } from '@angular/core';
@@ -10,16 +9,15 @@ import { Subscription } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
 import { ModalService } from '../../services/modal.service'
 
-
-
 @Component({
-  selector: 'app-content-menu-modal',
-  templateUrl: './content-menu-modal.component.html',
-  styleUrls: ['./content-menu-modal.component.css']
+  selector: 'app-class-editor-modal',
+  templateUrl: './class-editor-modal.component.html',
+  styleUrls: ['./class-editor-modal.component.css']
 })
 
-export class ContentMenuModalComponent {
-  @ViewChild('contentmenu') _dialogTemplate: TemplateRef<any>;
+export class ClassEditorModalComponent implements OnInit {
+  // 样式编辑器 
+  @ViewChild('classEditorModal') _dialogTemplate: TemplateRef<any>;
   private _overlayRef: OverlayRef;
   private _portal: TemplatePortal;
 
@@ -29,7 +27,6 @@ export class ContentMenuModalComponent {
     private _modalService: ModalService
   ) { }
 
-
   ngAfterViewInit() {
     // 弹窗内容
     this._portal = new TemplatePortal(this._dialogTemplate, this._viewContainerRef);
@@ -38,7 +35,7 @@ export class ContentMenuModalComponent {
     });
 
     this._modalService.modal$.pipe(filter(item => {
-      return item['key'] === 'contentmenu'
+      return item['key'] === 'class-editor'
     })).subscribe(item => {
       this.openDialog(item['$event'])
     })
@@ -57,8 +54,8 @@ export class ContentMenuModalComponent {
   openDialog($event) {
     let strategy = null
     strategy = this._overlay.position().flexibleConnectedTo({
-        x: $event.x,
-        y: $event.y
+        x: 1200,
+        y: 100
     }).withPositions([{
       originX: 'start',
       originY: 'top',
@@ -67,5 +64,9 @@ export class ContentMenuModalComponent {
     }])
     this._overlayRef.updatePositionStrategy(strategy)
     this._overlayRef.attach(this._portal);
+  }
+
+  closeModal () {
+    this._overlayRef.detach()
   }
 }

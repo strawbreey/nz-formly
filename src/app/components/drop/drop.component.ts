@@ -352,4 +352,18 @@ export class DropComponent implements DoCheck, OnDestroy {
     $event.stopPropagation();
     this.attributeService.model = field
   }
+
+  // 打开样式编辑器
+  openStyleModal ($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    this._modalService.open('style-editor', $event)
+  }
+
+  // class编辑器
+  openClassModel ($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    this._modalService.open('class-editor', $event)
+  }
 }

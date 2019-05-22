@@ -33,6 +33,9 @@ import { OverlayComponent } from './components/overlay/overlay.component';
 import { DragModalComponent } from './modal/drag-modal/drag-modal.component';
 import { ContentMenuModalComponent } from './modal/content-menu-modal/content-menu-modal.component';
 import { EditorModalComponent } from './modal/editor-modal/editor-modal.component';
+import { StyleEditorModalComponent } from './modal/style-editor-modal/style-editor-modal.component';
+import { ClassEditorModalComponent } from './modal/class-editor-modal/class-editor-modal.component';
+import { ShortcutsModalComponent } from './modal/shortcuts-modal/shortcuts-modal.component';
 
 
 
@@ -56,6 +59,9 @@ registerLocaleData(en);
     DragModalComponent,
     ContentMenuModalComponent,
     EditorModalComponent,
+    StyleEditorModalComponent,
+    ClassEditorModalComponent,
+    ShortcutsModalComponent,
   ],
   imports: [
     BrowserModule,

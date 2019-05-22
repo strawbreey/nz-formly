@@ -1,0 +1,13 @@
+.style-editor-modal{
+    width: 210px;
+    height: 500px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
+}
+
+.editor-modal-header {
+    height: 32px;
+    width: 100%;
+    background-color: rgb(242, 243, 244);
+    cursor: move
+}
