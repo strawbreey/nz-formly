@@ -15,7 +15,7 @@ import { ModalService } from '../../services/modal.service'
   styleUrls: ['./class-editor-modal.component.css']
 })
 
-export class ClassEditorModalComponent implements OnInit {
+export class ClassEditorModalComponent {
   // 样式编辑器 
   @ViewChild('classEditorModal') _dialogTemplate: TemplateRef<any>;
   private _overlayRef: OverlayRef;

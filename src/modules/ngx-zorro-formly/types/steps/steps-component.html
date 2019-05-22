@@ -2,12 +2,12 @@
             [nzSize]="to['nzSize']" 
             [nzStartIndex]="to['nzStartIndex'] || 0" 
             [nzLabelPlacement]="to['nzLabelPlacement'] || 'horizontal'"
-            [nzStatus]="to['nzStatus'] || process"
+            [nzStatus]="to['nzStatus'] || 'process'"
             [nzDirection]="to['nzDirection'] || 'horizontal'">
-    <ng-contaienr *ngFor="let item of to['options']">
+    <ng-container *ngFor="let item of to['options']">
         <nz-step    [nzTitle]="item['nzTitle']" 
                     [nzStatus]="item['nzStatus']" 
                     [nzIcon]="item['nzIcon'] || 'user'" 
                     [nzDescription]="item['nzDescription']"></nz-step>
-    </ng-contaienr>
+    </ng-container>
 </nz-steps>

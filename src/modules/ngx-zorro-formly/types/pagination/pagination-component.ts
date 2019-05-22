@@ -12,11 +12,11 @@ export class NzPaginationComponent extends FieldType {
         console.log('NzPaginationComponent')
     }
 
-    pageIndexChange () {
+    pageIndexChange ($event) {
         console.log('pageSizepageIndexChangeChange')
     }
 
-    pageSizeChange () {
+    pageSizeChange ($event) {
         console.log('pageSizeChange')
     }
 

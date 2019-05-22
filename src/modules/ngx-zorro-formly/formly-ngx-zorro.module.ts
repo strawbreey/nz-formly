@@ -74,6 +74,9 @@ import { NgxQuillComponent } from '../ngx-quill/ngx-quill-component';
 import { MonacoEditorComponent } from '../monaco-editor/monaco-editor-component';
 import { NzBreadcrumbComponent } from './types/breadcrumb/breadcrumb-component';
 
+import { NzCarouselComponent } from './types/carousel/carousel-component';
+import { NzStepsComponent } from './types/steps/steps-component';
+
 // repeat
 
 // wrapper
@@ -381,7 +384,9 @@ export const ForRootFormlyModule = FormlyModule.forRoot({
         AppLineComponent,
         AppTextComponent,
         AppPanelComponent,
-        AppPictureComponent
+        AppPictureComponent,
+        NzCarouselComponent,
+        NzStepsComponent
     ],
     exports: [
         NgZorroAntdModule,
