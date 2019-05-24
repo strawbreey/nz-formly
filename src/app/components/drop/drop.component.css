@@ -99,3 +99,14 @@ formly-field:active
   /* color: rgb(125, 134, 148); */
   color: rgb(65, 80, 88);
 }
+
+::ng-deep .checked {
+  outline: 2px dashed #3b97e3 !important;
+  outline-offset: 1px;
+}
+
+.drag-list .cdk-drag-placeholder {
+  width: 100%;
+  border-bottom: 2px solid #3b97e3
+  
+}

@@ -18,235 +18,21 @@ export class DragDropService {
       label: '233'
     }
   };
-  fields2: FormlyFieldConfig[] = [
-    {
-      type: 'nz-input',
-      key: 'label',
-      templateOptions: {
-        label: '标签'
-      }
-    },
-    {
-      type: 'nz-input',
-      key: 'label2',
-      templateOptions: {
-        label: '标签'
-      }
-    },
-    {
-      type: 'nz-input',
-      key: 'label3',
-      templateOptions: {
-        label: '标签'
-      }
-    },
-    {
-      type: 'nz-input',
-      key: 'label4',
-      templateOptions: {
-        label: '标签'
-      }
-    },
-    {
-      type: 'nz-input',
-      key: 'label5',
-      templateOptions: {
-        label: '标签'
-      }
-    },
-    {
-      type: 'nz-input',
-      key: 'label6',
-      templateOptions: {
-        label: '标签'
-      }
-    },
-    {
-      type: 'nz-input',
-      key: 'label7',
-      templateOptions: {
-        label: '标签'
-      }
-    },
-    {
-      type: 'nz-input',
-      key: 'label8',
-      templateOptions: {
-        label: '标签'
-      }
-    }
-  ]
-  fields3: FormlyFieldConfig[] = [
-    {
-      key: 'dropList1',
-      type: 'mt-drop-list',
-      fieldGroup: [
-        {
-          type: 'nz-input',
-          key: 'label',
-          templateOptions: {
-            label: '标签'
-          }
-        }
-      ]
-    }, 
-  ]
-  fields4: FormlyFieldConfig[] = [
-    {
-      key: 'dropList1',
-      type: 'mt-drop-list',
-      fieldGroup: [
-        {
-          type: 'nz-input',
-          key: 'label',
-          templateOptions: {
-            label: '标签'
-          }
-        }
-      ]
-    }, 
-  ]
-  fields1: FormlyFieldConfig[] = [
-    {
-      key: 'dropList1',
-      type: 'mt-drop-list',
-      fieldGroup: [
-        {
-          type: 'nz-input',
-          key: 'label',
-          templateOptions: {
-            label: '标签'
-          }
-        }
-      ]
-    }, 
-    {
-      key: 'dropList2',
-      type: 'mt-drop-list',
-      fieldGroup: [
-        {
-          type: 'nz-input',
-          key: 'label',
-          templateOptions: {
-            label: '标签'
-          }
-        }
-      ]
-    }, 
-    {
-      key: 'dropList3',
-      type: 'mt-drop-list',
-      fieldGroup: [
-        {
-          type: 'nz-input',
-          key: 'label',
-          templateOptions: {
-            label: '标签'
-          }
-        }
-      ]
-    }, 
-    {
-      key: 'dropList4',
-      type: 'mt-drop-list',
-      fieldGroup: [
-        {
-          type: 'nz-input',
-          key: 'label',
-          templateOptions: {
-            label: '标签'
-          }
-        }
-      ]
-    }, 
-    {
-      key: 'dropList5',
-      type: 'mt-drop-list',
-      fieldGroup: [
-        {
-          type: 'nz-input',
-          key: 'label',
-          templateOptions: {
-            label: '标签'
-          }
-        }
-      ]
-    }, 
-    {
-      key: 'dropList6',
-      type: 'mt-drop-list',
-      fieldGroup: [
-        {
-          type: 'nz-input',
-          key: 'label',
-          templateOptions: {
-            label: '标签'
-          }
-        }
-      ]
-    }, 
-    {
-      key: 'dropList7',
-      type: 'mt-drop-list',
-      fieldGroup: [
-        {
-          type: 'nz-input',
-          key: 'label',
-          templateOptions: {
-            label: '标签'
-          }
-        }
-      ]
-    }, 
-    {
-      key: 'dropList8',
-      type: 'mt-drop-list',
-      fieldGroup: [
-        {
-          type: 'nz-input',
-          key: 'label',
-          templateOptions: {
-            label: '标签'
-          }
-        }
-      ]
-    }, 
-    {
-      key: 'dropList9',
-      type: 'mt-drop-list',
-      fieldGroup: [
-        {
-          type: 'nz-input',
-          key: 'label',
-          templateOptions: {
-            label: '标签'
-          }
-        }
-      ]
-    }, 
-  ]
-  timer = 0
-  fields: FormlyFieldConfig[] = [
-    {
-      key: 'dropList',
-      type: 'mt-drop-list',
-      fieldGroup: [
-        {
-          type: 'nz-input',
-          key: 'label',
-          templateOptions: {
-            label: '标签'
-          }
-        }
-      ]
-    }
-  ]
 
-  fields$ = new Subject<FormlyFieldConfig[]>()
+  fields: FormlyFieldConfig[] = []
+
+  private fieldSource = new Subject<FormlyFieldConfig[]>();
+
+  field$ = this.fieldSource.asObservable();
 
   constructor() { 
     // this.fields$.next(this.fields)
   }
+
+  setFields(fields: FormlyFieldConfig[]) {
+    this.fieldSource.next(fields);
+  }
+
 
   getIds (): string [] {
     return this.ids
@@ -256,31 +42,6 @@ export class DragDropService {
     if (!this.ids.find(item => item === id) && id) {
       this.ids.push(id)
     }
-  }
-
-  getFields () {
-    return this.fields$
-  }
-
-  setFields () {
-    // this.model = clone(this.model)
-    // console.log(this.fields)
-    // this.fields = this.fields1
-    this.fields$.next(this.fields)
-  }
-
-  init ($event: null) {
-    // this.fields = this.fields1
-    // console.log(this.fields)
-    // switch ($event) {
-    //   case '1': console.log('1');this.fields = this.fields1; break
-    //   case '2': console.log('2');this.fields = this.fields2; break
-    //   case '3': console.log('3');this.fields = this.fields3; break
-    //   case '4': console.log('4');this.fields = this.fields4;break
-
-    // }
-    
-    this.fields$.next(this.fields)
   }
 
   canDropPredicate(): Function {

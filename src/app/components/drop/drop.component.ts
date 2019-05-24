@@ -48,6 +48,11 @@ export class DropComponent implements DoCheck, OnDestroy {
   ) { 
     this.dragDropService.addIds('dragroot')
     this.ids = this.dragDropService.getIds()
+    dragDropService.field$.subscribe(item => {
+      console.log('item')
+      console.log(item)
+      this.fields = item
+    })
 
     this.leftPaneFieldConfig = this._leftPaneService.FieldConfig
   }
@@ -80,6 +85,8 @@ export class DropComponent implements DoCheck, OnDestroy {
   initialModel: any;
   modelChangeSubs: Subscription[] = [];
 
+  lastClickField = null
+
   // 将菜单栏控件拖到视图层
   dragListDrop(event: CdkDragDrop<string[]>, field) { 
     // 如果将视图层的拖到试图外，则是删除
@@ -100,6 +107,9 @@ export class DropComponent implements DoCheck, OnDestroy {
     } else {
       transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
     }
+ 
+
+    // this.dragDropService.setFields(this.fields)
   }
 
   dragListEntered ($event) {
@@ -140,6 +150,8 @@ export class DropComponent implements DoCheck, OnDestroy {
   ngOnInit() {
     this.operatorFields = this.attributeService.fields
     this.getAttributeModel()
+
+    this.dragDropService.setFields(this.fields)
   }
 
   getAttributeModel () {
@@ -155,25 +167,39 @@ export class DropComponent implements DoCheck, OnDestroy {
 
 
   showModal ($event) {
-    let field = this.getField(this.fields)
-    this.resultField = field
-    this._modalService.open('editor', $event)
+    let fields = this.fieldGroup(clone(this.fields))
+    this._modalService.open('editor', {
+      $event: $event,
+      fields: fields
+    })
   }
 
-  getField (field) {
-    if (Array.isArray(field)) {
-      return field.map(item => {
-        return {
-          key: item.key,
-          templateOptions: item.templateOptions,
-          type: item.type,
-          wrappers: item.wrappers,
-          className: item.className
+  fieldGroup (field) {
+    if (Array.isArray(field) && field.length > 0) {
+      field = field.map(item => {
+        if (item.fieldGroup && item.fieldGroup.length > 0) {
+          return {
+            key: item.key,
+            templateOptions: item.templateOptions,
+            type: item.type,
+            wrappers: item.wrappers,
+            className: item.className,
+            fieldGroupClassName: item.fieldGroupClassName,
+            fieldGroup: this.fieldGroup(item.fieldGroup)
+          }
+        } else {
+          return {
+            key: item.key,
+            templateOptions: item.templateOptions,
+            type: item.type,
+            wrappers: item.wrappers,
+            className: item.className
+          }
         }
       })
     }
+    return field
   }
-
 
   canDropPredicate(): Function {
     return this.dragDropService.canDropPredicate()
@@ -211,19 +237,6 @@ export class DropComponent implements DoCheck, OnDestroy {
     this.clearModelSubscriptions();
   }
 
-  // ngOnChanges(changes: SimpleChanges) {
-  //   console.log('ngOnChanges')
-  //   if (changes.fields || changes.form || changes.model) {
-  //     this.fields = this.fields || [];
-  //     this.model = this.model || {};
-  //     this.form = this.form || (new FormGroup({}));
-  //     this.setOptions();
-  //     this.clearModelSubscriptions();
-  //     this.formlyBuilder.buildForm(this.form, this.fields, this.model, this.options);
-  //     this.trackModelChanges(this.fields);
-  //     this.options.updateInitialValue();
-  //   }
-  // }
 
   fieldChanges () {
     this.fields = this.fields || [];
@@ -250,9 +263,6 @@ export class DropComponent implements DoCheck, OnDestroy {
         }
 
         (<FormlyFormOptionsCache> this.options)._buildForm();
-
-        // we should call `NgForm::resetForm` to ensure changing `submitted` state after resetting form
-        // but only when the current component is a root one.
         if (this.options.parentForm && this.options.parentForm.control === this.form) {
           this.options.parentForm.resetForm(model);
         } else {
@@ -337,17 +347,25 @@ export class DropComponent implements DoCheck, OnDestroy {
     console.log('fieldStarted')
   }
 
-  // 右键点击
+  // 右键点击: 点击右键, 弹出内容目录
   fieldContextMenu ($event, field) {
     $event.preventDefault();
     $event.stopPropagation();
-    // this.openDialog($event)
     this._modalService.open('contentmenu', $event)
   }
 
   // 左键点击
   fieldClick ($event, field) {
-    console.log($event)
+    // 添加checked
+    if (field !== this.lastClickField) {
+      if (this.lastClickField && this.lastClickField.className) {
+        this.lastClickField.className = this.lastClickField.className.split(" ").filter(item => item !== 'checked').toString()
+      }
+
+      field.className = field.className ? field.className + ' checked' : 'checked'
+      this.lastClickField = field
+    }
+
     $event.preventDefault();
     $event.stopPropagation();
     this.attributeService.model = field

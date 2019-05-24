@@ -36,6 +36,7 @@ import { EditorModalComponent } from './modal/editor-modal/editor-modal.componen
 import { StyleEditorModalComponent } from './modal/style-editor-modal/style-editor-modal.component';
 import { ClassEditorModalComponent } from './modal/class-editor-modal/class-editor-modal.component';
 import { ShortcutsModalComponent } from './modal/shortcuts-modal/shortcuts-modal.component';
+import { LayersComponent } from './components/layers/layers.component';
 
 
 
@@ -62,6 +63,7 @@ registerLocaleData(en);
     StyleEditorModalComponent,
     ClassEditorModalComponent,
     ShortcutsModalComponent,
+    LayersComponent,
   ],
   imports: [
     BrowserModule,

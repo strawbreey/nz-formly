@@ -1,14 +1,15 @@
 :host {
     position: relative;
     display: block;
-    border: 1px dashed #ccc;
+    /* border: 1px dashed #ccc; */
+    outline: 1px dashed rgba(170,170,170,0.7);
     min-height: 100px;
-    overflow: hidden;
+    padding: 10px;
 }
 
-:host .drag-list {
+:host ::ng-deep [cdkdroplist] {
     display: block;
-    min-height: 100px;
+    min-height: 75px;
     /* min-height: 48px; */
 }
 

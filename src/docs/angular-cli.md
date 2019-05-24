@@ -66,3 +66,8 @@ ng generate component NameEditor
 ```shell
 ng generate service heroes/hero
 ```
+
+3. 部署到github page
+```shell
+ng build --prod --output-path docs --base-href https://strawbreey.github.io/nz-formly/
+```

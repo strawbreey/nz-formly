@@ -26,8 +26,11 @@
         </section>
 
         <section class="d-flex justify-content-center">
-          <i nz-icon nzType="download" nzTheme="outline" (click)="openStyleModal($event)"></i>
-          <i nz-icon nzType="share-alt" nzTheme="outline" (click)="openClassModel($event)"></i>
+          <!-- <i nz-icon nzType="download" nzTheme="outline" ></i> -->
+          <a class="mx-2" (click)="openStyleModal($event)">Style</a>
+          <a class="mx-2" (click)="openClassModel($event)">Class</a>
+
+          <!-- <i nz-icon nzType="share-alt" nzTheme="outline" (click)="openClassModel($event)"></i> -->
           <i nz-icon nzType="link" nzTheme="outline"></i>
           <i nz-icon nzType="eye" nzTheme="outline" (click)="showModal($event)"></i>
       </section>
@@ -46,12 +49,20 @@
         <nz-input-group class="mb-2" [nzSuffix]="suffixIconSearch">
           <input type="text" nz-input placeholder="搜索组件" />
         </nz-input-group>
+
         <ng-template #suffixIconSearch>
           <i nz-icon type="search"></i>
         </ng-template>
 
         <hr class="m-2">
-        <div class="example-box-1" *ngFor="let item of leftPaneFieldConfig" cdkDrag>{{item.type}}</div>
+
+        <ng-container *ngFor="let item of leftPaneFieldConfig">
+          <div class="example-box-1" cdkDrag>
+              <div>{{item.type}}</div>
+              <div *cdkDragPreview>{{item.type}}</div>
+              <div *cdkDragPlaceholder class="text-primary"></div>
+          </div>
+        </ng-container>
       </div>
       
       <div  class="drag-list shadow"
@@ -69,7 +80,6 @@
             <formly-field 
               cdkDrag
               *ngFor="let field of fields"
-
               (click)="fieldClick($event, field);" 
               (contextmenu)="fieldContextMenu($event, field);" 
               (cdkDragDropped)="fieldDrop($event)"
@@ -84,8 +94,21 @@
               [field]="field">
             </formly-field>      
       </div>
+      
       <div class="drag-operator shadow">
-        <formly-form [model]="operatorModel" [fields]="operatorFields" [options]="operatorOptions" [form]="operatorForm" (modelChange)="change($event)" ></formly-form>
+        <nz-tabset>
+            <nz-tab nzTitle="Style Manager">
+              <p>Style Manager</p>
+              <formly-form [model]="operatorModel" [fields]="operatorFields" [options]="operatorOptions" [form]="operatorForm" (modelChange)="change($event)" ></formly-form>
+            </nz-tab>
+            <nz-tab nzTitle="Layers">
+              <p>Layers</p>
+              <app-layers></app-layers>
+            </nz-tab>
+            <nz-tab nzTitle="Class Manager">
+              <p> Class Manager</p>
+            </nz-tab>
+          </nz-tabset>
       </div>
     </div>
 </nz-card>

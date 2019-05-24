@@ -2,12 +2,15 @@
     width: 210px;
     height: 500px;
     background-color: #fff;
+    /* box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1); */
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
+    border: 1px solid rgb(222, 222, 228);
 }
 
 .editor-modal-header {
     height: 32px;
     width: 100%;
     background-color: rgb(242, 243, 244);
+    border-bottom: 1px solid rgb(222, 222, 228);
     cursor: move
 }

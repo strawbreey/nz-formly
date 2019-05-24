@@ -9,6 +9,7 @@ import { ModalService } from '../../../app/services/modal.service'
 })
 export class EditorModalComponent implements OnInit {
 
+  fields  = null
   constructor(
     private _modalService: ModalService
   ) { }
@@ -17,7 +18,9 @@ export class EditorModalComponent implements OnInit {
     this._modalService.modal$.pipe(filter(item => {
       return item['key'] === 'editor'
     })).subscribe(item => {
-      console.log(item)
+      // console.log(item)
+      this.fields = item['data']['fields']
+      console.log(this.fields)
       this.isModelVisible = true
     })
   }

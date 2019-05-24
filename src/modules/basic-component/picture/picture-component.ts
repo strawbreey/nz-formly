@@ -19,5 +19,6 @@ export class AppPictureComponent extends FieldType {
     }
 
     ngOnInit(): void {
+        
     }
 }
