@@ -9,3 +9,5 @@
 7. VSCode Editor
 8. NG-ZORRO Component
 9. Layout Manager
+10. Router Manager
+11. Asset Manager
