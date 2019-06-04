@@ -1,7 +1,7 @@
 <ng-container >
-    <nz-form-item [nzFlex]="to['nzFlex'] || true">
-        <nz-form-label [nzSpan]="isHorizontal ? 8 : null" [nzRequired]="to['required']" *ngIf="to['label']">{{to['label']}}</nz-form-label>
-        <nz-form-control [nzSpan]="isHorizontal ? 16 : null">
+    <nz-form-item [nzFlex]="to['nzFlex']" [ngClass]="formItem">
+        <nz-form-label [nzSpan]="isHorizontal ? 8 : 24" [nzRequired]="to['required']" *ngIf="to['label']">{{to['label']}}</nz-form-label>
+        <nz-form-control [nzSpan]="isHorizontal ? 16 : 24">
             <ng-template #fieldComponent></ng-template>
             <nz-form-explain *ngIf="to['nzExplain']">{{to['nzExplain']}}</nz-form-explain>
             <nz-form-extra  *ngIf="to['nzExtra']">{{to['nzExtra']}}</nz-form-extra>

@@ -10,20 +10,18 @@ export class NzInputComponent extends FieldType {
     value: string = ''
 
     ngOnInit() {
-        console.log(this)
+        // console.log(this)
     }
 
     change ($event) {
         let value = $event.target.value
-        console.log(value)
-        console.log(this)
     }
 
     blur ($event) {
-        console.log('blur')
+        // console.log('blur')
     }
 
     focus ($event) {
-        console.log('focus')
+        // console.log('focus')
     } 
 }

@@ -1,27 +1,12 @@
-import { 
-  Component, DoCheck, OnChanges, Input, 
-  SimpleChanges, Optional, EventEmitter, 
-  Output, OnDestroy, Attribute, OnInit, 
-  HostListener, ChangeDetectionStrategy, ComponentFactoryResolver, 
-  Injector, ViewChild, TemplateRef, AfterViewInit, ViewContainerRef
-} from '@angular/core';
+import { Component,  OnInit, } from '@angular/core';
 
-import { FormGroup, FormArray, FormGroupDirective } from '@angular/forms';
-import {CdkDragDrop, moveItemInArray, transferArrayItem, DragDropModule, copyArrayItem} from '@angular/cdk/drag-drop';
-
-import { FormlyFormOptions, FormlyFieldConfig, Field,  FieldType, FormlyFormBuilder, FormlyConfig  } from '@ngx-formly/core';
-import { FormlyFormOptionsCache }from '@ngx-formly/core/lib/components/formly.field.config';
-import { getFieldId } from '@ngx-formly/core/lib/utils';
-
-import { Subscription } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
-
-import { assignModelValue, isNullOrUndefined, wrapProperty, clone, defineHiddenProp, reverseDeepMerge } from '../../../utils/index'
+import { FormlyFieldConfig, } from '@ngx-formly/core';
 import { DragAttributeService } from '../../services/drag-attribute.service'
 import { DragDropService } from '../../services/drag-drop.service'
 import { ModalService } from '../../services/modal.service' 
-
 import { LeftPaneService } from '../../services/left-pane.service'
+import { LayersService } from '../../services/layers.service'
+
 
 @Component({
   selector: 'app-layers',
@@ -32,30 +17,27 @@ import { LeftPaneService } from '../../services/left-pane.service'
 export class LayersComponent implements OnInit {
 
   fields: FormlyFieldConfig[] = []
+  connectedLists = []
 
   constructor(
     private attributeService: DragAttributeService,
-    private dragDropService:DragDropService,
+    private dragDropService: DragDropService,
     private _modalService: ModalService,
     private _leftPaneService: LeftPaneService,
+    private _layers: LayersService 
   ) { 
     dragDropService.field$.subscribe(item => {
+      console.log('item')
       this.fields = item
     })
+
+    this._layers.addIds('dragroot')
+    this.connectedLists = this._layers.getIds()
   }
 
   ngOnInit() {
-
+    
   }
-
-  move ($event) {
-    console.log('$event')
-  } 
-
-  drop (event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.fields, event.previousIndex, event.currentIndex);
-  }
-
 }
 
 

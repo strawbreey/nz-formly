@@ -1,8 +1,21 @@
+
 <ng-template #classEditorModal>
-  <div class="class-editor-modal" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
-    <div class="editor-modal-header text-right" cdkDragHandle>
+  <div class="class-editor-modal" cdkDrag cdkDragRootElement=".cdk-overlay-pane" >
+    <div class="editor-modal-header text-right position-sticky" cdkDragHandle>
         <a><i nz-icon nzType="close" nzTheme="outline" class="mr-2" (click)="closeModal()"></i></a>
     </div>
-    class编辑器
+
+    <nz-collapse>
+        <nz-collapse-panel
+          *ngFor="let collapse of collapses; let index = index;"
+          [nzHeader]="collapse.name"
+          [nzActive]="collapse.active"
+          [nzDisabled]="collapse.disabled"
+        >
+          <p style="margin:0; padding: 0; overflow: hidden;">
+              <formly-form [model]="model" [fields]="collapse.fields" [options]="options[index]" [form]="form.at(index)"></formly-form>
+          </p>
+        </nz-collapse-panel>
+    </nz-collapse>
   </div>
 </ng-template>

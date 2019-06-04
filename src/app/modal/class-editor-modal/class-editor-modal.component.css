@@ -11,3 +11,69 @@
     background-color: rgb(242, 243, 244);
     cursor: move
 }
+
+::ng-deep .ant-form-item-control {
+    height: unset;
+    line-height: unset;
+    font-size: 12px;
+}
+
+::ng-deep nz-select.ant-select {
+    font-size: 12px;
+}
+
+
+/* 折叠面板 */
+::ng-deep .ant-collapse {
+    border-radius: 0;
+}
+
+::ng-deep .ant-select-dropdown-menu-item{
+    line-height: 16px;
+}
+
+::ng-deep .ant-collapse-content > .ant-collapse-content-box{
+    padding: 4px;
+}
+
+::ng-deep .ant-collapse > .ant-collapse-item > .ant-collapse-header {
+    padding: 4px 16px 4px 40px;
+}
+
+::ng-deep .ant-collapse > .ant-collapse-item > .ant-collapse-header .ant-collapse-arrow{
+    margin-top: -2px;
+}
+
+::ng-deep .ant-collapse > .ant-collapse-item:last-child, .ant-collapse > .ant-collapse-item:last-child > .ant-collapse-header{
+    border-radius: 0
+}
+
+/* 单选按钮组 */
+::ng-deep .ant-radio-group {
+    display: flex;
+}
+
+::ng-deep .ant-radio-group .ant-radio-button-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 显示滚动，隐藏滚动条 */
+.class-editor-modal {
+    position: relative;
+    overflow-y: scroll;
+}
+
+.class-editor-modal .editor-modal-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+}
+
+.class-editor-modal::-webkit-scrollbar {
+    display: none;
+}

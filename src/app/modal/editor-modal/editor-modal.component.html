@@ -1,3 +1,14 @@
-<nz-modal [(nzVisible)]="isModelVisible" nzTitle="显示modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+<!-- <nz-modal [(nzVisible)]="isModelVisible" nzTitle="显示modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
     <pre>{{fields | json}}</pre>
-</nz-modal>
+</nz-modal> -->
+
+<ng-template #codeEditorModal>
+  <div class="class-editor-modal" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+    <div class="code-modal-header" cdkDragHandle>
+        <span class="text-white pl-2">生命周期</span>
+        <a><i nz-icon nzType="close" nzTheme="outline" class="mr-2 code-modal-close" (click)="closeModal()"></i></a>
+    </div>
+    <!-- code editor modal -->
+    <ngx-monaco-editor class="code-editor" [style]="{height: '600px'}"  [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
+  </div>
+</ng-template>

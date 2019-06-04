@@ -16,4 +16,8 @@
 
 ::ng-deep .ant-modal { 
     top: unset;
- }
+}
+
+::ng-deep .cursor-pointer {
+    cursor: pointer;
+}

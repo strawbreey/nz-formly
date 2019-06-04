@@ -1,0 +1,21 @@
+
+::ng-deep .ant-form-item-label label {
+    margin-bottom:0;
+}
+
+::ng-deep .ant-form-vertical .ant-form-item-label, 
+::ng-deep .ant-col-24.ant-form-item-label, 
+::ng-deep .ant-col-xl-24.ant-form-item-label {
+    margin-bottom:0;
+    padding-bottom: 0;
+}
+
+
+/* ant-form-item */
+::ng-deep .ant-form-item {
+    margin-bottom: 4px;
+}
+
+::ng-deep .form-item-sm .ant-form-item-label {
+    line-height: 24px;
+}

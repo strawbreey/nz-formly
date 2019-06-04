@@ -109,7 +109,7 @@ export class DropComponent implements DoCheck, OnDestroy {
     }
  
 
-    // this.dragDropService.setFields(this.fields)
+    this.dragDropService.setFields(this.fields)
   }
 
   dragListEntered ($event) {
@@ -383,5 +383,12 @@ export class DropComponent implements DoCheck, OnDestroy {
     $event.preventDefault();
     $event.stopPropagation();
     this._modalService.open('class-editor', $event)
+  }
+
+  // code编辑器
+  openCodeModel ($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    this._modalService.open('code-editor', $event)
   }
 }

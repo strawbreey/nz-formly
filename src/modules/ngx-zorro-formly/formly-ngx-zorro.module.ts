@@ -94,6 +94,10 @@ import { AppPictureComponent } from '../basic-component/picture/picture-componen
 // 服务
 // import { formlyService } from '../../services/formly.service'
 
+
+// 
+import { FourDimensionalComponent } from '../editor-component/four-dimensional/four-dimensional-component'
+
 import { from } from 'rxjs';
 
 const antDesignIcons = AllIcons as {
@@ -314,6 +318,11 @@ export const ForRootFormlyModule = FormlyModule.forRoot({
         {
             name: 'app-panel',
             component: AppPanelComponent
+        },
+        {
+            name: 'four-dimensional',
+            wrappers: ['field-wrapper'],
+            component: FourDimensionalComponent
         }
     ],
     wrappers: [
@@ -386,7 +395,8 @@ export const ForRootFormlyModule = FormlyModule.forRoot({
         AppPanelComponent,
         AppPictureComponent,
         NzCarouselComponent,
-        NzStepsComponent
+        NzStepsComponent,
+        FourDimensionalComponent
     ],
     exports: [
         NgZorroAntdModule,

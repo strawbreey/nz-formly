@@ -1,0 +1,20 @@
+<!-- [cdkDropListConnectedTo]="connectedLists" -->
+
+<div    class="menu-list"
+        id="root"
+        cdkDropList 
+        cdkDropListOrientation="vertical"
+        (cdkDropListDropped)="drop($event)">
+        <div *ngFor='let field of _fields'>
+            <div cdkDrag>
+                <div style="height: 45px; line-height: 45px; " class="d-flex justify-content-center align-items-center border-bottom drag-item bg-white shadow">
+                    <span class="d-inline-block w-100">{{field.type}}</span>
+                    <i nz-icon nzType="eye" nzTheme="outline" class="p-2 mx-2"></i>
+                    <i nz-icon nzType="drag" nzTheme="outline" class="cursor-pointer p-2 mr-2"></i>
+                </div>
+            </div>
+            <div *ngIf="field && field.fieldGroup" class="mr-2">
+                <app-container cdkDrag [(ngModel)]="field.fieldGroup" [cdkDragData]='field.fieldGroup' [root]="field.id"></app-container>
+            </div>
+        </div>
+</div>

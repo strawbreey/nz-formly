@@ -1,4 +1,4 @@
-<ng-container *ngIf="to['nzButtonStyle'] !== 'solid'">
+<ng-container *ngIf="to['nzButtonStyle'] && to['nzButtonStyle'] !== 'solid'">
     <nz-radio-group [(ngModel)]="model[key]" 
                     [nzName]="to['nzMame']"
                     [nzDisabled]="to['nzDisabled']"
@@ -8,13 +8,20 @@
     </nz-radio-group>
 </ng-container>
 
-<ng-container *ngIf="to['nzButtonStyle'] === 'solid'">
+<ng-container *ngIf="to['nzButtonStyle'] && to['nzButtonStyle'] === 'solid'">
     <nz-radio-group 
         [(ngModel)]="model[key]" 
         [nzName]="to['nzMame']"
         [nzDisabled]="to['nzDisabled']"
         [nzSize]="to['nzSize']"
         [nzButtonStyle]="'solid'">
-        <label nz-radio-button [nzValue]="o.value" *ngFor="let o of to['options']">{{ o.label }}</label>
+        <label nz-radio-button [nzValue]="o.value" *ngFor="let o of to['options']">
+            <ng-container *ngIf="o.icon">
+                <i nz-icon [nzType]="o.icon" class="d-flex align-items-center" nzTheme="outline"></i>
+            </ng-container>
+            <ng-container *ngIf="o.label">
+                <span >{{ o.label }}</span>  
+            </ng-container>
+        </label>
     </nz-radio-group>
 </ng-container>

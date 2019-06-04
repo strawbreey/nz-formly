@@ -7,7 +7,8 @@
     display: block;
     width: 300px;
     float: left;
-    height: 800px;
+    /* height: 800px; */
+    height: calc(100vh - 62px);
     box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.1);
     background-color: #fff;
   }
@@ -24,7 +25,8 @@
     padding: 12px;
     flex: 1;
     margin: 0 16px;
-    height: 800px;
+    /* height: 800px; */
+    height: calc(100vh - 62px);
     box-shadow: #27364E 1 0 6 0;
     margin: 0 16px;
     background-color: #fff; 
@@ -71,14 +73,7 @@ formly-field {
   vertical-align: top;
 }
 
-formly-field:hover,
-formly-field:focus,
-formly-field:active
- {
-  /* border: 1px solid #ccc; */
-  /* box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1); */
-  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
-}
+
 
 .toolbar-center {
   margin-left: 316px; 
@@ -105,8 +100,36 @@ formly-field:active
   outline-offset: 1px;
 }
 
-.drag-list .cdk-drag-placeholder {
+/* .drag-list .cdk-drag-placeholder {
   width: 100%;
-  border-bottom: 2px solid #3b97e3
-  
+  border-bottom: 2px solid #3b97e3;
+} */
+/* 
+outline: 1px dashed rgba(170,170,170,0.7);
+  outline-offset: -2px; */
+
+formly-field {
+  outline: 1px dashed rgba(170,170,170,0.7);
+  outline-offset: -1px;
+}
+
+formly-field:hover,
+formly-field:focus,
+formly-field:active
+ {
+  outline: 1px dashed #3b97e3;
+  /* border: 1px solid #ccc; */
+  /* box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1); */
+  /* box-shadow: 0px 0px 1px #3b97e3; */
+}
+
+formly-field {
+  display: inline-block;
+  vertical-align: top;
+}
+
+/* global dash border 显示全局虚线  */
+.gjs-dashed formly-field {
+  outline: 1px dashed rgba(170,170,170,0.7);
+  outline-offset: -2px;
 }

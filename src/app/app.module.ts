@@ -11,7 +11,7 @@ import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 
 
-
+import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { QuillModule } from 'ngx-quill'  
 
 import { FormlyNgxZorroModule } from "../modules/ngx-zorro-formly/formly-ngx-zorro.module";
@@ -36,7 +36,10 @@ import { EditorModalComponent } from './modal/editor-modal/editor-modal.componen
 import { StyleEditorModalComponent } from './modal/style-editor-modal/style-editor-modal.component';
 import { ClassEditorModalComponent } from './modal/class-editor-modal/class-editor-modal.component';
 import { ShortcutsModalComponent } from './modal/shortcuts-modal/shortcuts-modal.component';
+
+// 层级
 import { LayersComponent } from './components/layers/layers.component';
+import { AppContainerComponent } from './components/layers/container/container.component'
 
 
 
@@ -64,6 +67,7 @@ registerLocaleData(en);
     ClassEditorModalComponent,
     ShortcutsModalComponent,
     LayersComponent,
+    AppContainerComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,6 +80,7 @@ registerLocaleData(en);
     AppRoutingModule,
     DragDropModule,
     QuillModule,
+    MonacoEditorModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

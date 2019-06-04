@@ -1,9 +1,32 @@
-<ng-template #styleEditorModal>
+<!-- <ng-template #styleEditorModal>
 
   <div class="style-editor-modal" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
     <div class="editor-modal-header text-right" cdkDragHandle>
         <a><i nz-icon nzType="close" nzTheme="outline" class="mr-2" (click)="closeModal()"></i></a>
     </div>
-    样式编辑器
+
+    <formly-form [model]="model" [fields]="fields" [options]="options" [form]="form"></formly-form> 
   </div>
-</ng-template>
+</ng-template> -->
+
+
+<ng-template #styleEditorModal>
+
+    <div class="style-editor-modal" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+      <div class="editor-modal-header text-right" cdkDragHandle>
+          <a><i nz-icon nzType="close" nzTheme="outline" class="mr-2" (click)="closeModal()"></i></a>
+      </div>
+  
+      <nz-collapse>
+          <nz-collapse-panel
+            *ngFor="let panel of Collapses" 
+            [nzHeader]="panel.name"
+            [nzActive]="panel.active"
+            [nzDisabled]="panel.disabled"
+          >
+            <formly-form [model]="model" [fields]="fields" [options]="options" [form]="form"></formly-form> 
+          </nz-collapse-panel>
+      </nz-collapse>
+    </div>
+  </ng-template>
+

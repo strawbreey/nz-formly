@@ -69,7 +69,7 @@ export class MonacoEditorComponent extends FieldType {
              for (var i = 0; i < padIdx; i++)    padding += PADDING;
                  formatted += padding + node + '\r\n';
                  padIdx += indent;
-                 console.log('index:'+index+',indent:'+indent+',padIdx:'+padIdx+',node-->'+node);
+                //  console.log('index:'+index+',indent:'+indent+',padIdx:'+padIdx+',node-->'+node);
              });
              return formatted;
          };

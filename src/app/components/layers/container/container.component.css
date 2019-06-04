@@ -1,0 +1,11 @@
+.drag-item:hover{
+    background: rgb(247, 247, 247)
+}
+
+.drag-action {
+    display: none;
+}
+
+.drag-action:hover {
+    display: block;
+}

@@ -1,4 +1,4 @@
-<nz-card style="width: 100%; background-color: #f5f5f5;">
+<nz-card style="width: 100%; background-color: #f5f5f5;" class="gjs-dash">
 
     <div class="toolbar header d-block bg-white shadow mb-1 d-flex" style="height: 56px;">
       <div class="toolbar-left d-flex justify-content-start align-items-center ml-3">
@@ -13,7 +13,7 @@
         </section>
 
         <section class="d-flex justify-content-center">
-            <i nz-icon nzType="code" nzTheme="outline"></i>
+            
             <i nz-icon nzType="setting" nzTheme="outline"></i>
             <i nz-icon nzType="cloud-upload" nzTheme="outline"></i>
         </section>
@@ -29,8 +29,7 @@
           <!-- <i nz-icon nzType="download" nzTheme="outline" ></i> -->
           <a class="mx-2" (click)="openStyleModal($event)">Style</a>
           <a class="mx-2" (click)="openClassModel($event)">Class</a>
-
-          <!-- <i nz-icon nzType="share-alt" nzTheme="outline" (click)="openClassModel($event)"></i> -->
+          <i nz-icon nzType="code" nzTheme="outline" (click)="openCodeModel($event)"></i>
           <i nz-icon nzType="link" nzTheme="outline"></i>
           <i nz-icon nzType="eye" nzTheme="outline" (click)="showModal($event)"></i>
       </section>
@@ -70,12 +69,10 @@
             cdkDropList
             [cdkDropListData]="fields" 
             [cdkDropListConnectedTo]="ids"  
-
+            [cdkDropListEnterPredicate]="canDropPredicate()"
             (cdkDropListDropped)="dragListDrop($event, fields)"
             (cdkDropListEntered)="dragListEntered($event)"
-            (cdkDropListExited)="dragListExited($event, fields)"
-
-            [cdkDropListEnterPredicate]="canDropPredicate()">
+            (cdkDropListExited)="dragListExited($event, fields)">
 
             <formly-field 
               cdkDrag
@@ -102,7 +99,6 @@
               <formly-form [model]="operatorModel" [fields]="operatorFields" [options]="operatorOptions" [form]="operatorForm" (modelChange)="change($event)" ></formly-form>
             </nz-tab>
             <nz-tab nzTitle="Layers">
-              <p>Layers</p>
               <app-layers></app-layers>
             </nz-tab>
             <nz-tab nzTitle="Class Manager">
