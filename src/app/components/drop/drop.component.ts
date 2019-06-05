@@ -16,12 +16,15 @@ import { getFieldId } from '@ngx-formly/core/lib/utils';
 import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
-import { assignModelValue, isNullOrUndefined, wrapProperty, clone, defineHiddenProp, reverseDeepMerge } from '../../../utils/index'
-import { DragAttributeService } from '../../services/drag-attribute.service'
-import { DragDropService } from '../../services/drag-drop.service'
-import { ModalService } from '../../services/modal.service' 
+import { assignModelValue, isNullOrUndefined, wrapProperty, clone, defineHiddenProp, reverseDeepMerge } from '../../../utils/index';
+import { DragAttributeService } from '../../services/drag-attribute.service';
+import { DragDropService } from '../../services/drag-drop.service';
+import { ModalService } from '../../services/modal.service';
 
-import { LeftPaneService } from '../../services/left-pane.service'
+import { LeftPaneService } from '../../services/left-pane.service';
+import { DragDrop } from '@angular/cdk/drag-drop';
+import { element } from '@angular/core/src/render3';
+import { LayoutService } from '../../services/layout.service' 
 
 @Component({
   selector: 'app-drop',
@@ -34,7 +37,7 @@ export class DropComponent implements DoCheck, OnDestroy {
 
   data = [1,2,3]
   ids = []
-
+  deviceClass = {}
   // 菜单栏
   leftPaneFieldConfig: FormlyFieldConfig[] = []
 
@@ -44,14 +47,18 @@ export class DropComponent implements DoCheck, OnDestroy {
     private formlyBuilder: FormlyFormBuilder,
     private _modalService: ModalService,
     private _leftPaneService: LeftPaneService,
+    private _dragDrop: DragDrop,
+    private _layoutService: LayoutService,
     @Optional() private parentFormGroup: FormGroupDirective,
   ) { 
     this.dragDropService.addIds('dragroot')
     this.ids = this.dragDropService.getIds()
     dragDropService.field$.subscribe(item => {
-      console.log('item')
-      console.log(item)
       this.fields = item
+    })
+
+    _layoutService.device$.subscribe(data => {
+      this.deviceClass = data
     })
 
     this.leftPaneFieldConfig = this._leftPaneService.FieldConfig
@@ -86,6 +93,8 @@ export class DropComponent implements DoCheck, OnDestroy {
   modelChangeSubs: Subscription[] = [];
 
   lastClickField = null
+
+  leftPanel = false
 
   // 将菜单栏控件拖到视图层
   dragListDrop(event: CdkDragDrop<string[]>, field) { 
@@ -390,5 +399,28 @@ export class DropComponent implements DoCheck, OnDestroy {
     $event.preventDefault();
     $event.stopPropagation();
     this._modalService.open('code-editor', $event)
+  }
+
+  // 快捷键弹窗
+  openKeysModel ($event) {
+    console.log('keys')
+    $event.preventDefault();
+    $event.stopPropagation();
+    this._modalService.open('keys', $event)
+  }
+
+  drags ($event, element) {
+    console.log('666')
+    console.log($event)
+    this._dragDrop.createDrag(element)
+  }
+
+  setDevice (device) {
+    console.log(device)
+    this._layoutService.setDevice(device)
+  }
+
+  showpanel () {
+    this.leftPanel = !this.leftPanel
   }
 }

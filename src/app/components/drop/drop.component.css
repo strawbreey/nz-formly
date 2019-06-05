@@ -2,16 +2,6 @@
     display: flex;
   }
 
-  .menu-list{
-    padding: 12px;
-    display: block;
-    width: 300px;
-    float: left;
-    /* height: 800px; */
-    height: calc(100vh - 62px);
-    box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-  }
 
   .drag-operator{
     /* padding: 12px; */
@@ -20,17 +10,7 @@
     background-color: #fff;
   }
 
-  .drag-list{
-    min-width: 500px;
-    padding: 12px;
-    flex: 1;
-    margin: 0 16px;
-    /* height: 800px; */
-    height: calc(100vh - 62px);
-    box-shadow: #27364E 1 0 6 0;
-    margin: 0 16px;
-    background-color: #fff; 
-  }
+
 
   .box{
     width: 100px;
@@ -61,6 +41,10 @@
 .drop-list-group {
   flex: 1;
   display: flex;
+
+  height: calc(100vh - 60px);
+  overflow: hidden;
+  min-height: 667px;
 }
 
 
@@ -78,10 +62,9 @@ formly-field {
 .toolbar-center {
   margin-left: 316px; 
   margin-right: 316px;
-  height: 56px;
+  height: 40px;
   display: flex;
   align-items: center;
-  /* justify-content: center; */
 }
 
 .toolbar-center i {
@@ -91,7 +74,6 @@ formly-field {
 }
 
 .toolbar-center i:hover {
-  /* color: rgb(125, 134, 148); */
   color: rgb(65, 80, 88);
 }
 
@@ -100,13 +82,6 @@ formly-field {
   outline-offset: 1px;
 }
 
-/* .drag-list .cdk-drag-placeholder {
-  width: 100%;
-  border-bottom: 2px solid #3b97e3;
-} */
-/* 
-outline: 1px dashed rgba(170,170,170,0.7);
-  outline-offset: -2px; */
 
 formly-field {
   outline: 1px dashed rgba(170,170,170,0.7);
@@ -132,4 +107,122 @@ formly-field {
 .gjs-dashed formly-field {
   outline: 1px dashed rgba(170,170,170,0.7);
   outline-offset: -2px;
+}
+
+/* 面板设置 */
+.panel-main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  background-color: #ccc;
+  padding: 20px;
+  overflow-y: scroll;
+}
+
+.panel-main::-webkit-scrollbar {
+  display: none;
+}
+
+.panel-device {
+
+  width: 375px;
+  height: 667px;
+
+  overflow: hidden;
+
+  border-radius: 4px;
+
+  outline: 2px dashed rgba(0, 138, 255, 0.36);;
+  /* outline-offset: 12px; */
+
+  border: 12px solid #e8e8e8;
+
+  background-color: #fff;
+
+  overflow: scroll;
+}
+
+.panel-device::-webkit-scrollbar {
+  /* display: none; */
+}
+
+.drag-list{
+  background-color: #fff;
+  width: 100%;
+  height: 100%;
+}
+
+.iconfont {
+  font-size: 16px;
+}
+
+.iconfont img {
+  width: 16px;
+  height: 16px;
+}
+
+
+
+.left-panel {
+  display: flex;
+}
+
+.left-panel-basic {
+  width: 40px;
+  background-color: #fff;
+  height: 100%;
+}
+
+.left-panel-basic a {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+}
+
+.menu-list{
+  display: block;
+  width: 200px;
+  padding: 12px;
+  float: left;
+  height: 100%;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+.panel-device::-webkit-scrollbar
+{
+    width: 8px;
+    height: 0px;
+    background-color: #F5F5F5;
+}
+ 
+/*定义滚动条轨道 内阴影+圆角*/
+.panel-device::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 4px;
+    background-color: #F5F5F5;
+}
+ 
+/*定义滑块 内阴影+圆角*/
+.panel-device::-webkit-scrollbar-thumb
+{
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+}
+
+.example-box-1 {
+  border:  1px solid #ccc;
+  margin-bottom: 10px;
+  border-radius: 2px;
+  line-height: 28px;
+  height: 28px;
+  padding-left: 10px;
 }

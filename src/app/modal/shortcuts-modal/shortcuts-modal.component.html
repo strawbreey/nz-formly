@@ -1,3 +1,12 @@
-<p>
-  shortcuts-modal works!
-</p>
+
+<ng-template #keysEditorModal>
+  <div class="class-shortcuts-modal" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+    <div class="shortcuts-modal-header bg-white border"  cdkDragHandle>
+        <span class="pl-2">快捷键</span>
+        <a><i nz-icon nzType="close" nzTheme="outline" class="mr-2 code-modal-close" (click)="closeModal()"></i></a>
+    </div>
+    <div>
+
+    </div>
+  </div>
+</ng-template>

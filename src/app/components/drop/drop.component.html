@@ -1,15 +1,14 @@
-<nz-card style="width: 100%; background-color: #f5f5f5;" class="gjs-dash">
+<nz-card style="width: 100%; background-color: #f5f5f5; min-width: 1350px;" class="gjs-dash">
 
-    <div class="toolbar header d-block bg-white shadow mb-1 d-flex" style="height: 56px;">
+    <div class="toolbar header d-block bg-white shadow border-bottom d-flex" style="height: 40px;">
       <div class="toolbar-left d-flex justify-content-start align-items-center ml-3">
           <i nz-icon nzType="left" nzTheme="outline"></i>
       </div>
       <div class="toolbar-center d-flex justify-content-between pointer-event" style="width: 1000px">
         <section class="d-flex justify-content-center">
-            <i nz-icon nzType="copy" nzTheme="outline"></i>
-            <i nz-icon nzType="delete" nzTheme="outline"></i>
-            <i nz-icon nzType="scissor" nzTheme="outline"></i>
-            <i nz-icon nzType="snippets" nzTheme="outline"></i>
+            <i class="iconfont"><img src="../../../assets/pc.png" (click)="setDevice('pc')"> </i>
+            <i class="iconfont"><img src="../../../assets/ipad.png" (click)="setDevice('ipad')"> </i>
+            <i class="iconfont"><img src="../../../assets/mobile.png" (click)="setDevice('mobile')"> </i>
         </section>
 
         <section class="d-flex justify-content-center">
@@ -29,6 +28,7 @@
           <!-- <i nz-icon nzType="download" nzTheme="outline" ></i> -->
           <a class="mx-2" (click)="openStyleModal($event)">Style</a>
           <a class="mx-2" (click)="openClassModel($event)">Class</a>
+          <i nz-icon nzType="info-circle" nzTheme="outline" (click)="openKeysModel($event)"></i>
           <i nz-icon nzType="code" nzTheme="outline" (click)="openCodeModel($event)"></i>
           <i nz-icon nzType="link" nzTheme="outline"></i>
           <i nz-icon nzType="eye" nzTheme="outline" (click)="showModal($event)"></i>
@@ -37,34 +37,45 @@
     </div>
     
     <div cdkDropListGroup class="drop-list-group">
-      <div class="menu-list shadow" 
-        cdkDropList
-        #menuList="cdkDropList"
-        id="menuid"
-        [cdkDropListData]="leftPaneFieldConfig"
-        (cdkDragMoved)="menuMoved($event)"
-        (cdkDropListDropped)="menuDrop($event)">
 
-        <nz-input-group class="mb-2" [nzSuffix]="suffixIconSearch">
-          <input type="text" nz-input placeholder="搜索组件" />
-        </nz-input-group>
+      <div class="left-panel">
+        <div class="left-panel-basic border">
+          <a><i nz-icon nzType="double-right" nzTheme="outline" (click)="showpanel()"></i></a>
+        </div>
+        <div *ngIf="leftPanel" class="menu-list shadow" 
+          cdkDropList
+          #menuList="cdkDropList"
+          disable="true"
+          id="menuid"
+          [cdkDropListData]="leftPaneFieldConfig"
+          (cdkDragMoved)="menuMoved($event)"
+          (cdkDropListDropped)="menuDrop($event)">
 
-        <ng-template #suffixIconSearch>
-          <i nz-icon type="search"></i>
-        </ng-template>
+          <nz-input-group class="mb-2" [nzSuffix]="suffixIconSearch">
+            <input type="text" nz-input placeholder="搜索组件" />
+          </nz-input-group>
 
-        <hr class="m-2">
+          <ng-template #suffixIconSearch>
+            <i nz-icon type="search"></i>
+          </ng-template>
 
-        <ng-container *ngFor="let item of leftPaneFieldConfig">
-          <div class="example-box-1" cdkDrag>
-              <div>{{item.type}}</div>
-              <div *cdkDragPreview>{{item.type}}</div>
-              <div *cdkDragPlaceholder class="text-primary"></div>
-          </div>
-        </ng-container>
+          <hr class="m-2">
+
+          <ng-container *ngFor="let item of leftPaneFieldConfig">
+            <div class="example-box-1" cdkDrag >
+                <div >{{item.type}}</div>
+                <div *cdkDragPreview>{{item.type}}</div>
+                <!-- <div *cdkDragPlaceholder class="text-primary"></div> -->
+            </div>
+          </ng-container>
+        </div>
       </div>
+
+
       
-      <div  class="drag-list shadow"
+      <div class="panel-main" >
+        <div class="panel-device shadow" [ngStyle]="deviceClass" >
+          <div  class="drag-list shadow"
             id="dragroot"
             cdkDropList
             [cdkDropListData]="fields" 
@@ -90,6 +101,9 @@
               [model]="field.model"
               [field]="field">
             </formly-field>      
+          </div>
+        </div>
+
       </div>
       
       <div class="drag-operator shadow">
