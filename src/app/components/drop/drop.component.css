@@ -173,7 +173,7 @@ formly-field {
   height: 100%;
 }
 
-.left-panel-basic a {
+/* .left-panel-basic a {
   width: 40px;
   height: 40px;
   display: flex;
@@ -181,7 +181,7 @@ formly-field {
   align-items: center;
   position: absolute;
   bottom: 0;
-}
+} */
 
 .menu-list{
   display: block;
