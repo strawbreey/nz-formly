@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 
 import { FormGroup, FormArray, FormGroupDirective } from '@angular/forms';
-import {CdkDragDrop, moveItemInArray, transferArrayItem, DragDropModule, copyArrayItem} from '@angular/cdk/drag-drop';
+import {CdkDragDrop, moveItemInArray, transferArrayItem, DragDropModule, copyArrayItem, CdkDrag} from '@angular/cdk/drag-drop';
 
 import { FormlyFormOptions, FormlyFieldConfig, Field,  FieldType, FormlyFormBuilder, FormlyConfig  } from '@ngx-formly/core';
 import { FormlyFormOptionsCache }from '@ngx-formly/core/lib/components/formly.field.config';
@@ -34,12 +34,17 @@ import { LayoutService } from '../../services/layout.service'
 
 })
 export class DropComponent implements DoCheck, OnDestroy {
-
+  @ViewChild('square') _square: TemplateRef<any>;
   data = [1,2,3]
   ids = []
   deviceClass = {}
+
+  square = {
+    id: 2
+  }
   // 菜单栏
   leftPaneFieldConfig: FormlyFieldConfig[] = []
+  basicFields: FormlyFieldConfig[] = []
 
   constructor(
     private attributeService: DragAttributeService,
@@ -57,11 +62,13 @@ export class DropComponent implements DoCheck, OnDestroy {
       this.fields = item
     })
 
+    // 获取设备样式
     _layoutService.device$.subscribe(data => {
       this.deviceClass = data
     })
 
     this.leftPaneFieldConfig = this._leftPaneService.FieldConfig
+    this.basicFields = this._leftPaneService.basicFields
   }
 
 
@@ -109,7 +116,7 @@ export class DropComponent implements DoCheck, OnDestroy {
       return
     }
 
-    if (event.previousContainer.id ===  'menuid') {
+    if (event.previousContainer.id ===  'menuid' || event.previousContainer.id ===  'basicId') {
       copyArrayItem(clone(event.previousContainer.data), event.container.data, event.previousIndex, event.currentIndex);      
     } else if (event.previousContainer === event.container ){
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);      
@@ -123,38 +130,34 @@ export class DropComponent implements DoCheck, OnDestroy {
 
   dragListEntered ($event) {
     // console.log('dragListEntered')
-    // console.log($event)
   }
 
   dragListExited ($event, field) {
     // console.log('dragListExited')
-    // console.log($event)
   }
 
   menuDrop (event: CdkDragDrop<string[]>) {
-    // console.log('菜单栏')
-    if (event.previousContainer === event.container) {
-      // moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      // copyArrayItem(event.container.data, event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      // console.log('233')
-      // // 这是上一个
-      // console.log(event.previousContainer.data)
-      // console.log(event.container.data)
+    console.log('menuDrop')
+    // 不进行任何处理
 
-      // transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
-      // copyArrayItem(event.previousContainer.data, <string[]>this.dropFields, event.previousIndex, event.currentIndex);
-      // copyArrayItem(event.previousContainer.data, <string[]>this.dropFields, event.previousIndex, event.currentIndex);
-      // moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      // console.log(event.previousContainer.data)
-      // console.log(event.container.data)
-      // copyArrayItem(clone(event.previousContainer.data), event.container.data, event.previousIndex, event.currentIndex);
-    }
+    // // 如果来自相同dropList, 则不处理
+    // if (event.previousContainer == event.container || event.previousContainer.id === 'menuid' || event.previousContainer.id ===  'basicId') {
+    //   // moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    //   // copyArrayItem(event.container.data, event.container.data, event.previousIndex, event.currentIndex);
+    // } else {
+
+    //   copyArrayItem(clone(event.previousContainer.data), event.container.data, event.previousIndex, event.currentIndex);
+    //   console.log(event)
+    // }
   }
 
   menuMoved ($event) {
     console.log('$event')
   } 
+
+  menuPredicate (item: CdkDrag) {
+    return false
+  }
 
   ngOnInit() {
     this.operatorFields = this.attributeService.fields
@@ -166,13 +169,6 @@ export class DropComponent implements DoCheck, OnDestroy {
   getAttributeModel () {
     this.operatorModel = this.attributeService.getModel()
   }
-
-
-
-  CdkDragStart($event) {
-    console.log($event)
-  }
-
 
 
   showModal ($event) {
@@ -218,8 +214,6 @@ export class DropComponent implements DoCheck, OnDestroy {
   change ($event) {
     console.log('change')
   }
-
-
 
   checkExpressionChange() {
     if ((<FormlyFormOptionsCache> this.options)._checkField) {
@@ -358,9 +352,9 @@ export class DropComponent implements DoCheck, OnDestroy {
 
   // 右键点击: 点击右键, 弹出内容目录
   fieldContextMenu ($event, field) {
-    $event.preventDefault();
-    $event.stopPropagation();
-    this._modalService.open('contentmenu', $event)
+    // $event.preventDefault();
+    // $event.stopPropagation();
+    // this._modalService.open('contentmenu', $event)
   }
 
   // 左键点击
@@ -403,7 +397,6 @@ export class DropComponent implements DoCheck, OnDestroy {
 
   // 快捷键弹窗
   openKeysModel ($event) {
-    console.log('keys')
     $event.preventDefault();
     $event.stopPropagation();
     this._modalService.open('keys', $event)
@@ -415,9 +408,60 @@ export class DropComponent implements DoCheck, OnDestroy {
     this._dragDrop.createDrag(element)
   }
 
-
-
   showpanel () {
     this.leftPanel = !this.leftPanel
   }
+
+  creatDragDrop ($event, type = 'text') {
+    $event.preventDefault();
+    console.log($event)
+    let drag = this._dragDrop.createDrag($event.toElement)
+    drag.dropped.subscribe(res => {
+      console.log(res)
+    })
+
+    console.log(drag)
+    drag.entered.subscribe(res => {
+      console.log(res)
+    })
+    console.log('res')
+    // console.log(type)
+
+  }
+
+  dragDropped ($event) {
+    console.log($event)
+    console.log('666')
+    this._dragDrop.createDrag($event, )
+  }
+  keyup($event) {
+    console.log('keyup')
+  }
+  keydown($event) {
+    console.log('keydown')
+  }
+  keypress($event){
+    console.log('keypress')
+  }
+
+  click ($event) {
+    console.log('click')
+  }
+
+  dragstart ($event) {
+
+  }
+
+  dragend ($event) {
+    console.log('dragend')
+  }
+
+  blur ($event) {
+    console.log($event)
+  }
+
+  focus ($event) {
+    console.log($event)
+  }
+
 }

@@ -1,1 +1,10 @@
-<span [ngStyle]="Styles">请输入..</span>
+<!-- <ng-container *ngIf="isEdit">123
+    <span [id]="id" focus contenteditable="true" (click)="focus($event)" (blur)="blur($event)" (focus)="focus($event)">{{text}}</span>
+</ng-container> -->
+
+<pre>{{text}}</pre>
+<!-- <ng-container *ngIf="isEdit">
+    <span (click)="onClick($event)" contenteditable="false" (blur)="blur($event)" (focus)="focus($event)">{{text}}</span>
+</ng-container> -->
+
+<span contenteditable="true" (click)="focus($event)" (blur)="blur($event)" (focus)="focus($event)">{{text}}</span>

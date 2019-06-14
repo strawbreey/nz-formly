@@ -8,6 +8,41 @@ export class LeftPaneService {
 
   constructor() { }
 
+  basicFields: FormlyFieldConfig[] = [
+    {
+      key: 'text',
+      type: 'app-text',
+      className: 'px-2',
+      templateOptions: {
+        label: 'text'
+      }
+    },
+    {
+      key: 'square',
+      type: 'app-panel',
+      className: 'px-2',
+      templateOptions: {
+        label: 'square'
+      }
+    },
+    {
+      key: 'circle',
+      type: 'app-panel',
+      className: 'px-2',
+      templateOptions: {
+        label: 'circle'
+      }
+    },
+    {
+      key: 'image',
+      type: 'app-picture',
+      className: 'px-2',
+      templateOptions: {
+        label: 'image'
+      }
+    }
+  ]
+
   FieldConfig: FormlyFieldConfig[] = [
     {
       key: 'app-line',

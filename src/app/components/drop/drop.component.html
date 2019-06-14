@@ -1,25 +1,28 @@
 <nz-card style="width: 100%; background-color: #f5f5f5; min-width: 1350px;" class="gjs-dash">
     <app-header></app-header>
+<!-- <p contenteditable="true" (blur)="blur($event)" (focus)="focus($event)">这是一个可编辑的段落。</p> -->
     
     <div cdkDropListGroup class="main-wrap drop-list-group">
       <div class="left-panel">
-        <div class="left-panel-basic border-right">
-            <ul class="panel-top">
-              <li><a href=""><img src="assets/text.png"></a></li>
-              <li><a href=""><img src="assets/square.png"></a></li>
-              <li><a href=""><img src="assets/circle.png"></a></li>
-              <li><a href=""><img src="assets/image.png"></a></li>
+        <div class="left-panel-basic  border-right">
+            <ul class="panel-top" id="basicId" cdkDropList [cdkDropListData]="basicFields" (cdkDropListDropped)="menuDrop($event)" [cdkDropListEnterPredicate]="menuPredicate">
+              <li cdkDrag *ngFor="let item of basicFields">
+                <a><img src="assets/{{item.templateOptions.label}}.png" ></a>
+                <div class="list-item" *cdkDragPreview>
+                    <a class="example-box-1"><span>{{item.templateOptions.label}}</span></a>
+                </div>
+              </li>
             </ul>
             <div class="panel-bottom"><a><i nz-icon nzType="double-right" nzTheme="outline" (click)="showpanel()"></i></a></div>
         </div>
         <div *ngIf="leftPanel" class="menu-list shadow" 
           cdkDropList
           #menuList="cdkDropList"
-          disable="true"
           id="menuid"
           [cdkDropListData]="leftPaneFieldConfig"
           (cdkDragMoved)="menuMoved($event)"
-          (cdkDropListDropped)="menuDrop($event)">
+          (cdkDropListDropped)="menuDrop($event)"
+          [cdkDropListEnterPredicate]="menuPredicate">
 
           <nz-input-group class="mb-2" [nzSuffix]="suffixIconSearch">
             <input type="text" nz-input placeholder="搜索组件" />
@@ -30,12 +33,17 @@
           </ng-template>
 
           <hr class="m-2">
-
           <ng-container *ngFor="let item of leftPaneFieldConfig">
-            <div class="example-box-1" cdkDrag >
-                <div >{{item.type}}</div>
-                <div *cdkDragPreview>{{item.type}}</div>
-                <!-- <div *cdkDragPlaceholder class="text-primary"></div> -->
+            <div class="list-item" cdkDrag>
+                <a class="example-box-1">
+                    <div >{{item.type}}</div>
+                </a>
+                <div class="list-item" *cdkDragPreview>
+                    <a class="example-box-1"><span>{{item.type}}</span></a>
+                </div>
+                <div class="list-item" *cdkDragPlaceholder>
+                  <a class="example-box-1"><span>{{item.type}}</span></a>
+                </div>
             </div>
           </ng-container>
         </div>
@@ -110,5 +118,7 @@
       </div>
     </div>
 </nz-card>
+
+
 
 

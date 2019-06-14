@@ -112,6 +112,9 @@
   margin-bottom: 20px;
 
   vertical-align: top;
+
+  position: relative;
+  z-index: 1000;
 }
 
 .left-panel-basic ul li a img{ 
@@ -120,6 +123,43 @@
 
   vertical-align: top;
 }
+
+
+
+.menu-list{
+  display: block;
+  width: 200px;
+  padding: 12px;
+  float: left;
+  height: 100%;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+
+  overflow-y: scroll;
+}
+
+.menu-list::-webkit-scrollbar{
+  display: none;
+}
+
+.list-item {
+  display: block;
+  margin-bottom: 6px;
+  line-height: 28px;
+  height: 28px;
+  min-width: 164px;
+
+  padding-left: 10px;
+
+  border:  1px solid #ccc;
+  border-radius: 2px;
+  background-color: #fff;
+}
+
+.list-item.cdk-drag-dragging {
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.1);
+}
+
 
 /* 面板设置 */
 .panel-main {
@@ -148,18 +188,12 @@
 
   width: 375px;
   height: 667px;
-  /* height: calc(100% - 28px); */
-
-  overflow: hidden;
-
-  border-radius: 4px;
-
-  outline: 2px dashed rgba(0, 138, 255, 0.36);;
-  /* outline-offset: 12px; */
 
   border: 12px solid #e8e8e8;
-
+  border-radius: 4px;
+  border-right-width: 6px;
   background-color: #fff;
+  outline: 2px dashed rgba(0, 138, 255, 0.36);
 
   overflow: scroll;
 }
@@ -208,21 +242,6 @@
   color: #6C6D6E;
 }
 
-.menu-list{
-  display: block;
-  width: 200px;
-  padding: 12px;
-  float: left;
-  height: 100%;
-  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-
-  overflow-y: scroll;
-}
-
-.menu-list::-webkit-scrollbar{
-  display: none;
-}
 
 .iconfont {
   font-size: 16px;
@@ -258,14 +277,7 @@
     background-color: #555;
 }
 
-.example-box-1 {
-  border:  1px solid #ccc;
-  margin-bottom: 10px;
-  border-radius: 2px;
-  line-height: 28px;
-  height: 28px;
-  padding-left: 10px;
-}
+
 
 ::ng-deep .ant-tabs-bar {
   background-color: rgb(242, 243, 244);
@@ -298,3 +310,6 @@
   margin-right: 0;
   font-size: 16px;
 }
+
+
+

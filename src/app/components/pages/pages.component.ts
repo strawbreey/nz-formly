@@ -34,7 +34,7 @@ export class PagesComponent implements OnInit {
         children: [
           {
             id: '1.1.1',
-            title: '1-1',
+            title: '1-1-1',
             parent: '',
             icon: '',
             url: '',

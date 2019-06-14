@@ -25,44 +25,25 @@ export class AppPagesContainerComponent implements OnInit {
 
   _fields = []
 
-  @Input() root: String =  '';
+  @Input() 
+  root: String =  '';
 
   @Input()
   element
 
   @Input()
-  // connectedLists: string[];
- connectedLists: string[] = ['root', '1', '2', '1.1', '1.1.1', '2.1'];
+  connectedLists: string[] = ['root', '1', '2', '1.1', '1.1.1', '2.1'];
 
   onChange: (value: number) => void = () => null;
   onTouched: () => void = () => null;
-
 
   constructor(
     private _layers: LayersService 
   ) { }
 
   ngOnInit() {
-    console.log(this)
-    // this._layers.addIds(this.root)
-    // this.connectedLists = this._layers.getIds()
+    // console.log(this)
   }
-
-
-  // drop(event: CdkDragDrop<string[]>) {
-  //   console.log(123)
-  //   console.log(event)
-  //   if (event.previousContainer === event.container) {
-  //     moveItemInArray(event.container.data, 
-  //                     event.previousIndex, 
-  //                     event.currentIndex);
-  //   } else {
-  //     transferArrayItem(event.previousContainer.data,
-  //                       event.container.data,
-  //                       event.previousIndex,
-  //                       event.currentIndex);
-  //   }
-  // }  
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
@@ -73,7 +54,6 @@ export class AppPagesContainerComponent implements OnInit {
                         event.previousIndex,
                         event.currentIndex);
     }
-    console.log(event)
   }
 
   // writeValue(_fields): void {
