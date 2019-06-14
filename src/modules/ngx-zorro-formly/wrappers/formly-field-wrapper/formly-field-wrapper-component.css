@@ -13,7 +13,7 @@
 
 /* ant-form-item */
 ::ng-deep .ant-form-item {
-    margin-bottom: 4px;
+    margin-bottom: 0px;
 }
 
 ::ng-deep .form-item-sm .ant-form-item-label {
