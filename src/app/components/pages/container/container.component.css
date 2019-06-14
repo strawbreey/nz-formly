@@ -1,0 +1,36 @@
+.drag-item:hover{
+    background: rgb(247, 247, 247)
+}
+
+.drag-action {
+    display: none;
+}
+
+.drag-action:hover {
+    display: block;
+}
+
+.pages-list-item {
+    line-height: 32px;
+    height: 32px;
+    padding-left: 16px;
+}
+
+.pages-list-item:hover {
+    color: rgb(41, 141, 248);
+    background-color: rgb(242, 242, 242);
+}
+
+.pages-list-item i.fill,
+.pages-list-item:hover i.outline {
+    display: none;
+}
+
+.pages-list-item i.outline,
+.pages-list-item:hover i.fill {
+    display: inline-block;
+}
+
+.pages-list-container {
+    /* padding-left: 16px; */
+}

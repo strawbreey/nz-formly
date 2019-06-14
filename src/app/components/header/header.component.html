@@ -1,0 +1,33 @@
+<div class="toolbar header d-block bg-white d-flex" style="height: 40px;">
+  <div class="toolbar-left d-flex justify-content-start align-items-center ml-3">
+      <a><i nz-icon nzType="left" nzTheme="outline"></i></a>
+  </div>
+  <div class="toolbar-center d-flex justify-content-between pointer-event" style="width: 1000px">
+    <section class="d-flex justify-content-center">
+        <a><i class="iconfont"><img src="../../../assets/pc.png" (click)="setDevice('pc')"> </i></a>
+        <a><i class="iconfont"><img src="../../../assets/ipad.png" (click)="setDevice('ipad')"> </i></a>
+        <a><i class="iconfont"><img src="../../../assets/mobile.png" (click)="setDevice('mobile')"></i></a>
+    </section>
+
+    <section class="d-flex justify-content-center">
+        <a><i nz-icon nzType="setting" nzTheme="outline"></i></a>
+        <a><i nz-icon nzType="cloud-upload" nzTheme="outline"></i></a>
+    </section>
+
+    <section class="d-flex justify-content-center">
+        <a><i nz-icon nzType="download" nzTheme="outline"></i></a>
+        <a><i nz-icon nzType="share-alt" nzTheme="outline"></i></a>
+        <a><i nz-icon nzType="link" nzTheme="outline"></i></a>
+        <a><i nz-icon nzType="eye" nzTheme="outline"></i></a>
+    </section>
+
+    <section class="d-flex justify-content-center">
+      <a class="mx-2" (click)="openStyleModal($event)">Style</a>
+      <a class="mx-2" (click)="openClassModel($event)">Class</a>
+      <a><i nz-icon nzType="info-circle" nzTheme="outline" (click)="openKeysModel($event)"></i></a>
+      <a><i nz-icon nzType="code" nzTheme="outline" (click)="openCodeModel($event)"></i></a>
+      <a><i nz-icon nzType="link" nzTheme="outline"></i></a>
+      <a><i nz-icon nzType="eye" nzTheme="outline" (click)="showModal($event)"></i> </a>
+  </section>
+  </div>
+</div>

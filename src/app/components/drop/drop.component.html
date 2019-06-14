@@ -1,48 +1,16 @@
 <nz-card style="width: 100%; background-color: #f5f5f5; min-width: 1350px;" class="gjs-dash">
-
-    <div class="toolbar header d-block bg-white shadow border-bottom d-flex" style="height: 40px;">
-      <div class="toolbar-left d-flex justify-content-start align-items-center ml-3">
-          <i nz-icon nzType="left" nzTheme="outline"></i>
-      </div>
-      <div class="toolbar-center d-flex justify-content-between pointer-event" style="width: 1000px">
-        <section class="d-flex justify-content-center">
-            <i class="iconfont"><img src="../../../assets/pc.png" (click)="setDevice('pc')"> </i>
-            <i class="iconfont"><img src="../../../assets/ipad.png" (click)="setDevice('ipad')"> </i>
-            <i class="iconfont"><img src="../../../assets/mobile.png" (click)="setDevice('mobile')"> </i>
-        </section>
-
-        <section class="d-flex justify-content-center">
-            
-            <i nz-icon nzType="setting" nzTheme="outline"></i>
-            <i nz-icon nzType="cloud-upload" nzTheme="outline"></i>
-        </section>
-
-        <section class="d-flex justify-content-center">
-            <i nz-icon nzType="download" nzTheme="outline"></i>
-            <i nz-icon nzType="share-alt" nzTheme="outline"></i>
-            <i nz-icon nzType="link" nzTheme="outline"></i>
-            <i nz-icon nzType="eye" nzTheme="outline" (click)="showModal($event)"></i>
-        </section>
-
-        <section class="d-flex justify-content-center">
-          <!-- <i nz-icon nzType="download" nzTheme="outline" ></i> -->
-          <a class="mx-2" (click)="openStyleModal($event)">Style</a>
-          <a class="mx-2" (click)="openClassModel($event)">Class</a>
-          <i nz-icon nzType="info-circle" nzTheme="outline" (click)="openKeysModel($event)"></i>
-          <i nz-icon nzType="code" nzTheme="outline" (click)="openCodeModel($event)"></i>
-          <i nz-icon nzType="link" nzTheme="outline"></i>
-          <i nz-icon nzType="eye" nzTheme="outline" (click)="showModal($event)"></i>
-      </section>
-      </div>
-    </div>
+    <app-header></app-header>
     
-    <div cdkDropListGroup class="drop-list-group">
-
+    <div cdkDropListGroup class="main-wrap drop-list-group">
       <div class="left-panel">
-        <div class="left-panel-basic border">
-          <nz-affix nzOffsetBottom="0" >
-            <a><i nz-icon nzType="double-right" nzTheme="outline" (click)="showpanel()"></i></a>
-          </nz-affix>
+        <div class="left-panel-basic border-right">
+            <ul class="panel-top">
+              <li><a href=""><img src="../../../assets/text.png" (click)="setDevice('pc')"></a></li>
+              <li><a href=""><img src="../../../assets/square.png" (click)="setDevice('pc')"></a></li>
+              <li><a href=""><img src="../../../assets/circle.png" (click)="setDevice('pc')"></a></li>
+              <li><a href=""><img src="../../../assets/image.png" (click)="setDevice('pc')"></a></li>
+            </ul>
+            <div class="panel-bottom"><a><i nz-icon nzType="double-right" nzTheme="outline" (click)="showpanel()"></i></a></div>
         </div>
         <div *ngIf="leftPanel" class="menu-list shadow" 
           cdkDropList
@@ -76,49 +44,67 @@
 
       
       <div class="panel-main" >
-        <div class="panel-device shadow" [ngStyle]="deviceClass" >
-          <div  class="drag-list shadow"
-            id="dragroot"
-            cdkDropList
-            [cdkDropListData]="fields" 
-            [cdkDropListConnectedTo]="ids"  
-            [cdkDropListEnterPredicate]="canDropPredicate()"
-            (cdkDropListDropped)="dragListDrop($event, fields)"
-            (cdkDropListEntered)="dragListEntered($event)"
-            (cdkDropListExited)="dragListExited($event, fields)">
-
-            <formly-field 
-              cdkDrag
-              *ngFor="let field of fields"
-              (click)="fieldClick($event, field);" 
-              (contextmenu)="fieldContextMenu($event, field);" 
-              (cdkDragDropped)="fieldDrop($event)"
-              (cdkDragEnded)="fieldEntered($event)"
-              (cdkDragExited)="fieldExited($event)"
-              (cdkDragReleased)="fieldReleased($event)"
-              (cdkDragStarted)="fieldStarted($event)"
-              hide-deprecation
-              [form]="field.form"
-              [options]="field.options"
-              [model]="field.model"
-              [field]="field">
-            </formly-field>      
-          </div>
+        <div class="panel-main-top">
+            <div class="panel-device shadow" [ngStyle]="deviceClass" >
+                <div  class="drag-list shadow"
+                  id="dragroot"
+                  cdkDropList
+                  [cdkDropListData]="fields" 
+                  [cdkDropListConnectedTo]="ids"  
+                  [cdkDropListEnterPredicate]="canDropPredicate()"
+                  (cdkDropListDropped)="dragListDrop($event, fields)"
+                  (cdkDropListEntered)="dragListEntered($event)"
+                  (cdkDropListExited)="dragListExited($event, fields)">
+      
+                  <formly-field 
+                    cdkDrag
+                    *ngFor="let field of fields"
+                    (click)="fieldClick($event, field);" 
+                    (contextmenu)="fieldContextMenu($event, field);" 
+                    (cdkDragDropped)="fieldDrop($event)"
+                    (cdkDragEnded)="fieldEntered($event)"
+                    (cdkDragExited)="fieldExited($event)"
+                    (cdkDragReleased)="fieldReleased($event)"
+                    (cdkDragStarted)="fieldStarted($event)"
+                    hide-deprecation
+                    [form]="field.form"
+                    [options]="field.options"
+                    [model]="field.model"
+                    [field]="field">
+                  </formly-field>      
+                </div>
+              </div>
         </div>
+        <div class="panel-main-bottom">
+          <ul>
+            <li><a href="">快捷键</a></li>
 
+            <li><a href="">教程</a></li>
+
+            <li><a href="">帮助</a></li>
+
+            <li><a href="">功能</a></li>
+          </ul>
+        </div>
       </div>
       
-      <div class="drag-operator shadow">
-        <nz-tabset>
-            <nz-tab nzTitle="Style Manager">
-              <p>Style Manager</p>
+
+      <div class="panel-right shadow ">
+        <nz-tabset [nzTabPosition]="'top'" [nzType]="'card'" [nzSize]="'small'" nzShowPagination="false">
+            <nz-tab [nzTitle]="titleTemplate1">
+              <ng-template #titleTemplate1> <i nz-icon nzType="file-ppt"  nzTheme="outline"></i></ng-template>
               <formly-form [model]="operatorModel" [fields]="operatorFields" [options]="operatorOptions" [form]="operatorForm" (modelChange)="change($event)" ></formly-form>
             </nz-tab>
-            <nz-tab nzTitle="Layers">
+            <nz-tab [nzTitle]="titleTemplate2">
+              <ng-template #titleTemplate2> <i nz-icon nzType="folder-open" nzTheme="outline"></i></ng-template>
               <app-layers></app-layers>
             </nz-tab>
-            <nz-tab nzTitle="Class Manager">
-              <p> Class Manager</p>
+            <nz-tab [nzTitle]="titleTemplate3">
+              <ng-template #titleTemplate3> <i nz-icon nzType="folder-add" nzTheme="outline"></i></ng-template>
+            </nz-tab>
+            <nz-tab [nzTitle]="titleTemplate4">
+              <ng-template #titleTemplate4> <i nz-icon nzType="file" nzTheme="outline"></i></ng-template>
+              <app-pages></app-pages>
             </nz-tab>
           </nz-tabset>
       </div>

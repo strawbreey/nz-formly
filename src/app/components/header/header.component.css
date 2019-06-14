@@ -1,0 +1,34 @@
+  /* 菜单栏 工具栏 */
+  .toolbar {
+    position: relative;
+    box-shadow: rgba(39, 54, 78, 0.12) 1px 0px 6px 0px;
+    z-index: 1;
+  }
+
+  .toolbar-center {
+    margin-left: 316px; 
+    margin-right: 316px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+  }
+
+  .toolbar-center i {
+    font-size: 20px;
+    margin-right: 20px;
+    color: rgb(125, 134, 148);
+  }
+
+  .toolbar-center i:hover {
+    color: rgb(65, 80, 88);
+  }
+
+  
+.iconfont {
+    font-size: 16px;
+}
+
+.iconfont img {
+    width: 16px;
+    height: 16px;
+}

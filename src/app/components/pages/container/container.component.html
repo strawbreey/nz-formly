@@ -1,0 +1,34 @@
+<!-- <div  class="menu-list pages-list"
+      id="root"
+      cdkDropList 
+      [cdkDropListConnectedTo]="connectedLists"
+      (cdkDropListDropped)="drop($event)">
+      <div *ngFor='let page of _fields'>
+        <div cdkDrag>
+          <div class="d-flex justify-content-center align-items-center drag-item pages-list-item" [ngStyle]="{paddingLeft: (16 * page.level) + 'px'}">
+            <i nz-icon nzType="file" nzTheme="fill" class="mr-1 fill"></i>
+            <i nz-icon nzType="file" nzTheme="outline" class="mr-1 outline"></i>
+            <span class="d-inline-block w-100">{{page.title}} - {{root}}</span>
+          </div>
+          <div *ngIf="page && page.children" class="mr-2 pages-list-container">
+            <app-pages-container [(ngModel)]="page.children" [root]="page.id" ngDefaultControl></app-pages-container>
+          </div>
+        </div>
+      </div>
+</div> -->
+
+<div>
+  <div class="element">
+    <div cdkDragHandle class="d-flex justify-content-center align-items-center drag-item pages-list-item" >
+      <i nz-icon nzType="file" nzTheme="fill" class="mr-1 fill"></i>
+      <i nz-icon nzType="file" nzTheme="outline" class="mr-1 outline"></i>
+      <span class="d-inline-block w-100">{{element.title}} - {{element.name}}</span>
+    </div>
+  </div>
+  <div cdkDropList [cdkDropListData]="element.children" (cdkDropListDropped)="drop($event)" [id]='element.id' [cdkDropListConnectedTo]='connectedLists'>
+    <app-pages-container *ngFor="let element of element.children" cdkDrag [element]='element' [connectedLists]='connectedLists'></app-pages-container>
+  </div>
+</div>
+
+
+

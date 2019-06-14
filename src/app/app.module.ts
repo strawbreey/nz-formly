@@ -39,7 +39,11 @@ import { ShortcutsModalComponent } from './modal/shortcuts-modal/shortcuts-modal
 
 // 层级
 import { LayersComponent } from './components/layers/layers.component';
-import { AppContainerComponent } from './components/layers/container/container.component'
+import { AppContainerComponent } from './components/layers/container/container.component';
+import { HeaderComponent } from './components/header/header.component';
+import { PagesComponent } from './components/pages/pages.component';
+import { PagesModalComponent } from './modal/pages-modal/pages-modal.component';
+import { AppPagesContainerComponent } from './components/pages/container/container.component'
 
 
 
@@ -68,6 +72,10 @@ registerLocaleData(en);
     ShortcutsModalComponent,
     LayersComponent,
     AppContainerComponent,
+    HeaderComponent,
+    PagesComponent,
+    PagesModalComponent,
+    AppPagesContainerComponent,
   ],
   imports: [
     BrowserModule,

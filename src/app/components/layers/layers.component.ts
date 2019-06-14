@@ -1,12 +1,7 @@
 import { Component,  OnInit, } from '@angular/core';
-
 import { FormlyFieldConfig, } from '@ngx-formly/core';
-import { DragAttributeService } from '../../services/drag-attribute.service'
 import { DragDropService } from '../../services/drag-drop.service'
-import { ModalService } from '../../services/modal.service' 
-import { LeftPaneService } from '../../services/left-pane.service'
 import { LayersService } from '../../services/layers.service'
-
 
 @Component({
   selector: 'app-layers',
@@ -20,14 +15,10 @@ export class LayersComponent implements OnInit {
   connectedLists = []
 
   constructor(
-    private attributeService: DragAttributeService,
-    private dragDropService: DragDropService,
-    private _modalService: ModalService,
-    private _leftPaneService: LeftPaneService,
+    private _dragDropService: DragDropService,
     private _layers: LayersService 
   ) { 
-    dragDropService.field$.subscribe(item => {
-      console.log('item')
+    _dragDropService.field$.subscribe(item => {
       this.fields = item
     })
 

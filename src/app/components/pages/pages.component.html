@@ -1,0 +1,11 @@
+<!-- <app-pages-container [(ngModel)]="fields" [root]="'root'" ngDefaultControl></app-pages-container> -->
+
+<div cdkDropList 
+    #rootList="cdkDropList" 
+    [cdkDropListData]="fields" 
+    (cdkDropListDropped)="drop($event)" 
+    id='root' 
+    [cdkDropListConnectedTo]='connectedLists' 
+    [cdkDropListEnterPredicate]="canDropPredicate()">
+    <app-pages-container cdkDrag *ngFor="let element of fields" [element]='element' [connectedLists]='connectedLists'></app-pages-container>
+</div>

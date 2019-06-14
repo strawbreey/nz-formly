@@ -415,10 +415,7 @@ export class DropComponent implements DoCheck, OnDestroy {
     this._dragDrop.createDrag(element)
   }
 
-  setDevice (device) {
-    console.log(device)
-    this._layoutService.setDevice(device)
-  }
+
 
   showpanel () {
     this.leftPanel = !this.leftPanel
